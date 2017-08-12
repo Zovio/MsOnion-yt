@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd 
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context.xsd 
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop.xsd 
+						">
+
+	<!-- 单元测试  -->
+	<!--<context:component-scan base-package="test.msonion.carambola.parent.ext.netty" />-->
+
+	<!--<context:component-scan base-package="cc.msonion.carambola.parent.ext.netty" />-->
+
+	<!-- 日志  log -->
+	<context:component-scan base-package="test.msonion.carambola.parent.ext.log" />
+
+	<!--<context:component-scan base-package="cc.msonion.carambola.parent.pojo"/>-->
+
+	<!-- RocketMQ ## Begin  -->
+
+	<!-- 普通 Listener   -->
+	<bean id="testMQMessageListenerConcurrently" class="test.msonion.carambola.parent.ext.mq.rocketmq.messagelistener.TestMQMessageListenerConcurrently" />
+
+
+	<!-- 有序  Listener   -->
+	<bean id="testMQMessageListenerOrderly" class="test.msonion.carambola.parent.ext.mq.rocketmq.messagelistener.TestMQMessageListenerOrderly" />
+
+
+	<bean id="testRocketMQProducer" class="test.msonion.carambola.parent.ext.mq.rocketmq.TestRocketMQProducerExt">
+
+		<!-- 构造方法参数 -->
+		<constructor-arg index="0" value="${rocketmq.producerGroup}" />
+
+		<constructor-arg index="1" value="${rocketmq.namesrvAddr}" />
+
+		<constructor-arg name="topic" value="${rocketmq.topic}" />
+
+	</bean>
+
+
+	<!-- 普通消费者 -->
+	<bean id="testRocketMQPushConsumer" class="test.msonion.carambola.parent.ext.mq.rocketmq.TestRocketMQPushConsumerExt">
+
+		<!-- 构造方法参数 ： String consumerGroup, String namesrvAddr, String topic,
+		 String subExpression, MsOnionRocketMQMessageListenerConcurrently listenerConcurrently -->
+
+		<constructor-arg name="consumerGroup" value="${rocketmq.consumerGroup}" />
+
+		<constructor-arg name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+
+
+		<!--<constructor-arg name="topic" value="${rocketmq.consumer.topic}" />-->
+
+		<constructor-arg name="topic" value="${rocketmq.topic}" />
+
+
+		<constructor-arg name="subExpression" value="${rocketmq.consumer.topic.subExpression}" />
+
+
+		<constructor-arg name="listenerConcurrently" ref="testMQMessageListenerConcurrently" />
+
+		<constructor-arg name="consumeFromWhere" value="${rocketmq.consumer.consumeFromWhere}" />
+
+	</bean>
+
+
+	<!-- 有序消费者：
+	 test.msonion.carambola.parent.ext.mq.rocketmq.TestRocketMQOrderlyPushConsumerExt
+	 -->
+
+	<bean id="testRocketMQOrderlyPushConsumerExt" class="test.msonion.carambola.parent.ext.mq.rocketmq.TestRocketMQOrderlyPushConsumerExt">
+
+		<!-- 构造方法参数 ： String consumerGroup, String namesrvAddr, String topic,
+		 String subExpression, MsOnionRocketMQMessageListenerConcurrently listenerConcurrently -->
+
+		<!--
+		 consumerGroup不能相同，不同的  consumer
+
+		 The consumer group[msyt-mq-consumer-group-dev] has been created before, specify another name please.
+
+		 多个节点
+
+		 -->
+
+		<constructor-arg name="consumerGroup" value="${rocketmq.orderly.consumerGroup}" />
+
+		<!--<constructor-arg name="consumerGroup" value="${rocketmq.consumerGroup}" />-->
+
+		<constructor-arg name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+
+
+		<constructor-arg name="topic" value="${rocketmq.consumer.topic}" />
+
+		<!--<constructor-arg name="topic" value="${rocketmq.consumer.topic.orderly}" />-->
+
+
+		<constructor-arg name="subExpression" value="${rocketmq.consumer.topic.subExpression.orderly}" />
+
+
+		<constructor-arg name="listenerOrderly" ref="testMQMessageListenerOrderly" />
+
+		<constructor-arg name="consumeFromWhere" value="${rocketmq.consumer.consumeFromWhere}" />
+
+	</bean>
+
+
+
+	<!--<context:component-scan base-package="test.msonion.carambola.parent.ext.mq.rocketmq" />-->
+
+
+
+	<!-- RocketMQ ## End  -->
+
+	<!--
+
+	cc.msonion.carambola.parent.ext.netty.server.MsOnionNettyServer
+
+cc.msonion.carambola.parent.ext.netty.server.MsOnionNettyServer
+
+
+	-->
+
+
+	<context:property-placeholder location="classpath*:META-INF/prop/external/*.properties, classpath*:META-INF/prop/*.properties, classpath*:*.properties" />
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+</beans>

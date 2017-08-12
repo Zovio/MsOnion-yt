@@ -1,0 +1,152 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cc.msonion.carambola</groupId>
+		<artifactId>msyt-parent</artifactId>
+		<version>2.0.0</version>
+	</parent>
+	<artifactId>msyt-parent-service</artifactId>
+	<name>msyt-parent-service</name>
+	<description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-parent-service，服务模块</description>
+
+	<!-- 依赖 -->
+	<dependencies>
+
+		<!-- 依赖洋桃分布式架构，Begin -->
+
+		<!-- msyt-parent-dao -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-parent-dao</artifactId>
+		</dependency>
+
+		<!-- msyt-parent-interface -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-parent-interface</artifactId>
+		</dependency>
+
+		<!-- msyt-parent-interface -->
+		<!--<dependency>-->
+			<!--<groupId>cc.msonion.carambola</groupId>-->
+			<!--<artifactId>msyt-parent-interface</artifactId>-->
+			<!--<exclusions>-->
+				<!--<exclusion>-->
+					<!--<artifactId>netty</artifactId>-->
+					<!--<groupId>io.netty</groupId>-->
+				<!--</exclusion>-->
+			<!--</exclusions>-->
+		<!--</dependency>-->
+
+		<!-- msyt-parent-ext -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-parent-ext</artifactId>
+		</dependency>
+
+		<!-- 依赖洋桃分布式架构，End -->
+
+		<!-- 依赖第三方框架，Begin -->
+		<!-- Spring -->
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-context</artifactId> 
+			</dependency> <dependency> <groupId>org.springframework</groupId> <artifactId>spring-beans</artifactId> 
+			</dependency> -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-jdbc</artifactId> 
+			</dependency> <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aspects</artifactId> 
+			</dependency> <dependency> <groupId>org.springframework</groupId> <artifactId>spring-jms</artifactId> 
+			</dependency> <dependency> <groupId>org.springframework</groupId> <artifactId>spring-context-support</artifactId> 
+			</dependency> -->
+
+		<!-- Dubbo相关 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>netty</artifactId>
+					<groupId>io.netty</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Zookeeper -->
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>netty</artifactId>
+					<groupId>io.netty</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- <dependency> <groupId>com.github.sgroschupf</groupId> <artifactId>zkclient</artifactId> 
+			</dependency> -->
+		<dependency>
+			<groupId>com.101tec</groupId>
+			<artifactId>zkclient</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>netty</artifactId>
+					<groupId>io.netty</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+
+		<!--hibernate-validator -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.el</artifactId>
+		</dependency>
+
+
+        <!-- 依赖第三方框架，End -->
+
+	</dependencies>
+
+	<!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->
+	<!-- 不需要包含 *.java 文件，因为是默认已经包含 *.java -->
+	<build>
+
+		<resources>
+
+			<!-- src/main/java -->
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+
+			<!-- src/main/resources -->
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+
+		</resources>
+	</build>
+
+</project>

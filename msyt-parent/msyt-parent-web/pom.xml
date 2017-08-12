@@ -1,0 +1,152 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cc.msonion.carambola</groupId>
+		<artifactId>msyt-parent</artifactId>
+		<version>2.0.0</version>
+	</parent>
+	<artifactId>msyt-parent-web</artifactId>
+	<name>msyt-parent-web</name>
+	<description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-parent-web，WEB模块</description>
+
+	<!-- 依赖 -->
+	<dependencies>
+
+		<!-- msyt-parent-pojo -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-parent-pojo</artifactId>
+		</dependency>
+
+		<!-- msyt-parent-common -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-parent-common</artifactId>
+		</dependency>
+
+		<!-- msyt-parent-ext -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-parent-ext</artifactId>
+		</dependency>
+
+		<!-- JSP相关 -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+
+		<!-- Servlet、JSP，所有的WEB模块，都要再依赖，否则报错，Begin -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<!-- Servlet 的 scope配置成 provided，编译，测试，运行使用，打包不包含进去，因为Tomcat中已经包含， 如果打包再包含进去，可能导致冲突报错！！！ -->
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Servlet、JSP，所有的WEB模块，都要再依赖，否则报错，End -->
+
+		<!-- 文件上传组件 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+
+		<!-- Spring -->
+		<!-- WEB表现层，需要使用SpringMVC -->
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-context</artifactId> 
+			</dependency> <dependency> <groupId>org.springframework</groupId> <artifactId>spring-beans</artifactId> 
+			</dependency> -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<!-- 表现层WEB，现在是独立的工程，不需要使用 spring-jdbc -->
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-jdbc</artifactId> 
+			</dependency> -->
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aspects</artifactId> 
+			</dependency> <dependency> <groupId>org.springframework</groupId> <artifactId>spring-jms</artifactId> 
+			</dependency> <dependency> <groupId>org.springframework</groupId> <artifactId>spring-context-support</artifactId> 
+			</dependency> -->
+
+		<!-- urlrewritefilter -->
+		<dependency>
+			<groupId>org.tuckey</groupId>
+			<artifactId>urlrewritefilter</artifactId>
+		</dependency>
+
+		<!-- Dubbo相关 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+		</dependency>
+
+		<!-- Zookeeper -->
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+		</dependency>
+		<!-- <dependency> <groupId>com.github.sgroschupf</groupId> <artifactId>zkclient</artifactId> 
+			</dependency> -->
+		<dependency>
+			<groupId>com.101tec</groupId>
+			<artifactId>zkclient</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+
+		<!--
+             HTML恶意代码过滤 AntiSamy 它是一个可确保用户输入的HTML/CSS符合应用规范的API。
+		换句话讲，这个API可以确保用户无法在HTML中提交恶意代码，
+		这些恶意代码提交通常被用于用户输入的个人资料、评论等会被服务端持久化的数据中。
+		对Web应用来讲，“恶意代码”通常是指Javascript。
+		CSS样式在调用 Javascript引擎的时候也会被认为是恶意代码。
+		当然，通常一些“正常”的HTML和CSS也会被用于恶意的目的。
+		百度的UEditor富文本编辑，提交的内容可能会被处理掉！！！ 百度的UEditor 也自带这些过滤功能！！！
+		 ## Begin
+             -->
+
+		<dependency>
+			<groupId>org.owasp.antisamy</groupId>
+			<artifactId>antisamy</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.owasp.antisamy</groupId>
+			<artifactId>antisamy-sample-configs</artifactId>
+		</dependency>
+
+		<!-- End -->
+
+	</dependencies>
+
+	<build>
+
+		<!-- maven install 跳过test方法 , Begin -->
+		<defaultGoal>compile</defaultGoal>
+		<!-- maven install 跳过test方法 , End -->
+
+		<plugins>
+
+			<!-- maven install 跳过test方法 , Begin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<!-- maven install 跳过test方法 , End -->
+
+		</plugins>
+
+	</build>
+
+</project>

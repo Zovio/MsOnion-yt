@@ -1,0 +1,104 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cc.msonion.carambola</groupId>
+		<artifactId>msyt-parent</artifactId>
+		<version>2.0.0</version>
+	</parent>
+	<artifactId>msyt-parent-dao</artifactId>
+	<name>msyt-parent-dao</name>
+	<description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-parent-dao，DAO模块</description>
+
+	<!-- 依赖 -->
+	<dependencies>
+
+		<!-- 由于其他，DAO中，需要依赖 msyt-parent-interface ， 所以，这里直接依赖，其他DAO ，依赖当前 msyt-parent-dao -->
+
+		<!-- msyt-parent-common -->
+		<!--<dependency>-->
+			<!--<groupId>cc.msonion.carambola</groupId>-->
+			<!--<artifactId>msyt-parent-common</artifactId>-->
+		<!--</dependency>-->
+
+		<!-- msyt-parent-interface -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-parent-interface</artifactId>
+		</dependency>
+
+		<!-- msyt-parent-pojo -->
+		<!--<dependency>-->
+			<!--<groupId>cc.msonion.carambola</groupId>-->
+			<!--<artifactId>msyt-parent-pojo</artifactId>-->
+		<!--</dependency>-->
+
+		<!-- msyt-parent-ext -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-parent-ext</artifactId>
+		</dependency>
+
+		<!-- 不要使用 spring-orm -->
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-orm</artifactId> 
+			</dependency> -->
+
+		<!-- spring-jdbc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+
+		<!-- Mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.miemiedev</groupId>
+			<artifactId>mybatis-paginator</artifactId>
+		</dependency>
+		<!-- Mybatis 分页插件 -->
+		<!-- <dependency> <groupId>com.github.pagehelper</groupId> <artifactId>pagehelper</artifactId> 
+			</dependency> -->
+		<!-- MySql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!-- 连接池，阿里巴巴开源的JDBC 连接池，比 C3P0，DBCP等等都强大，全球最好，最强大的 连接池，网上测试过 ，比较过各种连接池的性能！！！ -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+		</dependency>
+
+		<!-- 单元测试 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->
+	<!-- 不需要包含 *.java 文件，因为是默认已经包含 *.java -->
+	<build>
+
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+	</build>
+
+</project>
