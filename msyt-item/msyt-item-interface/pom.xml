@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cc.msonion.carambola</groupId>
+        <artifactId>msyt-item</artifactId>
+        <version>2.0.0</version>
+    </parent>
+    <artifactId>msyt-item-interface</artifactId>
+    <name>msyt-item-interface</name>
+    <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-item-interface，商品接口模块</description>
+
+    <!-- 依赖 -->
+    <dependencies>
+        <!-- msyt-parent-interface -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-parent-interface</artifactId>
+        </dependency>
+
+        <!-- msyt-item-pojo，由于已经依赖 msyt-item-common，因此就不要再直接依赖，msyt-item-common -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-item-pojo</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-item-ext</artifactId>
+        </dependency>
+
+        <!-- msyt-collector-pojo-->
+        <dependency>
+          <groupId>cc.msonion.carambola</groupId>
+          <artifactId>msyt-collector-pojo</artifactId>
+        </dependency>
+
+        <!-- 单元测试 -->
+        <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <scope>test</scope>
+        </dependency>
+  </dependencies>
+</project>

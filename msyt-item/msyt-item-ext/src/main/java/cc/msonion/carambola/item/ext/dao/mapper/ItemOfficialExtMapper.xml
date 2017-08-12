@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.msonion.carambola.item.ext.dao.mapper.ItemOfficialExtMapper">
+  <resultMap id="BaseResultMap" type="cc.msonion.carambola.item.ext.pojo.ItemOfficialExt">
+    <id column="idx" jdbcType="BIGINT" property="itemOfficial.idx" />
+    <result column="item_idx" jdbcType="BIGINT" property="itemOfficial.itemIdx" />
+    <result column="cn_name" jdbcType="BIGINT" property="itemBasicOfficial.cnName" />
+    <result column="item_no" jdbcType="BIGINT" property="itemBasicOfficial.itemNo" />
+    <result column="category_idx" jdbcType="BIGINT" property="itemBasicOfficial.categoryIdx" />
+    <result column="brand_idx" jdbcType="BIGINT" property="itemBasicOfficial.brandIdx" />
+    <result column="batch" jdbcType="BIGINT" property="itemBasicOfficial.batch" />
+    <result column="weight" jdbcType="BIGINT" property="itemBasicOfficial.weight" />
+    <result column="item_state_idx" jdbcType="BIGINT" property="itemBasicOfficial.itemStateIdx" />
+    <result column="first_online_by_member_idx" jdbcType="BIGINT" property="itemOfficial.firstOnlineByMemberIdx" />
+    <result column="first_online_time" jdbcType="TIMESTAMP" property="itemOfficial.firstOnlineTime" />
+    <result column="online_by_member_idx" jdbcType="BIGINT" property="itemOfficial.onlineByMemberIdx" />
+    <result column="online_time" jdbcType="TIMESTAMP" property="itemOfficial.onlineTime" />
+    <result column="offline_by_member_idx" jdbcType="BIGINT" property="itemOfficial.offlineByMemberIdx" />
+    <result column="offline_time" jdbcType="TIMESTAMP" property="itemOfficial.offlineTime" />
+    <result column="status" jdbcType="SMALLINT" property="itemOfficial.status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tio.idx AS idx, tio.item_idx AS item_idx, tibo.cn_name AS cn_name, tibo.item_no AS item_no, tibo.category_idx AS category_idx,
+    tibo.brand_idx AS brand_idx, tibo.batch AS batch, tibo.weight AS weight, tibo.item_state_idx AS item_state_idx,
+    tio.first_online_by_member_idx AS first_online_by_member_idx, tio.first_online_time AS first_online_time,
+    tio.online_by_member_idx AS online_by_member_idx, tio.online_time AS online_time,
+    tio.offline_by_member_idx AS offline_by_member_idx, tio.offline_time AS offline_time, tio.status AS status
+  </sql>
+  <sql id="Example_Where_Clause">
+    <where>
+        <if test="itemOfficial != null">
+          <if test="itemOfficial.idx != null">
+            tio.idx = #{itemOfficial.idx,jdbcType=BIGINT}
+          </if>
+          <if test="itemOfficial.itemIdx != null">
+            AND tio.item_idx = #{itemOfficial.itemIdx,jdbcType=BIGINT}
+          </if>
+        </if>
+        <if test="itemBasicOfficial != null">
+          <if test="itemBasicOfficial.cnName != null">
+              AND tibo.cn_name LIKE CONCAT('%','${itemBasicOfficial.cnName}','%')
+          </if>
+        </if>
+        <if test="itemBasicOfficial != null">
+          <if test="itemBasicOfficial.itemNo != null">
+              AND tibo.item_no LIKE CONCAT('%','${itemBasicOfficial.itemNo}','%')
+          </if>
+        </if>
+        <if test="itemBasicOfficial != null">
+          <if test="itemBasicOfficial.brandIdx != null">
+            AND tibo.brand_idx = #{itemBasicOfficial.brandIdx,jdbcType=BIGINT}
+          </if>
+        </if>
+      <if test="itemBasicOfficial != null">
+        <if test="itemBasicOfficial.batch != null">
+          AND tibo.batch LIKE CONCAT('%','${itemBasicOfficial.batch}','%')
+        </if>
+      </if>
+      <if test="itemBasicOfficial != null">
+        <if test="itemBasicOfficial.weight != null">
+          AND tibo.weight LIKE CONCAT('%','${itemBasicOfficial.weight}','%')
+        </if>
+      </if>
+      <if test="categoryIdxList != null">
+          AND tibo.category_idx IN
+        <foreach item="item" index="index" collection="categoryIdxList" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+      </if>
+      <if test="itemOfficial != null">
+        <if test="itemOfficial.status != null">
+          AND tio.status = #{itemOfficial.status,jdbcType=SMALLINT}
+        </if>
+      </if>
+      <if test="itemBasicOfficial != null">
+        <if test="itemBasicOfficial.itemStateIdx != null">
+          AND tibo.item_state_idx = #{itemBasicOfficial.itemStateIdx,jdbcType=BIGINT}
+        </if>
+      </if>
+    </where>
+  </sql>
+  <select id="selectByExample" parameterType="cc.msonion.carambola.item.ext.pojo.ItemOfficialExt" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_item_official AS tio LEFT JOIN tb_item_basic_official AS tibo ON tio.idx = tibo.item_official_idx
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="(pageNum != null and pageNum != '' or pageNum == 0) and (pageSize != null and pageSize != '')">
+      limit #{startNum}, #{pageSize}
+    </if>
+  </select>
+  <select id="countByExample" parameterType="cc.msonion.carambola.item.ext.pojo.ItemOfficialExt" resultType="java.lang.Long">
+    select count(tio.idx) from tb_item_official AS tio LEFT JOIN tb_item_basic_official AS tibo ON tio.idx = tibo.item_official_idx
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+</mapper>
