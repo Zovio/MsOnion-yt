@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+        http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+	<display-name>msyt--service</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+	<!-- springmvc的前端控制器 -->
+	<servlet>
+		<servlet-name>msyt-cache-service</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- contextConfigLocation不是必须的， 如果不配置contextConfigLocation， springmvc的配置文件默认在：WEB-INF/servlet的name+"-servlet.xml" -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<!-- <param-value>classpath:spring/springmvc.xml</param-value> -->
+			<!--<param-value>classpath:dev/spring/applicationContext-*.xml</param-value>-->
+
+			<param-value>classpath:spring/applicationContext-*.xml</param-value>
+
+		</init-param>
+		<!-- 1 : 当Tomcat启动，就加载 -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+</web-app>

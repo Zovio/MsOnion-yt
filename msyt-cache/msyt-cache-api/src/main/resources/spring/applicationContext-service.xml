@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+			 xmlns:context="http://www.springframework.org/schema/context" 
+			 xmlns:p="http://www.springframework.org/schema/p"
+			 xmlns:aop="http://www.springframework.org/schema/aop" 
+			 xmlns:tx="http://www.springframework.org/schema/tx"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+			 xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			 								     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+											     http://www.springframework.org/schema/context 
+											    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+											    http://www.springframework.org/schema/aop 
+											   http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+											   http://www.springframework.org/schema/tx 
+											  http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+											  http://www.springframework.org/schema/util 
+											  http://www.springframework.org/schema/util/spring-util-4.0.xsd
+											 http://code.alibabatech.com/schema/dubbo 
+        									 http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 配置包扫描器 -->
+	<!--  注意，这里扫描的包 和 springmvc 中扫描的包，不要冲突！！！ -->
+	<!-- <context:component-scan base-package="cc.msonion.carambola.member.service"></context:component-scan> -->
+	
+	<!-- 扫描多个包，可以使用 ,(逗号）或者；(分号） 分隔 -->
+	
+	<!-- <context:component-scan base-package="cc.msonion.carambola.member.service.redis.key.impl"></context:component-scan> -->
+	
+	<!-- 发布dubbo服务 -->
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="msyt-member-service" />
+	<!-- 使用multicast广播注册中心暴露服务地址 -->
+	<!-- <dubbo:registry address="multicast://224.5.6.7:1234"/> -->
+	<!-- 使用Zookeeper 实现注册中心 -->
+	<!-- 使用Zookeeper实现注册中心，单机版，Dubbo 注册的协议使用 zookeeper
+	注意：要把Zookeeper服务器的防火墙关闭了，或者配置防火墙的端口，但是，必须查看Zookeeper服务器使用的端口是否被其他软件占用了。
+	 -->
+	<!-- <dubbo:registry protocol="zookeeper"
+		address="192.168.100.100:2181" /> -->
+		<!-- Zookeeper 实现注册中心，集群方式 -->
+	<dubbo:registry protocol="zookeeper"
+		address="${zkConnectString}" timeout="${msonion_dubbo_registry_timeout}" />
+		
+		<!-- Dubbo 注册中心， Zookeeper集群，已经搭建 @ 2017-02-18  -->
+		<!-- <dubbo:registry protocol="zookeeper"
+		address="192.168.100.165:2181,192.168.100.166:2181,192.168.100.167:2181" /> -->
+		
+	<!-- 用dubbo协议在20882端口暴露服务 -->
+	 <dubbo:protocol name="dubbo" port="20887" />
+	<!-- 声明需要暴露的服务接口 -->
+	<!-- 设置服务超时时间，默认1000毫秒，也就是1秒钟，如果需要调试，可以设置为 100000 毫秒，
+	也就是100秒钟，不到2分钟！ ，如果上线，需要欢迎会默认的值！！！ -->
+	
+	
+	<!-- 发布成员（公司内部）服务，注意：interface 都是Service 接口，而不是实现类！！！
+	， ref 才是实现类 实例 ！！！ -->
+	 <dubbo:service interface="cc.msonion.carambola.member.service.MemberService"
+		ref="memberServiceImpl"  version="${memberService.version}" timeout="${msonion_dubbo_service_timeout}"  />
+		
+	<!-- 搜索商品，服务，注意：interface 都是Service 接口，而不是实现类！！！
+	， ref 才是实现类 实例 ！！！ ref 引用前面 
+	配置<context:component-scan base-package="cc.msonion.user.service,cc.msonion.search.dao">
+	扫描包，已经注入到 Spring 容器中
+	 -->
+	<!-- <dubbo:service interface="cc.msonion.user.service.SearchItemService"
+		ref="searchItemServiceImpl"  timeout="100000" /> -->
+		
+	<!-- <dubbo:service interface="cc.msonion.user.service.SearchItemService"
+		ref="searchItemServiceImpl"  timeout="${msonion_dubbo_service_timeout}" /> -->
+		
+	
+	<!-- 引用服务 Begin ， 搜索中，即发布服务，又引用其他服务！！！ -->
+	<!-- 搜索服务，引用商品服务，实现从数据库中，把商品相关数据，导入到 Solr索引库中 -->
+	
+	
+	<!-- 商品独立工程，商品 Service -->
+	<!-- <dubbo:reference interface="cc.msonion.item.service.ItemService"
+		id="itemService" /> -->
+
+		
+	<!-- 引用服务 End -->
+	
+		
+</beans>

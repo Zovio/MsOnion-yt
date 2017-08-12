@@ -1,0 +1,82 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cc.msonion.carambola</groupId>
+		<artifactId>msyt-cache</artifactId>
+		<version>2.0.0</version>
+	</parent>
+	<artifactId>msyt-cache-api</artifactId>
+	<packaging>war</packaging>
+	<name>msyt-cache-api</name>
+	<description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-cache-api，缓存中心API模块</description>
+
+	<!-- 依赖 -->
+	<dependencies>
+
+		<!-- msyt-parent-api -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-parent-api</artifactId>
+		</dependency>
+
+		<!-- msyt-commons-web -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-commons-web</artifactId>
+		</dependency>
+
+		<!-- msyt-cache-common -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-cache-common</artifactId>
+		</dependency>
+
+
+		<!-- 依赖第三方框架，Begin -->
+		<!-- Servlet、JSP，所有的WEB模块，都要再依赖，否则报错，Begin -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<!-- Servlet 的 scope配置成 provided，编译，测试，运行使用，打包不包含进去，因为Tomcat中已经包含， 如果打包再包含进去，可能导致冲突报错！！！ -->
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- 单元测试 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+        <!-- Servlet、JSP，所有的WEB模块，都要再依赖，否则报错，End -->
+		<!-- 依赖第三方框架，End -->
+
+	</dependencies>
+
+	<build>
+		<finalName>msyt-cache-api</finalName>
+
+		<plugins>
+
+			<!-- 配置Tomcat插件，使用Tomcat插件之后，本地就不需要单独安装Tomcat了 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<path>/</path>
+					<port>8200</port>
+					<goal>clean tomcat7:run</goal>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+
+	</build>
+
+</project>
