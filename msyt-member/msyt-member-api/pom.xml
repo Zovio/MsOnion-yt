@@ -1,0 +1,132 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cc.msonion.carambola</groupId>
+        <artifactId>msyt-member</artifactId>
+        <version>2.0.0</version>
+    </parent>
+    <artifactId>msyt-member-api</artifactId>
+    <packaging>war</packaging>
+    <name>msyt-member-api</name>
+    <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-member-api，成员API模块</description>
+
+    <!-- 依赖 -->
+    <dependencies>
+
+        <!-- msyt-parent-api -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-parent-api</artifactId>
+        </dependency>
+
+        <!-- msyt-commons-web -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-commons-web</artifactId>
+        </dependency>
+
+        <!-- msyt-member-common -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-member-common</artifactId>
+        </dependency>
+
+        <!-- msyt-member-interface -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-member-interface</artifactId>
+        </dependency>
+
+        <!-- 依赖第三方框架，Begin -->
+        <!-- Servlet、JSP，所有的WEB模块，都要再依赖，否则报错，Begin -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <!-- Servlet 的 scope配置成 provided，编译，测试，运行使用，打包不包含进去，因为Tomcat中已经包含， 如果打包再包含进去，可能导致冲突报错！！！ -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- 单元测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Servlet、JSP，所有的WEB模块，都要再依赖，否则报错，End -->
+        <!-- 依赖第三方框架，End -->
+
+    </dependencies>
+
+    <build>
+        <finalName>msyt-member-api</finalName>
+
+        <plugins>
+
+            <!-- 配置Tomcat插件，使用Tomcat插件之后，本地就不需要单独安装Tomcat了 -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <configuration>
+                    <path>/</path>
+                    <port>8060</port>
+                    <goal>clean tomcat7:run</goal>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+        <!-- 多套环境，不同环境的配置不同， ## Begin -->
+
+        <resources>
+            <!-- 指定环境配置文件输出目录 -->
+            <resource>
+                <!-- 原始的 -->
+                <!--<directory>${profile.dir}</directory>-->
+
+                <!-- add -->
+                <directory>${resources.dir}</directory>
+                <targetPath>${project.build.directory}/classes</targetPath>
+
+                <!-- add by Hero ##  -->
+                <includes>
+                    <include>log4j.properties</include>
+                    <include>spring/**</include>
+                    <!--<include>mybatis/**</include>-->
+
+                    <!--<include>${target.env}/properties/**</include>-->
+                    <include>${target.env}/**</include>
+
+                </includes>
+
+                <!-- 资源过滤   -->
+                <filtering>true</filtering>
+
+            </resource>
+
+            <!--<resource>
+                <directory>${profile.dir}</directory>
+                <targetPath>${project.build.directory}/classes</targetPath>
+                <includes>
+                    <include>${target.env}/properties/**</include>
+                </includes>
+            </resource>-->
+
+            <!-- 资源过滤   -->
+            <!--<resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>-->
+        </resources>
+
+        <!-- 多套环境，不同环境的配置不同， ## End -->
+
+
+    </build>
+
+</project>

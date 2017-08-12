@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.msonion.carambola.member.dao.mapper.MemberMapper">
+  <resultMap id="BaseResultMap" type="cc.msonion.carambola.member.pojo.Member">
+    <id column="idx" jdbcType="BIGINT" property="idx" />
+    <result column="idx_code" jdbcType="BIGINT" property="idxCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="full_name" jdbcType="VARCHAR" property="fullName" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="password" jdbcType="CHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="sex" jdbcType="SMALLINT" property="sex" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="create_by_member_idx" jdbcType="BIGINT" property="createByMemberIdx" />
+    <result column="update_by_member_idx" jdbcType="BIGINT" property="updateByMemberIdx" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="store_idx" jdbcType="BIGINT" property="storeIdx" />
+    <result column="department_idx" jdbcType="BIGINT" property="departmentIdx" />
+    <result column="vip_member_idx" jdbcType="BIGINT" property="vipMemberIdx" />
+    <result column="member_cate_idx" jdbcType="BIGINT" property="memberCateIdx" />
+    <result column="last_login_ip" jdbcType="CHAR" property="lastLoginIp" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="ext" jdbcType="VARCHAR" property="ext" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    idx, idx_code, name, full_name, code, password, phone, tel, sex, email, create_by_member_idx, 
+    update_by_member_idx, create_time, update_time, status, version, remark, store_idx, 
+    department_idx, vip_member_idx, member_cate_idx, last_login_ip, last_login_time, 
+    ext
+  </sql>
+  <select id="selectByExample" parameterType="cc.msonion.carambola.member.pojo.MemberExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_member
+    where idx = #{idx,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_member
+    where idx = #{idx,jdbcType=BIGINT}
+  </delete>
+  <update id="deleteByIdxesWithExample" parameterType="cc.msonion.carambola.member.pojo.MemberExample">
+    update tb_member set status = 0
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </update>
+  <insert id="insert" parameterType="cc.msonion.carambola.member.pojo.Member">
+    insert into tb_member (idx, idx_code, name, 
+      full_name, code, password, 
+      phone, tel, sex, email, 
+      create_by_member_idx, update_by_member_idx, create_time, 
+      update_time, status, version, 
+      remark, store_idx, department_idx, 
+      vip_member_idx, member_cate_idx, last_login_ip, 
+      last_login_time, ext)
+    values (#{idx,jdbcType=BIGINT}, #{idxCode,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{fullName,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{password,jdbcType=CHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{sex,jdbcType=SMALLINT}, #{email,jdbcType=VARCHAR}, 
+      #{createByMemberIdx,jdbcType=BIGINT}, #{updateByMemberIdx,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=SMALLINT}, #{version,jdbcType=BIGINT}, 
+      #{remark,jdbcType=VARCHAR}, #{storeIdx,jdbcType=BIGINT}, #{departmentIdx,jdbcType=BIGINT}, 
+      #{vipMemberIdx,jdbcType=BIGINT}, #{memberCateIdx,jdbcType=BIGINT}, #{lastLoginIp,jdbcType=CHAR}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{ext,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cc.msonion.carambola.member.pojo.Member">
+    insert into tb_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idx != null">
+        idx,
+      </if>
+      <if test="idxCode != null">
+        idx_code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="fullName != null">
+        full_name,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="createByMemberIdx != null">
+        create_by_member_idx,
+      </if>
+      <if test="updateByMemberIdx != null">
+        update_by_member_idx,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="storeIdx != null">
+        store_idx,
+      </if>
+      <if test="departmentIdx != null">
+        department_idx,
+      </if>
+      <if test="vipMemberIdx != null">
+        vip_member_idx,
+      </if>
+      <if test="memberCateIdx != null">
+        member_cate_idx,
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="ext != null">
+        ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idx != null">
+        #{idx,jdbcType=BIGINT},
+      </if>
+      <if test="idxCode != null">
+        #{idxCode,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null">
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=SMALLINT},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="createByMemberIdx != null">
+        #{createByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="updateByMemberIdx != null">
+        #{updateByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="storeIdx != null">
+        #{storeIdx,jdbcType=BIGINT},
+      </if>
+      <if test="departmentIdx != null">
+        #{departmentIdx,jdbcType=BIGINT},
+      </if>
+      <if test="vipMemberIdx != null">
+        #{vipMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="memberCateIdx != null">
+        #{memberCateIdx,jdbcType=BIGINT},
+      </if>
+      <if test="lastLoginIp != null">
+        #{lastLoginIp,jdbcType=CHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        #{ext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cc.msonion.carambola.member.pojo.MemberExample" resultType="java.lang.Long">
+    select count(idx) from tb_member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_member
+    <set>
+      <if test="record.idx != null">
+        idx = #{record.idx,jdbcType=BIGINT},
+      </if>
+      <if test="record.idxCode != null">
+        idx_code = #{record.idxCode,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fullName != null">
+        full_name = #{record.fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=CHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null">
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=SMALLINT},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createByMemberIdx != null">
+        create_by_member_idx = #{record.createByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateByMemberIdx != null">
+        update_by_member_idx = #{record.updateByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=BIGINT},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeIdx != null">
+        store_idx = #{record.storeIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.departmentIdx != null">
+        department_idx = #{record.departmentIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.vipMemberIdx != null">
+        vip_member_idx = #{record.vipMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.memberCateIdx != null">
+        member_cate_idx = #{record.memberCateIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastLoginIp != null">
+        last_login_ip = #{record.lastLoginIp,jdbcType=CHAR},
+      </if>
+      <if test="record.lastLoginTime != null">
+        last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ext != null">
+        ext = #{record.ext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_member
+    set idx = #{record.idx,jdbcType=BIGINT},
+      idx_code = #{record.idxCode,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      full_name = #{record.fullName,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=CHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=SMALLINT},
+      email = #{record.email,jdbcType=VARCHAR},
+      create_by_member_idx = #{record.createByMemberIdx,jdbcType=BIGINT},
+      update_by_member_idx = #{record.updateByMemberIdx,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=SMALLINT},
+      version = #{record.version,jdbcType=BIGINT},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      store_idx = #{record.storeIdx,jdbcType=BIGINT},
+      department_idx = #{record.departmentIdx,jdbcType=BIGINT},
+      vip_member_idx = #{record.vipMemberIdx,jdbcType=BIGINT},
+      member_cate_idx = #{record.memberCateIdx,jdbcType=BIGINT},
+      last_login_ip = #{record.lastLoginIp,jdbcType=CHAR},
+      last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      ext = #{record.ext,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cc.msonion.carambola.member.pojo.Member">
+    update tb_member
+    <set>
+      <if test="idxCode != null">
+        idx_code = #{idxCode,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null">
+        full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=SMALLINT},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="createByMemberIdx != null">
+        create_by_member_idx = #{createByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="updateByMemberIdx != null">
+        update_by_member_idx = #{updateByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="storeIdx != null">
+        store_idx = #{storeIdx,jdbcType=BIGINT},
+      </if>
+      <if test="departmentIdx != null">
+        department_idx = #{departmentIdx,jdbcType=BIGINT},
+      </if>
+      <if test="vipMemberIdx != null">
+        vip_member_idx = #{vipMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="memberCateIdx != null">
+        member_cate_idx = #{memberCateIdx,jdbcType=BIGINT},
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip = #{lastLoginIp,jdbcType=CHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where idx = #{idx,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cc.msonion.carambola.member.pojo.Member">
+    update tb_member
+    set idx_code = #{idxCode,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=SMALLINT},
+      email = #{email,jdbcType=VARCHAR},
+      create_by_member_idx = #{createByMemberIdx,jdbcType=BIGINT},
+      update_by_member_idx = #{updateByMemberIdx,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=SMALLINT},
+      version = #{version,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      store_idx = #{storeIdx,jdbcType=BIGINT},
+      department_idx = #{departmentIdx,jdbcType=BIGINT},
+      vip_member_idx = #{vipMemberIdx,jdbcType=BIGINT},
+      member_cate_idx = #{memberCateIdx,jdbcType=BIGINT},
+      last_login_ip = #{lastLoginIp,jdbcType=CHAR},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      ext = #{ext,jdbcType=VARCHAR}
+    where idx = #{idx,jdbcType=BIGINT}
+  </update>
+</mapper>

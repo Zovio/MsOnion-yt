@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+			 xmlns:context="http://www.springframework.org/schema/context" 
+			 xmlns:p="http://www.springframework.org/schema/p"
+			 xmlns:aop="http://www.springframework.org/schema/aop" 
+			 xmlns:tx="http://www.springframework.org/schema/tx"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+			 xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			 								     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+											     http://www.springframework.org/schema/context 
+											    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+											    http://www.springframework.org/schema/aop 
+											   http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+											   http://www.springframework.org/schema/tx 
+											  http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+											  http://www.springframework.org/schema/util 
+											  http://www.springframework.org/schema/util/spring-util-4.0.xsd
+											 http://code.alibabatech.com/schema/dubbo 
+        									 http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 配置dubbo服务 -->
+	<dubbo:application name="msyt-fileresource-api" owner="yt" organization="www.msyc.cc"/>
+
+	<!-- 使用Zookeeper实现注册中心，集群的方式 -->
+	<dubbo:registry protocol="zookeeper" address="${zk.connectString}" timeout="${msonion_dubbo_registry_timeout}"/>
+
+
+	<!-- 引用服务 Begin ， 搜索中，即发布服务，又引用其他服务！！！ -->
+
+	<!-- 日志 服务 -->
+	<dubbo:reference interface="cc.msonion.carambola.log.service.LogService"
+					 id="logService" version="${dubbo.service.logService.version}"
+					 timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.msOnionLog}"/>
+
+
+	<!-- Member Service -->
+	 <dubbo:reference interface="cc.msonion.carambola.member.service.MemberService"
+		id="memberService" version="${dubbo.service.memberService.vesion}"
+					  timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.memberService}" />
+
+	<!-- ###################### msyt-system ### End  ######################  -->
+
+	<!-- 数据字典 Service-->
+	<dubbo:reference interface="cc.msonion.carambola.system.service.SysDataDictionaryService"
+					 id="sysDataDictionaryService" version="${dubbo.service.sysDataDictionaryService.vesion}"
+					 timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.sysDataDictionaryService}"/>
+	<!-- 登录日志 Service-->
+	<dubbo:reference interface="cc.msonion.carambola.system.service.SysMemberLoginLogService"
+					 id="sysMemberLoginLogService" version="${dubbo.service.sysMemberLoginLogService.vesion}"
+					 timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.sysMemberLoginLogService}"/>
+
+	<!-- 系统设置 Service-->
+	<dubbo:reference interface="cc.msonion.carambola.system.service.SysSettingService"
+					 id="sysSettingService" version="${dubbo.service.sysSettingService.vesion}"
+					 timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.sysSettingService}"/>
+
+	<!-- ###################### msyt-system ### End  ######################  -->
+
+		
+	<!-- 引用服务 End -->
+	
+		
+</beans>

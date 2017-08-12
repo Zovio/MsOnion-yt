@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cc.msonion.carambola</groupId>
+		<artifactId>msyt-parent</artifactId>
+		<version>2.0.0</version>
+	</parent>
+	<artifactId>msyt-member</artifactId>
+	<packaging>pom</packaging>
+	<name>msyt-member</name>
+	<description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-member 成员，也就是公司内部同事成员，可以登录后台系统</description>
+	<modules>
+		<module>msyt-member-api</module>
+		<module>msyt-member-common</module>
+		<module>msyt-member-dao</module>
+		<module>msyt-member-interface</module>
+		<module>msyt-member-service</module>
+		<module>msyt-member-pojo</module>
+		<module>msyt-member-ext</module>
+	</modules>
+
+</project>

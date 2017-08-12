@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.msonion.carambola.member.dao.mapper.MemberCateMapper">
+  <resultMap id="BaseResultMap" type="cc.msonion.carambola.member.pojo.MemberCate">
+    <id column="idx" jdbcType="BIGINT" property="idx" />
+    <result column="idx_code" jdbcType="BIGINT" property="idxCode" />
+    <result column="pidx" jdbcType="BIGINT" property="pidx" />
+    <result column="pidx_code" jdbcType="BIGINT" property="pidxCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="create_by_member_id" jdbcType="BIGINT" property="createByMemberId" />
+    <result column="update_by_member_id" jdbcType="BIGINT" property="updateByMemberId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    idx, idx_code, pidx, pidx_code, name, remark, create_time, update_time, version, 
+    status, create_by_member_id, update_by_member_id
+  </sql>
+  <select id="selectByExample" parameterType="cc.msonion.carambola.member.pojo.MemberCateExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_member_cate_p
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_member_cate_p
+    where idx = #{idx,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_member_cate_p
+    where idx = #{idx,jdbcType=BIGINT}
+  </delete>
+  <update id="deleteByIdxesWithExample" parameterType="cc.msonion.carambola.member.pojo.MemberCateExample">
+    update tb_member_cate_p set status = 0
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </update>
+  <insert id="insert" parameterType="cc.msonion.carambola.member.pojo.MemberCate">
+    insert into tb_member_cate_p (idx, idx_code, pidx, 
+      pidx_code, name, remark, 
+      create_time, update_time, version, 
+      status, create_by_member_id, update_by_member_id
+      )
+    values (#{idx,jdbcType=BIGINT}, #{idxCode,jdbcType=BIGINT}, #{pidx,jdbcType=BIGINT}, 
+      #{pidxCode,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{version,jdbcType=BIGINT}, 
+      #{status,jdbcType=SMALLINT}, #{createByMemberId,jdbcType=BIGINT}, #{updateByMemberId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cc.msonion.carambola.member.pojo.MemberCate">
+    insert into tb_member_cate_p
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idx != null">
+        idx,
+      </if>
+      <if test="idxCode != null">
+        idx_code,
+      </if>
+      <if test="pidx != null">
+        pidx,
+      </if>
+      <if test="pidxCode != null">
+        pidx_code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createByMemberId != null">
+        create_by_member_id,
+      </if>
+      <if test="updateByMemberId != null">
+        update_by_member_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idx != null">
+        #{idx,jdbcType=BIGINT},
+      </if>
+      <if test="idxCode != null">
+        #{idxCode,jdbcType=BIGINT},
+      </if>
+      <if test="pidx != null">
+        #{pidx,jdbcType=BIGINT},
+      </if>
+      <if test="pidxCode != null">
+        #{pidxCode,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createByMemberId != null">
+        #{createByMemberId,jdbcType=BIGINT},
+      </if>
+      <if test="updateByMemberId != null">
+        #{updateByMemberId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cc.msonion.carambola.member.pojo.MemberCateExample" resultType="java.lang.Long">
+    select count(idx) from tb_member_cate_p
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_member_cate_p
+    <set>
+      <if test="record.idx != null">
+        idx = #{record.idx,jdbcType=BIGINT},
+      </if>
+      <if test="record.idxCode != null">
+        idx_code = #{record.idxCode,jdbcType=BIGINT},
+      </if>
+      <if test="record.pidx != null">
+        pidx = #{record.pidx,jdbcType=BIGINT},
+      </if>
+      <if test="record.pidxCode != null">
+        pidx_code = #{record.pidxCode,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.createByMemberId != null">
+        create_by_member_id = #{record.createByMemberId,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateByMemberId != null">
+        update_by_member_id = #{record.updateByMemberId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_member_cate_p
+    set idx = #{record.idx,jdbcType=BIGINT},
+      idx_code = #{record.idxCode,jdbcType=BIGINT},
+      pidx = #{record.pidx,jdbcType=BIGINT},
+      pidx_code = #{record.pidxCode,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      version = #{record.version,jdbcType=BIGINT},
+      status = #{record.status,jdbcType=SMALLINT},
+      create_by_member_id = #{record.createByMemberId,jdbcType=BIGINT},
+      update_by_member_id = #{record.updateByMemberId,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cc.msonion.carambola.member.pojo.MemberCate">
+    update tb_member_cate_p
+    <set>
+      <if test="idxCode != null">
+        idx_code = #{idxCode,jdbcType=BIGINT},
+      </if>
+      <if test="pidx != null">
+        pidx = #{pidx,jdbcType=BIGINT},
+      </if>
+      <if test="pidxCode != null">
+        pidx_code = #{pidxCode,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createByMemberId != null">
+        create_by_member_id = #{createByMemberId,jdbcType=BIGINT},
+      </if>
+      <if test="updateByMemberId != null">
+        update_by_member_id = #{updateByMemberId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where idx = #{idx,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cc.msonion.carambola.member.pojo.MemberCate">
+    update tb_member_cate_p
+    set idx_code = #{idxCode,jdbcType=BIGINT},
+      pidx = #{pidx,jdbcType=BIGINT},
+      pidx_code = #{pidxCode,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=BIGINT},
+      status = #{status,jdbcType=SMALLINT},
+      create_by_member_id = #{createByMemberId,jdbcType=BIGINT},
+      update_by_member_id = #{updateByMemberId,jdbcType=BIGINT}
+    where idx = #{idx,jdbcType=BIGINT}
+  </update>
+</mapper>

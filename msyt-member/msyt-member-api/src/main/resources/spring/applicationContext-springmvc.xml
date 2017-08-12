@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			 									 http://www.springframework.org/schema/beans/spring-beans.xsd
+        										 http://www.springframework.org/schema/mvc 
+        										 http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        										 http://www.springframework.org/schema/context 
+        										 http://www.springframework.org/schema/context/spring-context.xsd
+        										 http://code.alibabatech.com/schema/dubbo 
+        										 http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        										 http://www.springframework.org/schema/task
+ 												 http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<!-- 注意，这里扫描的包 和 service 中扫描的包，不要冲突！！！ -->
+	<context:component-scan base-package="cc.msonion.carambola.member.api.controller.app" />
+
+	<mvc:annotation-driven />
+
+	
+	<!-- 配置，SpringMVC 全局异常处理器 -->
+	<bean class="cc.msonion.carambola.member.api.exception.WebGlobalHandlerExceptionResolver" />
+
+	<!-- 配置视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 配置多媒体解析器 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设定默认编码 -->
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<!-- 设定文件上传的最大值 2MB, 5MB，5*1024*1024 , 5242880 , 2097152 这里的配置，要和 msyt-image-service 
+			/ resources / fdfs / fdfsConfig.properties 大小一致 ，还有KindEditor中设置的上传文件大小，默认是1MB -->
+		<property name="maxUploadSize" value="2097152"></property>
+	</bean>
+
+
+</beans>
