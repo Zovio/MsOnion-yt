@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cc.msonion.carambola</groupId>
+		<artifactId>msyt-parent</artifactId>
+		<version>2.0.0</version>
+	</parent>
+	<artifactId>msyt-fileresource</artifactId>
+	<packaging>pom</packaging>
+	<name>msyt-fileresource</name>
+	<description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-fileresource，文件资源模块，包括收集的视频、图片、PPT、Excel等文件资源上传和下载</description>
+	<modules>
+		<module>msyt-fileresource-api</module>
+		<module>msyt-fileresource-common</module>
+		<module>msyt-fileresource-dao</module>
+		<module>msyt-fileresource-interface</module>
+		<module>msyt-fileresource-pojo</module>
+		<module>msyt-fileresource-service</module>
+	</modules>
+
+</project>

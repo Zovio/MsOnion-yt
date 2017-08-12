@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 配置dubbo服务 -->
+    <dubbo:application name="msyt-fileresource-api" owner="yt" organization="www.msyc.cc"/>
+
+    <!-- 使用Zookeeper实现注册中心，集群的方式 -->
+    <dubbo:registry protocol="zookeeper" address="${zk.connectString}" timeout="${msonion_dubbo_registry_timeout}"/>
+
+
+    <!-- 引用服务 Begin ， 搜索中，即发布服务，又引用其他服务！！！ -->
+
+    <!-- 日志 服务 -->
+    <dubbo:reference interface="cc.msonion.carambola.parent.interfaces.log.MsOnionLog"
+                     id="msOnionLog" version="${dubbo.service.logService.version}"
+                     timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.msOnionLog}"/>
+    <!-- 系统设置 Service-->
+    <dubbo:reference interface="cc.msonion.carambola.system.service.SysSettingService"
+                     id="sysSettingService" version="${dubbo.service.sysSettingService.vesion}"
+                     timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.sysSettingService}"/>
+
+    <dubbo:reference interface="cc.msonion.carambola.fileresource.interfaces.FileResourceUploadService"
+                     id="fileResourceUploadService" version="${dubbo.service.fileResourceUploadService.version}"
+                     timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.fileResourceUploadService}"/>
+
+    <dubbo:reference interface="cc.msonion.carambola.fileresource.interfaces.FileResourceDownloadService"
+                     id="fileResourceDownloadService" version="${dubbo.service.fileResourceDownloadService.version}"
+                     timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.fileResourceDownloadService}"/>
+
+    <dubbo:reference interface="cc.msonion.carambola.fileresource.interfaces.AblumLibService"
+                     id="ablumLibService" version="${dubbo.service.ablumLibService.version}"
+                     timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.ablumLibService}"/>
+
+    <!-- 引用服务 End -->
+
+
+</beans>

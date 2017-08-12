@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.msonion.carambola.fileresource.dao.mapper.FileResourceUploadMapper">
+  <resultMap id="BaseResultMap" type="cc.msonion.carambola.fileresource.pojo.FileResourceUpload">
+    <id column="idx" jdbcType="BIGINT" property="idx" />
+    <result column="idx_code" jdbcType="BIGINT" property="idxCode" />
+    <result column="message_id" jdbcType="BIGINT" property="messageId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="total_size" jdbcType="BIGINT" property="totalSize" />
+    <result column="upload_size" jdbcType="BIGINT" property="uploadSize" />
+    <result column="upload_status" jdbcType="SMALLINT" property="uploadStatus" />
+    <result column="md5_value" jdbcType="VARCHAR" property="md5Value" />
+    <result column="file_type" jdbcType="SMALLINT" property="fileType" />
+    <result column="album_type" jdbcType="SMALLINT" property="albumType" />
+    <result column="oss_path" jdbcType="VARCHAR" property="ossPath" />
+    <result column="oss_sync" jdbcType="SMALLINT" property="ossSync" />
+    <result column="search_by_image" jdbcType="SMALLINT" property="searchByImage" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+    <result column="create_by_member_idx" jdbcType="BIGINT" property="createByMemberIdx" />
+    <result column="update_by_member_idx" jdbcType="BIGINT" property="updateByMemberIdx" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="ext" jdbcType="VARCHAR" property="ext" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    idx, idx_code, message_id, name, path, total_size, upload_size, upload_status, md5_value, 
+    file_type, album_type, oss_path, oss_sync, search_by_image, remark, status, version, 
+    create_by_member_idx, update_by_member_idx, create_time, update_time, ext
+  </sql>
+  <select id="selectByExample" parameterType="cc.msonion.carambola.fileresource.pojo.FileResourceUploadExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_fileresource_upload
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_fileresource_upload
+    where idx = #{idx,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_fileresource_upload
+    where idx = #{idx,jdbcType=BIGINT}
+  </delete>
+  <update id="deleteByIdxesWithExample" parameterType="cc.msonion.carambola.fileresource.pojo.FileResourceUploadExample">
+    update tb_fileresource_upload set status = 0
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </update>
+  <insert id="insert" parameterType="cc.msonion.carambola.fileresource.pojo.FileResourceUpload">
+    insert into tb_fileresource_upload (idx, idx_code, message_id, 
+      name, path, total_size, 
+      upload_size, upload_status, md5_value, 
+      file_type, album_type, oss_path, 
+      oss_sync, search_by_image, remark, 
+      status, version, create_by_member_idx, 
+      update_by_member_idx, create_time, update_time, 
+      ext)
+    values (#{idx,jdbcType=BIGINT}, #{idxCode,jdbcType=BIGINT}, #{messageId,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{totalSize,jdbcType=BIGINT}, 
+      #{uploadSize,jdbcType=BIGINT}, #{uploadStatus,jdbcType=SMALLINT}, #{md5Value,jdbcType=VARCHAR}, 
+      #{fileType,jdbcType=SMALLINT}, #{albumType,jdbcType=SMALLINT}, #{ossPath,jdbcType=VARCHAR}, 
+      #{ossSync,jdbcType=SMALLINT}, #{searchByImage,jdbcType=SMALLINT}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=SMALLINT}, #{version,jdbcType=BIGINT}, #{createByMemberIdx,jdbcType=BIGINT}, 
+      #{updateByMemberIdx,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{ext,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cc.msonion.carambola.fileresource.pojo.FileResourceUpload">
+    insert into tb_fileresource_upload
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idx != null">
+        idx,
+      </if>
+      <if test="idxCode != null">
+        idx_code,
+      </if>
+      <if test="messageId != null">
+        message_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="totalSize != null">
+        total_size,
+      </if>
+      <if test="uploadSize != null">
+        upload_size,
+      </if>
+      <if test="uploadStatus != null">
+        upload_status,
+      </if>
+      <if test="md5Value != null">
+        md5_value,
+      </if>
+      <if test="fileType != null">
+        file_type,
+      </if>
+      <if test="albumType != null">
+        album_type,
+      </if>
+      <if test="ossPath != null">
+        oss_path,
+      </if>
+      <if test="ossSync != null">
+        oss_sync,
+      </if>
+      <if test="searchByImage != null">
+        search_by_image,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="createByMemberIdx != null">
+        create_by_member_idx,
+      </if>
+      <if test="updateByMemberIdx != null">
+        update_by_member_idx,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="ext != null">
+        ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idx != null">
+        #{idx,jdbcType=BIGINT},
+      </if>
+      <if test="idxCode != null">
+        #{idxCode,jdbcType=BIGINT},
+      </if>
+      <if test="messageId != null">
+        #{messageId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="totalSize != null">
+        #{totalSize,jdbcType=BIGINT},
+      </if>
+      <if test="uploadSize != null">
+        #{uploadSize,jdbcType=BIGINT},
+      </if>
+      <if test="uploadStatus != null">
+        #{uploadStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="md5Value != null">
+        #{md5Value,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        #{fileType,jdbcType=SMALLINT},
+      </if>
+      <if test="albumType != null">
+        #{albumType,jdbcType=SMALLINT},
+      </if>
+      <if test="ossPath != null">
+        #{ossPath,jdbcType=VARCHAR},
+      </if>
+      <if test="ossSync != null">
+        #{ossSync,jdbcType=SMALLINT},
+      </if>
+      <if test="searchByImage != null">
+        #{searchByImage,jdbcType=SMALLINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="createByMemberIdx != null">
+        #{createByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="updateByMemberIdx != null">
+        #{updateByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        #{ext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cc.msonion.carambola.fileresource.pojo.FileResourceUploadExample" resultType="java.lang.Long">
+    select count(idx) from tb_fileresource_upload
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_fileresource_upload
+    <set>
+      <if test="record.idx != null">
+        idx = #{record.idx,jdbcType=BIGINT},
+      </if>
+      <if test="record.idxCode != null">
+        idx_code = #{record.idxCode,jdbcType=BIGINT},
+      </if>
+      <if test="record.messageId != null">
+        message_id = #{record.messageId,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null">
+        path = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalSize != null">
+        total_size = #{record.totalSize,jdbcType=BIGINT},
+      </if>
+      <if test="record.uploadSize != null">
+        upload_size = #{record.uploadSize,jdbcType=BIGINT},
+      </if>
+      <if test="record.uploadStatus != null">
+        upload_status = #{record.uploadStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.md5Value != null">
+        md5_value = #{record.md5Value,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileType != null">
+        file_type = #{record.fileType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.albumType != null">
+        album_type = #{record.albumType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.ossPath != null">
+        oss_path = #{record.ossPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ossSync != null">
+        oss_sync = #{record.ossSync,jdbcType=SMALLINT},
+      </if>
+      <if test="record.searchByImage != null">
+        search_by_image = #{record.searchByImage,jdbcType=SMALLINT},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=BIGINT},
+      </if>
+      <if test="record.createByMemberIdx != null">
+        create_by_member_idx = #{record.createByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateByMemberIdx != null">
+        update_by_member_idx = #{record.updateByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ext != null">
+        ext = #{record.ext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_fileresource_upload
+    set idx = #{record.idx,jdbcType=BIGINT},
+      idx_code = #{record.idxCode,jdbcType=BIGINT},
+      message_id = #{record.messageId,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      path = #{record.path,jdbcType=VARCHAR},
+      total_size = #{record.totalSize,jdbcType=BIGINT},
+      upload_size = #{record.uploadSize,jdbcType=BIGINT},
+      upload_status = #{record.uploadStatus,jdbcType=SMALLINT},
+      md5_value = #{record.md5Value,jdbcType=VARCHAR},
+      file_type = #{record.fileType,jdbcType=SMALLINT},
+      album_type = #{record.albumType,jdbcType=SMALLINT},
+      oss_path = #{record.ossPath,jdbcType=VARCHAR},
+      oss_sync = #{record.ossSync,jdbcType=SMALLINT},
+      search_by_image = #{record.searchByImage,jdbcType=SMALLINT},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=SMALLINT},
+      version = #{record.version,jdbcType=BIGINT},
+      create_by_member_idx = #{record.createByMemberIdx,jdbcType=BIGINT},
+      update_by_member_idx = #{record.updateByMemberIdx,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      ext = #{record.ext,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cc.msonion.carambola.fileresource.pojo.FileResourceUpload">
+    update tb_fileresource_upload
+    <set>
+      <if test="idxCode != null">
+        idx_code = #{idxCode,jdbcType=BIGINT},
+      </if>
+      <if test="messageId != null">
+        message_id = #{messageId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="totalSize != null">
+        total_size = #{totalSize,jdbcType=BIGINT},
+      </if>
+      <if test="uploadSize != null">
+        upload_size = #{uploadSize,jdbcType=BIGINT},
+      </if>
+      <if test="uploadStatus != null">
+        upload_status = #{uploadStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="md5Value != null">
+        md5_value = #{md5Value,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        file_type = #{fileType,jdbcType=SMALLINT},
+      </if>
+      <if test="albumType != null">
+        album_type = #{albumType,jdbcType=SMALLINT},
+      </if>
+      <if test="ossPath != null">
+        oss_path = #{ossPath,jdbcType=VARCHAR},
+      </if>
+      <if test="ossSync != null">
+        oss_sync = #{ossSync,jdbcType=SMALLINT},
+      </if>
+      <if test="searchByImage != null">
+        search_by_image = #{searchByImage,jdbcType=SMALLINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="createByMemberIdx != null">
+        create_by_member_idx = #{createByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="updateByMemberIdx != null">
+        update_by_member_idx = #{updateByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where idx = #{idx,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cc.msonion.carambola.fileresource.pojo.FileResourceUpload">
+    update tb_fileresource_upload
+    set idx_code = #{idxCode,jdbcType=BIGINT},
+      message_id = #{messageId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      total_size = #{totalSize,jdbcType=BIGINT},
+      upload_size = #{uploadSize,jdbcType=BIGINT},
+      upload_status = #{uploadStatus,jdbcType=SMALLINT},
+      md5_value = #{md5Value,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=SMALLINT},
+      album_type = #{albumType,jdbcType=SMALLINT},
+      oss_path = #{ossPath,jdbcType=VARCHAR},
+      oss_sync = #{ossSync,jdbcType=SMALLINT},
+      search_by_image = #{searchByImage,jdbcType=SMALLINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=SMALLINT},
+      version = #{version,jdbcType=BIGINT},
+      create_by_member_idx = #{createByMemberIdx,jdbcType=BIGINT},
+      update_by_member_idx = #{updateByMemberIdx,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      ext = #{ext,jdbcType=VARCHAR}
+    where idx = #{idx,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,205 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cc.msonion.carambola</groupId>
+    <artifactId>msyt-fileresource</artifactId>
+    <version>2.0.0</version>
+  </parent>
+  <artifactId>msyt-fileresource-api</artifactId>
+  <packaging>war</packaging>
+  <name>msyt-fileresource-api</name>
+  <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-fileresource-api，文件资源API模块</description>
+
+	<!-- 自定义属性 -->
+	<properties>
+
+		<!-- Netty ， Begin
+         由于 Netty 5.x 是商业版本，不再开源，但是 5.0.0.Alpha2 新增很多功能，已经代码调整，
+         Netty 4.x 和  Netty 5.x 不兼容， 5.0.0.Alpha2 (Mar 03, 2015)，
+         4.1.9.Final (Mar 10, 2017) ，由于 Hero 时间方面问题，同时为了更快实现，
+         先以5.0.0.Alpha2 (Mar 03, 2015) 来实现 ！！！
+
+            RocketMQ 中使用 Netty： 4.0.36.Final ，由于冲突，因此不能使用 5.0.0.Alpha2
+
+             由于 Elasticsearch 底层也使用到 Netty，因此当前模块不可以使用 Elasticsearch，
+             否则出现 Netty 版本冲突
+
+         -->
+		<netty-all.version>5.0.0.Alpha2</netty-all.version>
+
+	</properties>
+
+  <!-- 依赖 -->
+	<dependencies>
+
+		<!-- msyt-commons-web -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-commons-web</artifactId>
+			<exclusions>
+				<!--<exclusion>-->
+					<!--<artifactId>netty</artifactId>-->
+					<!--<groupId>io.netty</groupId>-->
+				<!--</exclusion>-->
+				<!--<exclusion>-->
+					<!--<artifactId>netty-all</artifactId>-->
+					<!--<groupId>io.netty</groupId>-->
+				<!--</exclusion>-->
+				<exclusion>
+					<groupId>com.alibaba.rocketmq</groupId>
+					<artifactId>rocketmq-client</artifactId>
+				</exclusion>
+				<exclusion>
+					<artifactId>transport-netty3-client</artifactId>
+					<groupId>org.elasticsearch.plugin</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>transport-netty4-client</artifactId>
+					<groupId>org.elasticsearch.plugin</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- msyt-fileresource-common -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-fileresource-common</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>netty</artifactId>
+					<groupId>io.netty</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>netty-all</artifactId>
+					<groupId>io.netty</groupId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.alibaba.rocketmq</groupId>
+					<artifactId>rocketmq-client</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- msyt-fileresource-interface -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-fileresource-interface</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>netty</artifactId>
+					<groupId>io.netty</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>netty-all</artifactId>
+					<groupId>io.netty</groupId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.alibaba.rocketmq</groupId>
+					<artifactId>rocketmq-client</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- 依赖第三方框架，Begin -->
+		<!-- Servlet、JSP，所有的WEB模块，都要再依赖，否则报错，Begin -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<!-- Servlet 的 scope配置成 provided，编译，测试，运行使用，打包不包含进去，因为Tomcat中已经包含， 如果打包再包含进去，可能导致冲突报错！！！ -->
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Servlet、JSP，所有的WEB模块，都要再依赖，否则报错，End -->
+
+		<!-- Netty Begin ，
+           Netty是由JBOSS提供的一个java开源框架。Netty提供异步的、事件驱动的网络应用程序框架和工具，用以快速开发高性能、高可靠性的网络服务器和客户端程序。
+           也就是说，Netty 是一个基于NIO的客户、服务器端编程框架，使用Netty 可以确保你快速和简单的开发出一个网络应用
+           ，例如实现了某种协议的客户，服务端应用。
+           Netty相当简化和流线化了网络应用的编程开发过程，例如，TCP和UDP的socket服务开发。
+           -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>${netty-all.version}</version>
+		</dependency>
+
+		<!-- Netty ### End  -->
+
+		<!-- 单元测试 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- 依赖第三方框架，End -->
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- 配置Tomcat插件，使用Tomcat插件之后，本地就不需要单独安装Tomcat了 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<path>/</path>
+					<port>8140</port>
+					<goal>clean tomcat7:run</goal>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<!-- 多套环境，不同环境的配置不同， ## Begin -->
+
+		<resources>
+			<!-- 指定环境配置文件输出目录 -->
+			<resource>
+				<!-- 原始的 -->
+				<!--<directory>${profile.dir}</directory>-->
+
+				<!-- add -->
+				<directory>${resources.dir}</directory>
+				<targetPath>${project.build.directory}/classes</targetPath>
+
+				<!-- add by Hero ##  -->
+				<includes>
+					<include>log4j.properties</include>
+					<include>spring/**</include>
+					<!--<include>mybatis/**</include>-->
+
+					<!--<include>${target.env}/properties/**</include>-->
+					<include>${target.env}/**</include>
+
+				</includes>
+
+				<!-- 资源过滤   -->
+				<filtering>true</filtering>
+
+			</resource>
+
+			<!--<resource>
+                <directory>${profile.dir}</directory>
+                <targetPath>${project.build.directory}/classes</targetPath>
+                <includes>
+                    <include>${target.env}/properties/**</include>
+                </includes>
+            </resource>-->
+
+			<!-- 资源过滤   -->
+			<!--<resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>-->
+		</resources>
+
+		<!-- 多套环境，不同环境的配置不同， ## End -->
+
+	</build>
+  
+</project>

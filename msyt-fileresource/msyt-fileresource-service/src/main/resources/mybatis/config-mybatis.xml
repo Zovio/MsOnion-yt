@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 这里可以为空，不配置任何东西config-mybatis.xml 必须有 ， 这里没有配置 别名 ！！！ 也可以配置别名 ！！！ -->
+
+	<plugins>
+		<!-- 分页插件
+		cc.msonion.carambola.member.service.mybatis.MsOnionSqlAnalyzeInterceptor
+		com.github.pagehelper.PageHelper
+		-->
+		<!-- 4.x -->
+		<!--<plugin interceptor="com.github.pagehelper.PageHelper">-->
+		<!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库 -->
+		<!--<property name="dialect" value="mysql" />-->
+
+		<!-- 5.x -->
+		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+
+		</plugin>
+
+		<!-- PageHelper 5.x把排序独立出来，分页插件或其他插件，OrderBy 一定要在分页插件下面（主要是为了避免 count 也被增加排序） -->
+		<plugin interceptor="tk.mybatis.orderbyhelper.OrderByHelper"/>
+
+		<!-- SQL语句执行分析插件 -->
+		<plugin interceptor="cc.msonion.carambola.parent.dao.mybatis.MsOnionSqlAnalyzeInterceptor"/>
+
+	</plugins>
+
+</configuration>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			 									 http://www.springframework.org/schema/beans/spring-beans.xsd
+        										 http://www.springframework.org/schema/context 
+        										 http://www.springframework.org/schema/context/spring-context.xsd
+        										 http://code.alibabatech.com/schema/dubbo 
+        										 http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 配置加载配置文件 -->
+	<!-- <context:property-placeholder location="classpath:properties/*.properties"/> -->
+	
+	<!-- 不是WEB工程，不要 classpath: , WEB工程，必须加上 classpath:  -->
+	<!-- <context:property-placeholder location="classpath:properties/*.properties"/> -->
+
+	<!-- 配置文件环境切换 ### Begin  -->
+	<!--
+             # Environment :
+             pro(production、生产环境) , pre(preview、预发布环境) , test（测试环境） , dev(develop、开发环境) , sta (stable、稳定环境)
+
+            -->
+
+	<context:property-placeholder location="classpath:*/properties/config-*.properties"/>
+
+	<!-- dev(develop、开发环境) -->
+	<!--<context:property-placeholder location="classpath:dev/properties/config-*.properties"/>-->
+
+	<!-- test（测试环境） -->
+	<!--<context:property-placeholder location="classpath:test/properties/config-*.properties"/>-->
+
+	<!-- sta (stable、稳定环境) -->
+	<!--<context:property-placeholder location="classpath:sta/properties/config-*.properties"/>-->
+
+	<!--  pre(preview、预发布环境) -->
+	<!--<context:property-placeholder location="classpath:pre/properties/config-*.properties"/>-->
+
+	<!-- pro(production、生产环境)  -->
+	<!--<context:property-placeholder location="classpath:pro/properties/config-*.properties"/>-->
+
+	<!-- 配置文件环境切换 ### End  -->
+	
+	<!-- 注意，这里扫描的包 和 service 中扫描的包，不要冲突！！！ -->
+
+	<!--  OK  -->
+	<context:component-scan base-package="cc.msonion.carambola.parent.pojo" />
+	
+	<!--<context:component-scan base-package="cc.msonion.carambola.parent.pojo.zk.client" />-->
+
+	<!--  msyt-parent-ext 不可以全部扫描，因为包括所有  -->
+	<!--<context:component-scan base-package="cc.msonion.carambola.parent.ext"/>-->
+
+	<!-- 扫描日志，加载 -->
+	<context:component-scan base-package="cc.msonion.carambola.parent.ext.log"/>
+
+	<!-- 扫描动态配置 -->
+	<context:component-scan base-package="cc.msonion.carambola.parent.ext.pojo.setting"/>
+
+	<!-- Netty ## Begin  -->
+	<context:component-scan base-package="cc.msonion.carambola.parent.ext.netty" />
+
+	<context:component-scan base-package="cc.msonion.carambola.fileresource.api.netty" />
+
+	<!-- Netty ## End  -->
+	
+	<!-- RetryNTimes -->
+	<bean id="retryPolicy" class="cc.msonion.carambola.parent.pojo.zk.retrypolicy.MsOnionRetryNTimes">
+		<constructor-arg name="n"  value="${zk.retryPolicyN}"></constructor-arg>
+		<constructor-arg name="sleepMsBetweenRetries"  value="${zk.retryPolicy.sleepMsBetweenRetries}"></constructor-arg>
+	</bean>
+
+	<!-- MsOnionCuratorZookeeperClient -->
+	<bean class="cc.msonion.carambola.parent.pojo.zk.client.MsOnionCuratorZookeeperClient">
+		<!--<constructor-arg name="zkConnectString"  value="zk01:2181,zk02:2181,zk03:2181"></constructor-arg>-->
+
+		<constructor-arg name="zkConnectString"  value="${zk.connectString}"></constructor-arg>
+
+
+		<constructor-arg name="sessionTimeoutMs" value="5000"></constructor-arg>
+		<constructor-arg name="retryPolicy" ref="retryPolicy"></constructor-arg>
+	</bean>
+
+	<!-- 基于 Netty 实现的文件上传，下载 ， Begin -->
+
+
+	<!-- 基于 Netty 实现的文件上传，下载 ， End -->
+
+</beans>

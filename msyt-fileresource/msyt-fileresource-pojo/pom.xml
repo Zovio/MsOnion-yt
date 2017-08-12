@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cc.msonion.carambola</groupId>
+		<artifactId>msyt-fileresource</artifactId>
+		<version>2.0.0</version>
+	</parent>
+	<artifactId>msyt-fileresource-pojo</artifactId>
+	<name>msyt-fileresource-pojo</name>
+	<description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-fileresource-pojo，文件资源POJO</description>
+
+	<!-- 依赖 -->
+	<dependencies>
+
+		<!-- msyt-parent-pojo -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-parent-pojo</artifactId>
+		</dependency>
+
+		<!-- msyt-fileresource-common -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-fileresource-common</artifactId>
+		</dependency>
+
+	</dependencies>
+
+</project>

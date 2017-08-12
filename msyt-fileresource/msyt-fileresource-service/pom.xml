@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cc.msonion.carambola</groupId>
+        <artifactId>msyt-fileresource</artifactId>
+        <version>2.0.0</version>
+    </parent>
+    <artifactId>msyt-fileresource-service</artifactId>
+    <packaging>war</packaging>
+    <name>msyt-fileresource-service</name>
+    <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-fileresource-service，文件资源服务</description>
+
+    <!-- 多套环境，切换  -->
+    <properties>
+        <resources.dir>src/main/resources</resources.dir>
+    </properties>
+
+    <!-- 依赖 -->
+    <dependencies>
+
+        <!-- msyt-parent-service -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-parent-service</artifactId>
+        </dependency>
+
+        <!-- msyt-fileresource-dao -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-fileresource-dao</artifactId>
+        </dependency>
+
+        <!-- msyt-fileresource-interface -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-fileresource-interface</artifactId>
+        </dependency>
+
+        <!-- 依赖第三方框架 # Begin -->
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- 依赖第三方框架 # End -->
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- 配置Tomcat插件，使用Tomcat插件之后，本地就不需要单独安装Tomcat了 -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <configuration>
+                    <path>/</path>
+                    <port>8141</port>
+                    <goal>clean tomcat7:run</goal>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <!-- 多套环境，不同环境的配置不同， ## Begin -->
+
+        <resources>
+            <!-- 指定环境配置文件输出目录 -->
+            <resource>
+                <!-- 原始的 -->
+                <!--<directory>${profile.dir}</directory>-->
+
+                <!-- add -->
+                <directory>${resources.dir}</directory>
+                <targetPath>${project.build.directory}/classes</targetPath>
+
+                <!-- add by Hero ##  -->
+                <includes>
+                    <include>log4j.properties</include>
+                    <include>spring/**</include>
+                    <include>mybatis/**</include>
+                    <!--<include>${profile.dir}/**</include>-->
+                    <include>${target.env}/properties/**</include>
+
+                    <!--<include>${target.env}</include>-->
+                </includes>
+
+                <!-- 资源过滤   -->
+                <filtering>true</filtering>
+
+            </resource>
+
+            <!--<resource>
+                <directory>${profile.dir}</directory>
+                <targetPath>${project.build.directory}/classes</targetPath>
+                <includes>
+                    <include>${target.env}/properties/**</include>
+                </includes>
+            </resource>-->
+
+            <!-- 资源过滤   -->
+            <!--<resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>-->
+        </resources>
+
+        <!-- 多套环境，不同环境的配置不同， ## End -->
+
+    </build>
+
+</project>
