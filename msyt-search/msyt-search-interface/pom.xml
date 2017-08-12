@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cc.msonion.carambola</groupId>
+		<artifactId>msyt-search</artifactId>
+		<version>2.0.0</version>
+	</parent>
+	<artifactId>msyt-search-interface</artifactId>
+	<name>msyt-search-interface</name>
+	<description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-search-interface，搜索接口模块</description>
+
+	<!-- 依赖 -->
+	<dependencies>
+
+		<!-- msyt-parent-interface -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-parent-interface</artifactId>
+		</dependency>
+
+		<!-- msyt-search-pojo，由于已经依赖 msyt-search-common，因此就不要再直接依赖，msyt-search-common -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-search-pojo</artifactId>
+		</dependency>
+
+		<!-- 搜索需要依赖其他模块的POJO  ### Begin  -->
+
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-collector-pojo</artifactId>
+		</dependency>
+
+		<!-- 搜索需要依赖其他模块的POJO  ### End  -->
+
+	</dependencies>
+
+</project>
