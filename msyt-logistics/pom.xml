@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cc.msonion.carambola</groupId>
+        <artifactId>msyt-parent</artifactId>
+        <version>2.0.0</version>
+    </parent>
+    <groupId>cc.msonion.carambola</groupId>
+    <artifactId>msyt-logistics</artifactId>
+    <version>2.0.0</version>
+    <packaging>pom</packaging>
+    <name>msyt-logistics</name>
+    <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-logistics，物流中心模块</description>
+
+    <!-- modules -->
+    <modules>
+        <module>msyt-logistics-api</module>
+        <module>msyt-logistics-common</module>
+        <module>msyt-logistics-dao</module>
+        <module>msyt-logistics-interface</module>
+        <module>msyt-logistics-pojo</module>
+        <module>msyt-logistics-ext</module>
+        <module>msyt-logistics-service</module>
+    </modules>
+
+
+</project>

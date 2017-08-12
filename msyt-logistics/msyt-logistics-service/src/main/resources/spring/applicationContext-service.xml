@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+			 								     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+											     http://www.springframework.org/schema/context 
+											    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+
+
+
+
+
+
+											 http://code.alibabatech.com/schema/dubbo 
+        									 http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!-- 配置包扫描器 -->
+    <!--  注意，这里扫描的包 和 springmvc 中扫描的包，不要冲突！！！ -->
+
+    <!-- System（系统模块服务）-->
+    <context:component-scan base-package="cc.msonion.carambola.logistics.service"></context:component-scan>
+
+    <!-- 扫描多个包，可以使用 ,(逗号）或者；(分号） 分隔 -->
+
+    <!-- Redis的Key生成器 -->
+    <context:component-scan
+            base-package="cc.msonion.carambola.logistics.service.redis.key.impl"></context:component-scan>
+
+
+    <!-- 发布dubbo服务 -->
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="msyt-logistics-service" owner="yt" organization="www.msyc.cc"/>
+
+    <!-- Zookeeper 实现注册中心，集群方式 -->
+    <dubbo:registry protocol="zookeeper"
+                    address="${zk.connectString}" timeout="${msonion_dubbo_registry_timeout}"/>
+
+    <!-- 用dubbo协议在20800端口暴露服务 -->
+    <!-- 这个采用推荐的dubbo协议(tcp传输协议)（底层通过netty实现）（默认采用Hessian序列化方式）在20990端口暴露服务 -->
+    <!--<dubbo:protocol name="dubbo" port="20990" serialization="hessian2" host="${dubbo.protocol.host}" />-->
+    <!--dubbox中引入Kryo和FST这两种高效Java序列化实现，来逐步取代原生dubbo中的hessian2,如果使用kryo记得添加依赖 -->
+    <!-- kryo的确会有这种问题 kryo，目前我们各个服务api升级频繁，增加字段就某一方的api不更新就报错了，这对于上线影响比较大，只能切换回Hessian2先了，或者只传输JSON或者Map类型的容器对象。 -->
+    <dubbo:protocol name="dubbo" port="20819"/>
+
+    <!-- timeout远程服务调用超时时间(毫秒) -->
+    <!-- threads该服务线程池大小 -->
+    <!-- accepts限制服务器端接受的连接不能超过1000个 , accepts="1000"  -->
+    <!-- 随机token令牌，使用UUID生成 ，防止消费者绕过注册中心访问提供者-->
+    <dubbo:provider timeout="${msonion_dubbo_service_timeout}" token="true"/>
+
+    <!-- <dubbo:consumer/> 服务消费者缺省值配置 , 说明：该标签为<dubbo:reference>标签的缺省值设置。 -->
+    <dubbo:consumer check="${dubbo.consumer.check.logistics}"/>
+
+    <!-- 设置服务超时时间，默认1000毫秒，也就是1秒钟，如果需要调试，可以设置为 100000 毫秒，
+    也就是100秒钟，不到2分钟！ ，如果上线，需要欢迎会默认的值！！！ -->
+
+    <!-- 发布成员（公司内部）服务，注意：interface 都是Service 接口，而不是实现类！！！
+    ， ref 才是实现类 实例 ！！！ -->
+    <!--<dubbo:service interface="cc.msonion.carambola.system.service.TestService"-->
+    <!--ref="testServiceImpl"  version="${memberService.vesion}" timeout="${msonion_dubbo_service_timeout}"  />-->
+
+    <dubbo:service interface="cc.msonion.carambola.logistics.service.LogisticsCustomsDeclareService"
+                   ref="logisticsCustomsDeclareServiceImpl"
+                   version="${dubbo.service.logisticsCustomsDeclareService.vesion}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+
+    <dubbo:service interface="cc.msonion.carambola.logistics.service.LogisticsCustomsDeclareOfficialService"
+                   ref="logisticsCustomsDeclareOfficialServiceImpl"
+                   version="${dubbo.service.logisticsCustomsDeclareOfficialService.vesion}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 发布计量单位服务 -->
+    <dubbo:service interface="cc.msonion.carambola.logistics.service.LogisticsUnitService"
+                   ref="logisticsUnitServiceImpl"
+                   version="${dubbo.service.logisticsUnitService.vesion}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+
+    <!-- 搜索商品，服务，注意：interface 都是Service 接口，而不是实现类！！！
+    ， ref 才是实现类 实例 ！！！ ref 引用前面
+    配置<context:component-scan base-package="cc.msonion.user.service,cc.msonion.search.dao">
+    扫描包，已经注入到 Spring 容器中
+     -->
+
+    <!-- 引用（调用）服务 Begin  -->
+
+    <!-- 日志 服务，报错，必须使用 MsOnionLog 接口 -->
+    <!--<dubbo:reference interface="cc.msonion.carambola.log.service.LogService"
+                     id="logService" version="${dubbo.service.logService.version}"
+                     timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.msOnionLog}"/>-->
+
+    <!-- 日志 服务 -->
+    <dubbo:reference interface="cc.msonion.carambola.parent.interfaces.log.MsOnionLog"
+                     id="msOnionLog" version="${dubbo.service.logService.version}"
+                     timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.msOnionLog}"/>
+
+    <!-- 引用（调用）服务 End -->
+
+
+</beans>

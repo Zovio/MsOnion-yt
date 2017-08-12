@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			 								   	 http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+											  	 http://www.springframework.org/schema/context 
+											  	 http://www.springframework.org/schema/context/spring-context-4.0.xsd
+											    http://www.springframework.org/schema/aop 
+											    http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+											   http://www.springframework.org/schema/tx 
+											   http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+											  http://www.springframework.org/schema/util 
+											  http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+	<!-- 事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- 数据源 -->
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 通知 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- 传播行为 -->
+			<!-- 增，删，改 必须在事务中执行， 因此是 REQUIRED ，如果当前有事务，就在当前事务中执行，如果当前没有事务，就开启事务 ， 
+				查询 只读，可以不需要事务， SUPPORTS 如果当前有事务就在当前事务中执行，如果当前没有事务，就不开启事务 -->
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="create*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="edit*" propagation="REQUIRED" />
+			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="select*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="query*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="search*" propagation="SUPPORTS" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<!-- 切面 -->
+	<aop:config>
+		<aop:advisor advice-ref="txAdvice"
+			pointcut="execution(* cc.msonion.carambola.logistics.service.*.*(..))" />
+	</aop:config>
+</beans>
