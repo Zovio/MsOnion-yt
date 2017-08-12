@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 这里可以为空，不配置任何东西，但是 SqlMapConfig.xml 必须有 ， 这里没有配置 别名 ！！！ 也可以配置别名 ！！！ -->
+
+	<plugins>
+		<!-- 分页插件
+		cc.msonion.carambola.member.service.mybatis.MsOnionSqlAnalyzeInterceptor
+		com.github.pagehelper.PageHelper
+		自定义SQL语句分析拦截器
+
+		cc.msonion.carambola.member.service.mybatis.MsOnionSqlAnalyzeInterceptor2
+
+		cc.msonion.carambola.member.service.mybatis.MsOnionSqlAnalyzeInterceptor3
+		-->
+		<plugin interceptor="com.github.pagehelper.PageHelper">
+
+		<!-- MsOnionSqlAnalyzeInterceptor2 , OK , -->
+		<!--<plugin interceptor="cc.msonion.carambola.member.service.mybatis.MsOnionSqlAnalyzeInterceptor2">-->
+
+			<!-- MsOnionSqlAnalyzeInterceptor3 , OK , -->
+		<!--<plugin interceptor="cc.msonion.carambola.member.service.mybatis.MsOnionSqlAnalyzeInterceptor3">-->
+			<!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库 -->
+			<property name="dialect" value="mysql" />
+		</plugin>
+
+	</plugins>
+
+</configuration>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+			 									 http://www.springframework.org/schema/beans/spring-beans.xsd
+        										 http://www.springframework.org/schema/context 
+        										 http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 配置加载配置文件 -->
+    <!--<context:property-placeholder location="classpath:properties/*.properties"/>-->
+
+    <!--<context:property-placeholder location="classpath:properties/config-*.properties"/>-->
+
+    <!--<context:property-placeholder location="classpath:properties/config-*.properties"/>-->
+
+    <!-- 不是WEB工程，不要 classpath: -->
+    <!-- 	<context:property-placeholder location="properties/*.properties"/> -->
+
+    <!-- 直接使用 bean 无法 扫描  Domain 中的  @Value 注解，必须使用 ： context:component-scan  -->
+    <!-- <bean class="cc.msonion.parent.pojo.Domain"></bean> -->
+
+    <!-- 注意，这里扫描的包 和 service 中扫描的包，不要冲突！！！ -->
+
+    <!--  OK  -->
+    <context:component-scan base-package="cc.msonion.carambola.parent.pojo"/>
+
+    <!--  msyt-parent-ext 不可以全部扫描，因为包括所有  -->
+    <!--<context:component-scan base-package="cc.msonion.carambola.parent.ext"/>-->
+
+    <!-- 扫描日志，加载 -->
+    <context:component-scan base-package="cc.msonion.carambola.parent.ext.log"/>
+
+    <!-- MemPojoStringFieldUtilsPOJO -->
+    <context:component-scan base-package="cc.msonion.carambola.content.pojo"/>
+
+    <!-- 扫描动态配置 -->
+    <context:component-scan base-package="cc.msonion.carambola.parent.ext.pojo.setting"/>
+
+    <!-- RetryNTimes -->
+    <bean id="retryPolicy" class="cc.msonion.carambola.parent.pojo.zk.retrypolicy.MsOnionRetryNTimes">
+        <constructor-arg name="n"  value="${zk.retryPolicyN}"></constructor-arg>
+        <constructor-arg name="sleepMsBetweenRetries"  value="${zk.retryPolicy.sleepMsBetweenRetries}"></constructor-arg>
+    </bean>
+
+    <!-- MsOnionCuratorZookeeperClient -->
+    <bean class="cc.msonion.carambola.parent.pojo.zk.client.MsOnionCuratorZookeeperClient">
+
+        <constructor-arg name="zkConnectString" value="${zk.connectString}"></constructor-arg>
+
+        <constructor-arg name="sessionTimeoutMs" value="${zk.sessionTimeoutMs}"></constructor-arg>
+        <constructor-arg name="retryPolicy" ref="retryPolicy"></constructor-arg>
+    </bean>
+
+    <!-- RocketMQ ## Begin  -->
+
+    <!-- 生产者：Producer ## Begin -->
+    <!--<bean class="cc.msonion.carambola.parent.ext.mq.rocketmq.simple.MsOnionSimpleRocketMQProducerExt">
+-->
+        <!-- 构造方法参数: producerGroup, namesrvAddr, topic -->
+        <!--<constructor-arg name="producerGroup" value="${rocketmq.producerGroup.contentService}"/>
+        <constructor-arg name="namesrvAddr" value="${rocketmq.namesrvAddr}"/>
+        <constructor-arg name="topic" value="${rocketmq.topic}"/>
+    </bean>-->
+    <!-- 生产者：Producer ## End -->
+
+    <!-- RocketMQ ## End  -->
+
+</beans>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+			 									 http://www.springframework.org/schema/beans/spring-beans.xsd
+        										 http://www.springframework.org/schema/mvc 
+        										 http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        										 http://www.springframework.org/schema/context 
+        										 http://www.springframework.org/schema/context/spring-context.xsd
+        										 http://code.alibabatech.com/schema/dubbo 
+        										 http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        										 http://www.springframework.org/schema/task
+ 												 http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <!-- 注意，这里扫描的包 和 service 中扫描的包，不要冲突！！！ -->
+    <context:component-scan base-package="cc.msonion.carambola.member.api.controller.app"/>
+
+    <mvc:annotation-driven/>
+
+    <!-- 支持异步方法执行
+    http://www.cnblogs.com/yjmyzz/p/how-to-use-Async-annotation-in-spring-mvc.html
+    -->
+    <!--  <task:annotation-driven /> -->
+
+
+    <!--
+    http://www.cnblogs.com/yangzhilong/p/3725128.html
+
+     可不设置，使用默认的超时时间
+    spring mvc的dtd的声明必须大于等于3.2
+
+<mvc:annotation-driven>
+
+    <mvc:async-support default-timeout="3000"/>
+</mvc:annotation-driven>
+
+     -->
+
+
+    <!-- 异步支持 默认30秒超时
+    https://github.com/zhangkaitao/es/blob/master/web/src/main/resources/spring-mvc.xml
+     -->
+    <!--   <mvc:async-support default-timeout="30000" task-executor="executor"/> -->
+
+
+    <!-- 配置，SpringMVC 全局异常处理器 -->
+    <bean class="cc.msonion.carambola.commons.web.exception.MsOnionBaseHandlerExceptionResolver"/>
+
+    <!-- 配置视图解析器 -->
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 配置多媒体解析器 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设定默认编码 -->
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <!-- 设定文件上传的最大值 2MB, 5MB，5*1024*1024 , 5242880 , 2097152 这里的配置，要和 msyt-image-service
+            / resources / fdfs / fdfsConfig.properties 大小一致 ，还有KindEditor中设置的上传文件大小，默认是1MB -->
+        <property name="maxUploadSize" value="2097152"></property>
+    </bean>
+
+
+    <!-- 配置静态资源 由于在 web.xml 中 <servlet-mapping> 配置 <url-pattern>/</url-pattern>
+        ，“/”是拦截除了 JSP页面之外的 ，所有资源或者请求，同时包括：css, js , 图片等等静态资源。因此需要在这里配置映射，不需要拦截的静态资源 -->
+
+    <!-- "/css" 中的“/”表示： webapp目录，也就是WEB工程根目录 "/css/**" 中的：** 表示所有，也就是无论多少层，都可以匹配，例如：
+        /css/aa.css , 和 /css/home/cate/item.css 都可以匹配 ！！！ 直接将所有静态资源CSS，JS 都放到 /WEB-INF/
+        目录，外部都不可以直接访问了， 注意， mapping="/css/**" 中没有 包含 "/WEB-INF/" 因为，这是映射！！！ -->
+    <mvc:resources location="/WEB-INF/resources/css/" mapping="/css/**"/>
+    <mvc:resources location="/WEB-INF/resources/js/" mapping="/js/**"/>
+    <mvc:resources location="/WEB-INF/resources/images/" mapping="/images/**"/>
+    <mvc:resources location="/WEB-INF/resources/html/" mapping="/html/**"/>
+
+
+</beans>

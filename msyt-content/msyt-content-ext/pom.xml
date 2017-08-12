@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
+
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>msyt-content</artifactId>
+        <groupId>cc.msonion.carambola</groupId>
+        <version>2.0.0</version>
+    </parent>
+    <artifactId>msyt-content-ext</artifactId>
+    <name>msyt-content-ext</name>
+    <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-content-ext，内容扩展模块</description>
+
+    <!-- 依赖 -->
+    <dependencies>
+
+        <!-- msyt-content-pojo，由于已经依赖 msyt-content-common，因此就不要再直接依赖，msyt-content-common -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-content-pojo</artifactId>
+        </dependency>
+
+        <!-- 单元测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+</project>

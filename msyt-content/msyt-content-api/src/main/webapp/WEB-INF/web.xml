@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+        http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <display-name>msyt-content-api</display-name>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <!-- 出错页面定义 Begin，统一使用 SpringMVC处理，是否有效？？？ -->
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/500.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
+
+    <!-- 这里可继续增加服务器错误号的处理及对应显示的页面 End -->
+
+    <!-- 解决post乱码 -->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+        <!-- <init-param> <param-name>forceEncoding</param-name> <param-value>true</param-value>
+            </init-param> -->
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <!-- springmvc的前端控制器 -->
+    <servlet>
+        <servlet-name>msyt-content-api</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- contextConfigLocation不是必须的， 如果不配置contextConfigLocation， springmvc的配置文件默认在：WEB-INF/servlet的name+"-servlet.xml" -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!-- <param-value>classpath:spring/springmvc.xml</param-value> -->
+            <param-value>classpath:spring/applicationContext-*.xml</param-value>
+        </init-param>
+        <!-- 1 : 当Tomcat启动，就加载 -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- 配置拦截的URL 格式 SprigMVC 中，不要配置 /* , 因为我们controller 中加载完成之后，需要跳转到 jsp页面，如果配置了
+        /* ，就也会被前端控制器拦截了，controller中加载数据完成，跳转到jsp页面不需要被前端控制器拦截， 不是外部请求过来的，是我们内部跳转到Model展示的JSP页面，因为不需要被前端控制器拦截，
+        前端控制器，是拦截外部请求。 我们是访问一个Controller 然后再跳转JSP页面。 还有静态资源是否被拦截？ 配置成： / , 是除了 JSP页面之外，其他资源都被拦截了，包括：css,
+        js ，图片， *.do , *.action 等等 静态资源被拦截，怎么处理？ 在 springmvc.xml 中配置 <mvc:resources
+        location="" mapping=""/> 不需要拦截的静态资源 -->
+    <servlet-mapping>
+        <servlet-name>msyt-content-api</servlet-name>
+        <!-- 伪静态页面，其实还是动态的，只是后缀为 *.html，有利于SEO -->
+        <!-- <url-pattern>*.html</url-pattern> -->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>
