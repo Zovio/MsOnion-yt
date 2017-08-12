@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>msyt-warehouse</artifactId>
+        <groupId>cc.msonion.carambola</groupId>
+        <version>2.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>msyt-warehouse-ext</artifactId>
+    <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-warehouse-ext，仓库管理中心扩展模块</description>
+
+    <!-- 依赖 -->
+    <dependencies>
+
+        <!-- msyt-warehouse-pojo，由于已经依赖 msyt-warehouse-common，因此就不要再直接依赖，msyt-warehouse-common -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-warehouse-pojo</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cc.msonion.carambola</groupId>
+        <artifactId>msyt-parent</artifactId>
+        <version>2.0.0</version>
+    </parent>
+    <groupId>cc.msonion.carambola</groupId>
+    <artifactId>msyt-warehouse</artifactId>
+    <version>2.0.0</version>
+    <packaging>pom</packaging>
+    <name>msyt-warehouse</name>
+    <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-warehouse，仓库中心模块</description>
+
+    <!-- modules -->
+    <modules>
+        <module>msyt-warehouse-api</module>
+        <module>msyt-warehouse-common</module>
+        <module>msyt-warehouse-dao</module>
+        <module>msyt-warehouse-interface</module>
+        <module>msyt-warehouse-pojo</module>
+        <module>msyt-warehouse-ext</module>
+        <module>msyt-warehouse-service</module>
+    </modules>
+</project>
