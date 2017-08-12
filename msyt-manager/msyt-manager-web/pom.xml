@@ -1,0 +1,226 @@
+﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cc.msonion.carambola</groupId>
+        <artifactId>msyt-manager</artifactId>
+        <version>2.0.0</version>
+    </parent>
+    <artifactId>msyt-manager-web</artifactId>
+    <packaging>war</packaging>
+    <name>msyt-manager-web</name>
+    <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-manager-web，系统管理后台WEB模块</description>
+
+    <!-- 依赖 -->
+    <dependencies>
+
+        <!-- msyt-commons-web -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-commons-web</artifactId>
+        </dependency>
+
+        <!-- msyt-manager-common -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-manager-common</artifactId>
+        </dependency>
+
+        <!-- msyt-member-interface ，因为调用 Member服务，必须依赖接口 -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-member-interface</artifactId>
+        </dependency>
+
+        <!-- msyt-member-ext ，因为调用 Member服务，必须依赖接口 -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-member-ext</artifactId>
+        </dependency>
+
+        <!-- msyt-collector-interface，因为调用 collector 服务，必须依赖接口 -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-collector-interface</artifactId>
+        </dependency>
+
+        <!-- msyt-item-interface，因为调用 item 服务，必须依赖接口 -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-item-interface</artifactId>
+        </dependency>
+
+        <!-- msyt-collector-ext，因为调用 collector 服务，必须依赖接口 -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-collector-ext</artifactId>
+        </dependency>
+
+        <!-- msyt-system-interface，因为调用 System 服务，必须依赖接口 -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-system-interface</artifactId>
+        </dependency>
+
+
+        <!-- msyt-cache-interface，因为调用 cache 服务，必须依赖接口 -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-cache-interface</artifactId>
+        </dependency>
+        <!-- msyt-cache-interface，因为调用 cache 服务，必须依赖接口 -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-cache-ext</artifactId>
+        </dependency>
+
+        <!-- msyt-fileresouce-interface -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-fileresource-interface</artifactId>
+        </dependency>
+
+        <!-- msyt-logistics-interface 物流中心 -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-logistics-interface</artifactId>
+        </dependency>
+
+        <!-- msyt-warehouse-interface 仓库中心 -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-warehouse-interface</artifactId>
+        </dependency>
+
+        <!-- msyt-thirdplatform-interface -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-thirdplatform-interface</artifactId>
+        </dependency>
+
+        <!-- msyt-thirdplatform-pojo  -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-thirdplatform-pojo</artifactId>
+        </dependency>
+
+        <!-- msyt-manager-ext -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-manager-ext</artifactId>
+        </dependency>
+        <!-- msyt-logistics-ext -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-logistics-ext</artifactId>
+        </dependency>
+
+        <!-- msyt-content-interface，因为调用 content 服务，必须依赖接口 -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-content-interface</artifactId>
+        </dependency>
+        <!-- msyt-fileresource-api -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-fileresource-pojo</artifactId>
+        </dependency>
+        <!-- msyt-thirdplatform-api -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-thirdplatform-ext</artifactId>
+        </dependency>
+        <!-- 依赖第三方框架，Begin -->
+
+        <!-- Servlet、JSP，所有的WEB模块，都要再依赖，否则报错，Begin -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <!-- Servlet 的 scope配置成 provided，编译，测试，运行使用，打包不包含进去，因为Tomcat中已经包含， 如果打包再包含进去，可能导致冲突报错！！！ -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <!-- 单元测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!-- Servlet、JSP，所有的WEB模块，都要再依赖，否则报错，End -->
+
+        <!-- 依赖第三方框架，End -->
+
+    </dependencies>
+
+    <build>
+
+
+        <plugins>
+            <!-- 配置Tomcat插件，使用Tomcat插件之后，本地就不需要单独安装Tomcat了 -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <configuration>
+                    <path>/</path>
+                    <port>8022</port>
+                    <goal>clean tomcat7:run</goal>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <!-- 多套环境，不同环境的配置不同， ## Begin -->
+
+        <resources>
+            <!-- 指定环境配置文件输出目录 -->
+            <resource>
+                <!-- 原始的 -->
+                <!--<directory>${profile.dir}</directory>-->
+
+                <!-- add -->
+                <directory>${resources.dir}</directory>
+                <targetPath>${project.build.directory}/classes</targetPath>
+
+                <!-- add by Hero ##  -->
+                <includes>
+                    <include>log4j.properties</include>
+                    <include>spring/**</include>
+                    <!--<include>mybatis/**</include>-->
+
+                    <!--<include>${target.env}/properties/**</include>-->
+                    <include>${target.env}/**</include>
+
+                </includes>
+
+                <!-- 资源过滤   -->
+                <filtering>true</filtering>
+
+            </resource>
+
+            <!--<resource>
+                <directory>${profile.dir}</directory>
+                <targetPath>${project.build.directory}/classes</targetPath>
+                <includes>
+                    <include>${target.env}/properties/**</include>
+                </includes>
+            </resource>-->
+
+            <!-- 资源过滤   -->
+            <!--<resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>-->
+        </resources>
+
+        <!-- 多套环境，不同环境的配置不同， ## End -->
+
+    </build>
+
+</project>

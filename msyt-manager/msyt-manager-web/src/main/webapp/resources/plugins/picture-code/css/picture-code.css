@@ -1,0 +1,30 @@
+.pictureCodeMain{
+    width:360px;height:98px;margin: 5px auto 0px auto;
+}
+.pictureCode-refresh{
+    margin-bottom:8px;
+}
+.pictureCode-refresh span{
+    color:#666;font-size:12px;margin-left:2px;
+}
+.pictureCode-refresh a{
+    text-decoration: none; left: 243px; color: rgb(153, 153, 153);
+    margin-right: 8px; font-size: 12px; cursor: default;float: right;
+    margin-top: 2px;
+}
+.pictureCode-refresh a:hover{
+    color: #24d8b9;
+    cursor: pointer;
+}
+.pictureCode-imgDiv{
+    overflow: hidden;
+}
+
+.pictureCode-imgDiv .imgRow{
+    overflow:hidden;margin-left:2px; margin-right:2px;float:left;position:relative;
+    border: 1px solid #e4e4e4;
+}
+
+.pictureCode-imgDiv img{
+    position: relative; cursor: pointer; left: 0px; top: 0px;
+}

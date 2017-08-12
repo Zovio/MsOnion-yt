@@ -1,0 +1,721 @@
+* {
+    margin: 0 0;
+    padding: 0 0
+}
+
+body {
+    font-family: Microsoft Yahei;
+    font-size: 14px;
+    background: #FFF
+}
+
+ol li,
+ul li {
+    list-style: none
+}
+
+a,
+a:hover {
+    text-decoration: none
+}
+
+a {
+    -webkit-tap-highlight-color: transparent;
+    outline: 0
+}
+
+button,
+input,
+textarea {
+    outline: 0
+}
+
+::-ms-clear,
+::-ms-reveal {
+    display: none
+}
+
+.wrapper {
+    width: 100%
+}
+
+.relative {
+    position: relative
+}
+
+.login-bg {
+    align-items: center
+}
+
+.login-container {
+    margin: 10% auto;
+    position: relative;
+    overflow: hidden;
+    width: 440px;
+    height: 490px;
+    background: url(https://static-1253852034.cosgz.myqcloud.com/images/loginwin-bg.png);
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    box-sizing: border-box
+}
+
+.cont {
+    width: 388px;
+    height: 277px;
+    position: relative;
+    box-sizing: border-box;
+    background: #FFF;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    margin: 85px auto 0 auto;
+    padding: 12px 0
+}
+
+.cont .userName {
+    width: 360px;
+    height: 61px;
+    line-height: 60px;
+    padding-left: 20px;
+    font-size: 12px;
+    border-bottom: 1px solid #ededed;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    margin: 0 auto;
+    display: block;
+    box-sizing: border-box;
+    color: #333333;
+}
+
+.cont .passWord {
+    width: 360px;
+    height: 61px;
+    line-height: 60px;
+    padding-left: 20px;
+    margin: 0 auto;
+    display: block;
+    font-size: 12px;
+    border-bottom: 1px solid #ededed;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    margin-bottom: 17px;
+    box-sizing: border-box;
+    color: #00d5b4
+}
+
+.cont .user-icon {
+    display: block;
+    width: 64px;
+    height: 60px;
+    position: absolute;
+    left: 0;
+    background: url(https://static-1253852034.cosgz.myqcloud.com/images/icon1.png);
+    background-position: 0 0;
+    background-size: 200px 400px
+}
+
+.cont .pass-icon {
+    display: block;
+    width: 64px;
+    height: 60px;
+    position: absolute;
+    left: 0;
+    background: url(https://static-1253852034.cosgz.myqcloud.com/images/icon1.png);
+    background-position: -107px 0;
+    background-size: 200px 400px
+}
+
+.cont .user-close {
+    display: none;
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 20px;
+    top: 38px;
+    background: url(https://static-1253852034.cosgz.myqcloud.com/images/icon1.png);
+    background-position: -25px -105px;
+    background-size: 200px 400px
+}
+
+.cont .pass-close {
+    display: none;
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 20px;
+    top: 99px;
+    background: url(https://static-1253852034.cosgz.myqcloud.com/images/icon1.png);
+    background-position: -25px -105px;
+    background-size: 200px 400px
+}
+
+.cont .verification {
+    width: 216px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 14px;
+    padding-left: 64px;
+    display: block;
+    float: left;
+    border: none
+}
+
+.cont .verification-img {
+    cursor: pointer;
+    width: 90px;
+    height: 36px;
+    display: block;
+    padding-top: 12px;
+    float: left
+}
+
+.login-row {
+    width: 388px;
+    height: 46px;
+    line-height: 46px;
+    margin: 0 auto
+}
+
+.login-row input[type=checkbox] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    display: block;
+    margin-top: 14px;
+    margin-right: 5px;
+    float: left;
+    border: none
+}
+
+.login-row .checkbox {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    display: block;
+    box-sizing: border-box;
+    margin-top: 15px;
+    margin-right: 5px;
+    float: left;
+    border: 1px solid #FFF
+}
+
+.login-row .cur {
+    background: url(https://static-1253852034.cosgz.myqcloud.com/images/checkbox2.png) no-repeat;
+    border: none
+}
+
+.login-row .avoid {
+    font-size: 12px;
+    color: #FFF;
+    float: left;
+    display: block;
+    cursor: pointer
+}
+
+.login-row .forget {
+    display: block;
+    float: right;
+    font-size: 12px;
+    color: #FFF
+}
+
+.login-btn {
+    width: 388px;
+    height: 44px;
+    line-height: 44px;
+    cursor: not-allowed!important;
+    background: #dbddde;
+    color: #FFF;
+    text-align: center;
+    font-size: 18px;
+    border: none;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    margin: 0 auto;
+    display: block
+}
+
+.login-container .login-btn-active {
+    background: #ffcf00;
+    cursor: pointer;
+    width: 388px;
+    height: 44px;
+    line-height: 44px;
+    color: #FFF;
+    text-align: center;
+    font-size: 18px;
+    border: none;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    margin: 0 auto;
+    display: block
+}
+
+.off-reg {
+    width: 418px;
+    height: 50px;
+    line-height: 50px;
+    margin: 0 auto;
+    display: block;
+    color: #FFF;
+    font-size: 12px;
+    text-align: center
+}
+
+.hint-d {
+    display: none;
+    width: 388px;
+    background: #ffffe0;
+    position: absolute;
+    top: 78px;
+    left: 26px;
+    text-align: center;
+    color: #ff8400;
+    font-size: 12px;
+    padding: 4px 0
+}
+
+.hint-d i {
+    width: 17px;
+    height: 17px;
+    display: block;
+    float: left;
+    margin: 1px 5px 0 10px;
+    background: url(https://static-1253852034.cosgz.myqcloud.com/images/icon7.png) no-repeat;
+    background-position: 0 -35px;
+    background-size: 400px 100px
+}
+
+.hint-d span {
+    display: block;
+    float: left
+}
+
+.reg-top {
+    width: 100%;
+    height: 61px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e4e4e4
+}
+
+.reg-top .cont-top {
+    width: 60%;
+    min-width: 660px;
+    height: 60px;
+    margin: 0 auto
+}
+
+.reg-top .reg-logo {
+    width: 125px;
+    height: 60px;
+    display: block;
+    float: left
+}
+
+.reg-top .reg-find {
+    width: 125px;
+    height: 60px;
+    display: block;
+    float: left
+}
+
+.reg-top .logn-reg {
+    width: 134px;
+    height: 24px;
+    line-height: 24px;
+    float: left;
+    padding-left: 20px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    border-left: 1px solid #e4e4e4;
+    font-size: 14px
+}
+
+.reg-top .logn-reg .font-logo,
+.reg-top .logn-reg .font-reg {
+    color: #00d5b4
+}
+
+.reg-container {
+    width: 60%;
+    margin: 50px auto;
+    min-width: 900px
+}
+
+.reg-container .row {
+    width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 24px;
+    overflow: hidden
+}
+
+.reg-container .reg-userName {
+    width: 128px;
+    height: 50px;
+    line-height: 50px;
+    text-align: right;
+    font-size: 14px;
+    color: #333;
+    display: block;
+    float: left;
+    padding-right: 10px;
+    box-sizing: border-box
+}
+
+.reg-container .reg-input {
+    width: 240px;
+    height: 50px;
+    border: 1px solid #e4e4e4;
+    box-sizing: border-box;
+    display: block;
+    float: left;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    padding: 0 10px
+}
+
+.reg-container .reg-input-bm {
+    width: 240px;
+    height: 50px;
+    border: 1px solid #e4e4e4;
+    box-sizing: border-box;
+    display: block;
+    float: left;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    padding: 0 10px
+}
+
+.reg-container .coding {
+    background: #eceded;
+    color: #999
+}
+
+.reg-container input[type=radio] {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    margin: 17px 10px;
+    display: block;
+    float: left
+}
+
+.findPass {
+    float: left;
+    color: #00d5b4;
+    font-size: 14px;
+    height: 24px;
+    line-height: 24px;
+    padding-top: 20px
+}
+
+.reg-container .sex-man {
+    width: 20px;
+    height: 20px;
+    display: block;
+    float: left;
+    margin: 14px 14px 0 0;
+    background: url(https://static-1253852034.cosgz.myqcloud.com/images/sexicon.png) no-repeat;
+    background-position: 0 -103px;
+    background-size: 40px 200px
+}
+
+.reg-container .sex-manCur {
+    background: url(https://static-1253852034.cosgz.myqcloud.com/images/sexicon.png) no-repeat;
+    background-position: 0 0;
+    background-size: 40px 200px
+}
+
+.reg-container .sex-woman {
+    width: 20px;
+    height: 20px;
+    display: block;
+    float: left;
+    margin: 14px 14px 0 10px;
+    background: url(https://static-1253852034.cosgz.myqcloud.com/images/sexicon.png) no-repeat;
+    background-position: 0 -161px;
+    background-size: 40px 200px
+}
+
+.reg-container .sex-womanCur {
+    background: url(https://static-1253852034.cosgz.myqcloud.com/images/sexicon.png) no-repeat;
+    background-position: 0 -52px;
+    background-size: 40px 200px
+}
+
+.reg-container .sex {
+    width: 16px;
+    height: 50px;
+    line-height: 50px;
+    display: block;
+    float: left
+}
+
+.reg-container .yz-input {
+    width: 130px;
+    height: 50px;
+    line-height: 50px;
+    float: left;
+    display: block;
+    border: 1px solid #e4e4e4;
+    box-sizing: border-box;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    padding: 0 10px
+}
+
+.reg-container .yz-img {
+    cursor: pointer;
+    width: 90px;
+    height: 36px;
+    margin-top: 7px;
+    display: block;
+    float: left;
+    margin-left: 20px
+}
+
+.reg-container .row-bz {
+    width: 100%;
+    height: 128px;
+    padding-bottom: 24px;
+    box-sizing: border-box
+}
+
+.reg-container .bz-textarea {
+    width: 240px;
+    height: 90px;
+    float: left;
+    font-size: 14px;
+    font-family: "microsoft yahei";
+    box-sizing: border-box;
+    padding: 10px 10px;
+    border: 1px solid #e4e4e4;
+    border-radius: 4px;
+    -webkit-border-radius: 4px
+}
+
+.reg-container .submit {
+    cursor: pointer;
+    width: 140px;
+    height: 48px;
+    line-height: 48px;
+    margin-right: 40px;
+    margin-left: 128px;
+    text-align: center;
+    display: block;
+    float: left;
+    border: none;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    color: #FFF;
+    background: #00d5b4;
+    font-size: 14px
+}
+
+.reg-container .reset {
+    cursor: pointer;
+    width: 140px;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    display: block;
+    float: left;
+    border: none;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    color: #acacac;
+    background: #eceded;
+    font-size: 14px
+}
+
+.hints {
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+    float: left;
+    font-size: 14px;
+    color: #ff2c41
+}
+
+#passHint {
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    color: #00d5b4;
+    position: absolute;
+    bottom: 0;
+    padding-left: 50px
+}
+
+.reg-container .return {
+    float: left;
+    color: #00D5B4;
+    font-size: 16px;
+    display: block;
+    margin-top: 48px;
+    text-align: left;
+    width: 398px
+}
+
+.reg-container .succeed {
+    width: 300px;
+    float: left;
+    display: block;
+    text-align: center
+}
+
+.fp-item-step {
+    height: 90px
+}
+
+.fp-item-step .fp-step-list {
+    list-style: none;
+    width: 800px;
+    margin: 0 auto;
+    height: 90px
+}
+
+.fp-item-step .fp-step-list .step {
+    width: 330px;
+    text-align: center;
+    float: left;
+    position: relative
+}
+
+.fp-item-step .fp-step-list .step .line {
+    width: 101%;
+    height: 5px;
+    top: 8px;
+    position: absolute;
+    background: #cdcdcd;
+    border-radius: 4px
+}
+
+.fp-item-step .fp-step-list .step.on .line {
+    background: #00d5b4
+}
+
+.fp-item-step .fp-step-list .step.pre .line {
+    background: #00d5b4
+}
+
+.fp-item-step .fp-step-list .step .circle {
+    width: 20px;
+    height: 20px;
+    left: 50%;
+    color: #fff;
+    font-size: 8px;
+    line-height: 20px;
+    font-weight: 700;
+    margin-left: -10px;
+    border-radius: 10px;
+    background: #cdcdcd;
+    position: absolute
+}
+
+.fp-item-step .fp-step-list .step.on .circle {
+    background: #00d5b4
+}
+
+.fp-item-step .fp-step-list .step.pre .circle {
+    color: #f2faed;
+    background: #cbedb7
+}
+
+.fp-item-step .fp-step-list .step span {
+    display: block;
+    padding-top: 30px;
+    color: #cdcdcd;
+    font-size: 16px;
+    font-weight: 600
+}
+
+.fp-item-step .fp-step-list .step.on span {
+    color: #00d5b4
+}
+
+.fp-item-step .fp-step-list .step.pre .span {
+    color: #cbedb7
+}
+
+.clearfix {
+    display: block;
+    min-height: 1%
+}
+
+.gender-man,
+.gender-woman {
+    overflow: hidden;
+    float: left;
+    cursor: pointer
+}
+
+.cont-s {
+    height: 61px
+}
+
+.yt-hint {
+    position: relative;
+    top: -43px;
+    left: 430px;
+    display: inline;
+    padding: 8px 10px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background: #ff2c41;
+    color: #FFF
+}
+
+.yt-hint i {
+    width: 5px;
+    height: 11px;
+    display: block;
+    position: absolute;
+    top: 12px;
+    left: -5px;
+    background: url(https://static-1253852034.cosgz.myqcloud.com/images/icon7.png) no-repeat;
+    background-position: 0 0;
+    background-size: 400px 100px
+}
+
+.set-hints {
+    height: 50px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #ff2c41
+}
+
+.reg-container .border-cyan {
+    border: 1px solid #00d5b4
+}
+
+.reg-container .border-red {
+    border: 1px solid #ff2c41
+}
+
+.reg-container .border-gray {
+    border: 1px solid #dbdcde
+}
+
+.reg-container .reg-input:focus {
+    border: 1px solid #00d5b4
+}
+
+.reg-container .bz-textarea:focus {
+    border: 1px solid #00d5b4
+}
+
+.reg-container .yz-input:focus {
+    border: 1px solid #00d5b4
+}
+
+input:-webkit-autofill,
+select:-webkit-autofill,
+textarea:-webkit-autofill {
+    background-color: #fff;
+    background-image: none;
+    color: #000
+}

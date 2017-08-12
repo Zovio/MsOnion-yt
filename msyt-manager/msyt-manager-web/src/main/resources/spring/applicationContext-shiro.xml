@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<!-- sessionIdCookie配置 -->
+	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<constructor-arg value="sid.ms.yt.msyc.cc"/>
+		<property name="httpOnly" value="true"/>
+		<property name="maxAge" value="${rememberMe_time}"/>
+	</bean>
+
+	<!-- remenberMe配置 -->
+	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<constructor-arg value="rme.ms.yt.msyc.cc" />
+		<property name="httpOnly" value="true" />
+		<property name="maxAge" value="${rememberMe_time}" />
+	</bean>
+	<!-- rememberMe管理器 -->
+	<bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+		<property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}" />
+		<property name="cookie" ref="rememberMeCookie" />
+	</bean>
+
+	<!-- 配置权限管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+
+		<!-- ref对应我们写的realm ShiroSecurityRealm -->
+		<property name="realm" ref="shiroSecurityRealm" />
+
+		<!-- sessionManager -->
+		<property name="sessionManager" ref="sessionManager" />
+
+		<!-- 使用下面配置的缓存管理器 -->
+		<property name="cacheManager" ref="cacheManager" />
+		<!-- rememberMe管理器 -->
+		<property name="rememberMeManager" ref="rememberMeManager" />
+
+	</bean>
+
+
+	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<!-- url sessionId 不加上 -->
+		<property name="sessionIdUrlRewritingEnabled" value="false" />
+	    <!--	设置全局会话超时时间，默认45分钟(2700000) -->
+		<property name="globalSessionTimeout" value="${global.session.timeout}"/>
+
+		<!--是否在会话过期后会调用SessionDAO的delete方法删除会话 默认true-->
+		<property name="deleteInvalidSessions" value="false"/>
+		<!--是否开启会话验证器任务 默认true-->
+		<property name="sessionValidationSchedulerEnabled" value="true"/>
+		 <!--会话验证器调度时间 -->
+		<property name="sessionValidationInterval" value="${global.session.timeout}"/>
+		<!-- 会话Cookie模板 -->
+		<property name="sessionIdCookie" ref="sessionIdCookie"/>
+
+
+		<property name="sessionDAO" ref="sessionDao"/>
+
+		<property name="sessionListeners">
+			<list>
+				<bean class="cc.msonion.carambola.manager.web.security.ShiroSessionListener"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="sessionDao" class="cc.msonion.carambola.manager.web.security.ShiroSessionDao">
+		<property name="seconds" value="${sid.redis.timeout}"/>
+	</bean>
+
+
+	<bean id="shiroSecurityRealm" class="cc.msonion.carambola.manager.web.security.ShiroSecurityRealm"></bean>
+
+	<!-- 配置shiro的过滤器工厂类，id- shiroFilter要和我们在web.xml中配置的过滤器一致 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- 调用我们配置的权限管理器 -->
+		<property name="securityManager" ref="securityManager" />
+
+		<property name="filters">
+			<util:map>
+				<entry key="authc">
+					<bean
+						class="org.apache.shiro.web.filter.authc.PassThruAuthenticationFilter" />
+				</entry>
+				<entry key="anyRoles">
+					<bean class="cc.msonion.carambola.manager.web.security.AnyRolesFilter" />
+				</entry>
+			</util:map>
+		</property>
+		<!-- 权限配置 -->
+		<property name="filterChainDefinitions">
+			<value>
+				<!-- anon表示此地址不需要任何权限即可访问 -->
+				/sys/*-login=anon <!-- 登录 -->
+				/ueditConfig=anon  <!-- ueditor -->
+				/validatecode=anon  <!-- 验证码 -->
+				/sys/*-register=anon  <!-- 注册 -->
+				/sys/*-forget=anon  <!-- 忘记密码-->
+				/resources/**=anon  <!-- 静态资源-->
+				/sys/logout = logout  <!-- 退出-->
+				/favicon.ico = anon  <!-- icon-->
+				/memberMain = anon
+				<!--所有的请求(除去配置的静态资源请求或请求地址为anon的请求)都要通过登录验证,如果未登录则跳到/loginUrl -->
+				/** = anyRoles
+
+			</value>
+		</property>
+	</bean>
+
+	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+</beans>

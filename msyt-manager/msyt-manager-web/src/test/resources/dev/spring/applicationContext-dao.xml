@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			 								  http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+											  http://www.springframework.org/schema/context 
+											  http://www.springframework.org/schema/context/spring-context-4.0.xsd
+											  http://www.springframework.org/schema/aop 
+											  http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+											  http://www.springframework.org/schema/tx 
+											  http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+											 http://www.springframework.org/schema/util 
+											 http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- 数据库连接池 -->
+	<!-- 加载配置文件 -->
+	<!-- <context:property-placeholder location="classpath:properties/db.properties" /> -->
+	
+	<!-- <context:property-placeholder location="classpath:properties/*.properties" /> -->
+	<!-- <context:property-placeholder location="classpath:properties/config-*.properties" /> -->
+
+	<!-- 配置文件环境切换 ### Begin  -->
+	<!--
+             # Environment :
+             pro(production、生产环境) , pre(preview、预发布环境) , test（测试环境） , dev(develop、开发环境) , sta (stable、稳定环境)
+
+            -->
+
+	<!-- dev(develop、开发环境) -->
+	<context:property-placeholder location="classpath:dev/properties/config-*.properties"/>
+
+	<!-- test（测试环境） -->
+	<!--<context:property-placeholder location="classpath:test/properties/config-*.properties"/>-->
+
+	<!-- sta (stable、稳定环境) -->
+	<!--<context:property-placeholder location="classpath:sta/properties/config-*.properties"/>-->
+
+	<!--  pre(preview、预发布环境) -->
+	<!--<context:property-placeholder location="classpath:pre/properties/config-*.properties"/>-->
+
+	<!-- pro(production、生产环境)  -->
+	<!--<context:property-placeholder location="classpath:pro/properties/config-*.properties"/>-->
+
+	<!-- 配置文件环境切换 ### End  -->
+	
+	<!-- 可以使用 * 把所有的配置文件加载了，不需要一一配置 -->
+	<!-- Error: trying original name [jdbc.url]. javax.naming.NameNotFoundException: 
+		Name [jdbc. url] is not bound in this Context. Unable to find [jdbc.url]. -->
+	<!-- <context:property-placeholder location="classpath:properties/*.properties" 
+		/> -->
+		
+		
+	<!-- 数据库连接池 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		destroy-method="close">
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="maxActive" value="${jdbc.max_active}" />
+		<property name="minIdle" value="${jdbc.minIdle}" />
+		<!-- 支持Emoji表情的解决方案 -->
+		<property name="connectionInitSqls" value="set names utf8mb4;"/>
+
+	</bean>
+	<!-- 让spring管理sqlsessionfactory 使用mybatis和spring整合包中的 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 数据库连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 加载mybatis的全局配置文件 -->
+		<!--<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml" />-->
+
+		<!-- 配置文件环境切换 ### Begin  -->
+		<!--
+                 # Environment :
+                 pro(production、生产环境) , pre(preview、预发布环境) , test（测试环境） , dev(develop、开发环境) , sta (stable、稳定环境)
+
+                -->
+		<!-- dev(develop、开发环境)  -->
+		<property name="configLocation" value="classpath:dev/mybatis/config-mybatis.xml" />
+
+		<!-- test（测试环境）  -->
+		<!--<property name="configLocation" value="classpath:test/mybatis/config-mybatis.xml"/>-->
+
+		<!-- sta (stable、稳定环境) -->
+		<!--<property name="configLocation" value="classpath:sta/mybatis/config-mybatis.xml" />-->
+
+		<!-- pre(preview、预发布环境)  -->
+		<!--<property name="configLocation" value="classpath:pre/mybatis/config-mybatis.xml" />-->
+
+		<!-- pro(production、生产环境) -->
+		<!--<property name="configLocation" value="classpath:pro/mybatis/config-mybatis.xml" />-->
+
+		<!-- 配置文件环境切换 ### End  -->
+
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 
+		This property lets you set the base package for your mapper interface 
+			files. 
+			You can set more than one package by using a semicolon or comma as 
+			a separator. 
+			Mappers will be searched for recursively starting in the specified  package(s). 
+			
+			此属性允许你映射接口文件设置基础包。 
+			你可以通过使用分号或逗号作为分隔符设置多个包。
+			 映射器将搜索指定的包开始递归（S）。 -->
+			 
+		<!-- <property name="basePackage" value="cc.msonion.search.mapper, cc.msonion.user.mapper" /> -->
+		
+		<property name="basePackage" value="cc.msonion.carambola.member.dao.mapper" />
+		
+		<!-- <property name="basePackage" value="cc.msonion.search.mapper" /> -->
+	</bean>
+</beans>

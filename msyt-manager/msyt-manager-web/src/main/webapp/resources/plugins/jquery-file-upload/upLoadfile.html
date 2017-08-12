@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery File Upload Example</title>
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+<script type="text/javascript" src="../common/js/jquery-3.0.0.min.js" ></script>
+<script src="js/vendor/jquery.ui.widget.js"></script>
+<script src="js/jquery.iframe-transport.js"></script>
+<script src="js/jquery.fileupload.js"></script>
+<style type="text/css">
+	.bar{
+		height: 18px;
+    	background: green;
+	}
+</style>
+</head>
+<body>
+<input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>
+
+<!--装进度条的容器-->
+<div id="progress" style="background: pink;">
+    <div class="bar" style="width: 0%;"></div>
+</div>
+
+
+
+<script type="text/javascript">
+	
+//$(function () {
+//  $('#fileupload').fileupload({
+//      dataType: 'json',
+//      done: function (e, data) {
+//          $.each(data.result.files, function (index, file) {
+//              $('<p/>').text(file.name).appendTo(document.body);
+//          });
+//      }
+//  });
+//});
+
+//带进度条
+$(function () {
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        //formData:{param1:"p1",param2:"p2"}，
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('.progress .bar').css(
+                'width',
+                progress + '%'
+            );
+            $('.progress .bar').text(progress + '%');
+        },
+
+        done: function(e, data) {
+            $('.progress .bar').text("done");
+        }
+    });
+});
+
+//可将上传的文件显示在一个元素上
+//$(function () {
+//  $('#fileupload').fileupload({
+//      dataType: 'json',
+//      add: function (e, data) {
+//          data.context = $('<p/>').text('Uploading...').appendTo(document.body);
+//          data.submit();
+//      },
+//      done: function (e, data) {
+//          data.context.text('Upload finished.');
+//      }
+//  });
+//});
+
+//可以通过按钮来触发开始上传
+//$(function () {
+//  $('#fileupload').fileupload({
+//      dataType: 'json',        
+//      add: function (e, data) {
+//          data.context = $('<button/>').text('Upload').appendTo(document.body);
+//              .click(function () {				                
+//                  data.context = $('<p/>').text('上传中').replaceAll($(this));
+//                  data.submit();  
+//              });
+//      },
+//      done: function (e, data) {        	
+//          data.context.text('上传成功！');
+//      }
+//  });
+//});
+
+
+
+
+</script>
+</body> 
+</html>
