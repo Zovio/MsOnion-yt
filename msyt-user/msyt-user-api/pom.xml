@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cc.msonion.carambola</groupId>
+    <artifactId>msyt-user</artifactId>
+    <version>2.0.0</version>
+  </parent>
+  <artifactId>msyt-user-api</artifactId>
+  <packaging>war</packaging>
+  <name>msyt-user-api</name>
+  <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-user-api，洋桃用户API模块</description>
+
+ <!-- 依赖 -->
+  <dependencies>
+  
+  	<!-- msyt-parent-api -->
+  	<dependency>
+  		<groupId>cc.msonion.carambola</groupId>
+    	<artifactId>msyt-parent-api</artifactId>
+  	</dependency>
+  	
+  	<!-- msyt-user-common -->
+  	<dependency>
+  		<groupId>cc.msonion.carambola</groupId>
+    	<artifactId>msyt-user-common</artifactId>
+  	</dependency>
+  	
+  	<!-- msyt-user-interface -->
+  	<dependency>
+  		<groupId>cc.msonion.carambola</groupId>
+    	<artifactId>msyt-user-interface</artifactId>
+  	</dependency>
+  	
+  </dependencies>
+  
+  <build>
+		<plugins>
+			<!-- 配置Tomcat插件，使用Tomcat插件之后，本地就不需要单独安装Tomcat了 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<path>/</path>
+					<port>8010</port>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

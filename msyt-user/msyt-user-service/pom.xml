@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cc.msonion.carambola</groupId>
+		<artifactId>msyt-user</artifactId>
+		<version>2.0.0</version>
+	</parent>
+	<artifactId>msyt-user-service</artifactId>
+	<packaging>war</packaging>
+	<name>msyt-user-service</name>
+	<description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-user-service，用户服务模块</description>
+
+	<!-- 依赖 -->
+	<dependencies>
+
+		<!-- msyt-parent-service -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-parent-service</artifactId>
+		</dependency>
+
+		<!-- msyt-user-dao -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-user-dao</artifactId>
+		</dependency>
+
+		<!-- msyt-user-interface -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-user-interface</artifactId>
+		</dependency>
+
+	</dependencies>
+
+</project>

@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cc.msonion.carambola</groupId>
+		<artifactId>msyt-user</artifactId>
+		<version>2.0.0</version>
+	</parent>
+	<artifactId>msyt-user-dao</artifactId>
+	<name>msyt-user-dao</name>
+	<description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-user-dao，用户DAO模块</description>
+
+	<!-- 依赖 -->
+	<dependencies>
+
+		<!-- msyt-parent-dao -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-parent-dao</artifactId>
+		</dependency>
+
+		<!-- msyt-user-pojo，由于已经依赖 msyt-user-common，因此就不要再直接依赖，msyt-user-common -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-user-pojo</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->
+	<!-- 不需要包含 *.java 文件，因为是默认已经包含 *.java -->
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+	</build>
+	
+</project>
