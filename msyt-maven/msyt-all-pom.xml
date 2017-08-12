@@ -1,0 +1,2179 @@
+﻿<!-- 
+/**   
+* 广州市两棵树网络科技有限公司版权所有
+* DT Group Technology & commerce Co., LtdAll rights reserved.   
+*   
+* 广州市两棵树网络科技有限公司，创立于2009年。旗下运营品牌洋葱小姐。
+* 洋葱小姐（Ms.Onion） 下属三大业务模块 [洋葱海外仓] , [洋葱DSP] , [洋葱海外聚合供应链]
+* [洋葱海外仓]（DFS）系中国海关批准的跨境电商自营平台(Cross-border ecommerce platform)，
+* 合法持有海外直邮保税模式的跨境电商营运资格。是渠道拓展，平台营运，渠道营运管理，及客户服务等前端业务模块。
+* [洋葱DSP]（DSP）系拥有1.3亿消费者大数据分析模型。 是基于客户的消费行为，消费轨迹，及多维度云算法(MDPP)
+* 沉淀而成的精准消费者模型。洋葱DSP能同时为超过36种各行业店铺 及200万个销售端口
+* 进行多店铺高精度配货，并能预判消费者购物需求进行精准推送。同时为洋葱供应链提供更前瞻的商品采买需求模型 。
+* [洋葱海外聚合供应链]（Super Supply Chain）由中国最大的进口贸易集团共同
+* 合资成立，拥有20余年的海外供应链营运经验。并已入股多家海外贸易企业，与欧美澳等9家顶级全球供应商达成战略合作伙伴关系。
+* 目前拥有835个国际品牌直接采买权，12万个单品的商品供应库。并已建设6大海外直邮仓库，为国内客户提供海外商品采买集货供应，
+* 跨境 物流，保税清关三合一的一体化模型。目前是中国唯一多模式聚合的海外商品供应链 。  
+*   
+* 洋葱商城：http://m.msyc.cc/wx/indexView?tmn=1 
+*
+* 洋桃商城：http://www.yunyangtao.com
+* 
+*/
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cc.msonion.carambola</groupId>
+	<artifactId>msyt</artifactId>
+	<version>2.0.0</version>
+	<packaging>pom</packaging>
+	<name>msyt-maven</name>
+	<description>msyt-maven</description>
+
+	<modules>
+		<!--  ../ : 上一级目录  -->
+		
+		<!-- msyt-parent -->
+		<module>../msyt-parent</module>
+		
+		<!-- msyt-commons -->
+		<module>../msyt-commons</module>
+
+		<!-- msyt-log -->
+		<module>../msyt-log</module>
+
+		<!-- msyt-cache -->
+		<module>../msyt-cache</module>
+		
+		<!-- msyt-logistics -->
+		<module>../msyt-logistics</module>
+		
+		<!-- msyt-warehouse -->
+		<module>../msyt-warehouse</module>
+
+
+		<!-- msyt-collector -->
+		<module>../msyt-collector</module>
+
+		<!-- msyt-content -->
+		<module>../msyt-content</module>
+
+		<!-- msyt-item -->
+		<module>../msyt-item</module>
+
+		<!-- msyt-member -->
+		<module>../msyt-member</module>
+
+		<!-- msyt-user -->
+		<module>../msyt-user</module>
+
+		<!-- msyt-search -->
+		<module>../msyt-search</module>
+
+		<!-- msyt-security -->
+		<module>../msyt-security</module>
+
+		<!-- msyt-system -->
+		<module>../msyt-system</module>
+
+		<!-- msyt-vipmember -->
+		<module>../msyt-vipmember</module>
+
+		<!-- msyt-sso -->
+		<module>../msyt-sso</module>
+
+		<!-- msyt-manager -->
+		<module>../msyt-manager</module>
+
+        <!-- msyt-fileresource ##
+            由于 msyt-fileresource-api 模块的 Netty 使用 5.0+ 实现文件上传 ，而其他的模块Netty ，
+            使用 4.0+，出现Netty版本冲突而报错， 文件上传使用 Netty 5.0+ 新特性， 
+            Netty 4.0+ 没有，暂时还没有找到比较好的解决方案！！！
+            这样也导致 msyt-fileresource-api 无法使用 RocketMQ ， RocketMQ 也使用都 Netty
+         -->
+         <!--   -->
+        <module>../msyt-fileresource</module>
+       
+
+        <!-- msyt-thirdplatform  -->
+        <module>../msyt-thirdplatform</module>
+       
+		
+	</modules>
+
+
+  <properties>
+
+	  <!-- Maven 配置 ， Begin @ 2017-04-18 -->
+
+	  <skip_maven_deploy>false</skip_maven_deploy>
+		<skip_maven_test>true</skip_maven_test>
+		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+
+
+	 <!-- Maven 配置 ， End @ 2017-04-18 -->
+		
+
+	 <!-- 集中定义依赖版本号 -->
+    
+
+        <!-- 当前项目所有工程版本号 Begin -->
+
+        <!-- msyt-parent , Begin -->
+        <msyt-parent.version>2.0.0</msyt-parent.version>
+        <msyt-parent-api.version>2.0.0</msyt-parent-api.version>
+        <msyt-parent-common.version>2.0.0</msyt-parent-common.version>
+        <msyt-parent-dao.version>2.0.0</msyt-parent-dao.version>
+        <msyt-parent-interface.version>2.0.0</msyt-parent-interface.version>
+        <msyt-parent-pojo.version>2.0.0</msyt-parent-pojo.version>
+        <msyt-parent-service.version>2.0.0</msyt-parent-service.version>
+        <msyt-parent-web.version>2.0.0</msyt-parent-web.version>
+        <msyt-parent-ext.version>2.0.0</msyt-parent-ext.version>
+        <!-- msyt-parent , End -->
+
+        <!-- msyt-commons, Begin -->
+        <msyt-commons.version>2.0.0</msyt-commons.version>
+        <msyt-commons-api.version>2.0.0</msyt-commons-api.version>
+        <msyt-commons-common.version>2.0.0</msyt-commons-common.version>
+        <msyt-commons-dao.version>2.0.0</msyt-commons-dao.version>
+        <msyt-commons-interface.version>2.0.0</msyt-commons-interface.version>
+        <msyt-commons-pojo.version>2.0.0</msyt-commons-pojo.version>
+        <msyt-commons-service.version>2.0.0</msyt-commons-service.version>
+        <msyt-commons-web.version>2.0.0</msyt-commons-web.version>
+        <msyt-commons-ext.version>2.0.0</msyt-commons-ext.version>
+        <!-- msyt-commons, End -->
+
+        <!-- msyt-member, Begin -->
+        <msyt-member.version>2.0.0</msyt-member.version>
+        <msyt-member-api.version>2.0.0</msyt-member-api.version>
+        <msyt-member-common.version>2.0.0</msyt-member-common.version>
+        <msyt-member-dao.version>2.0.0</msyt-member-dao.version>
+        <msyt-member-interface.version>2.0.0</msyt-member-interface.version>
+        <msyt-member-pojo.version>2.0.0</msyt-member-pojo.version>
+        <msyt-member-service.version>2.0.0</msyt-member-service.version>
+        <msyt-member-web.version>2.0.0</msyt-member-web.version>
+        <msyt-member-ext.version>2.0.0</msyt-member-ext.version>
+        <!-- msyt-member, End -->
+
+        <!-- msyt-user, Begin -->
+        <msyt-user.version>2.0.0</msyt-user.version>
+        <msyt-user-api.version>2.0.0</msyt-user-api.version>
+        <msyt-user-common.version>2.0.0</msyt-user-common.version>
+        <msyt-user-dao.version>2.0.0</msyt-user-dao.version>
+        <msyt-user-interface.version>2.0.0</msyt-user-interface.version>
+        <msyt-user-pojo.version>2.0.0</msyt-user-pojo.version>
+        <msyt-user-service.version>2.0.0</msyt-user-service.version>
+        <msyt-user-web.version>2.0.0</msyt-user-web.version>
+        <msyt-user-ext.version>2.0.0</msyt-user-ext.version>
+        <!-- msyt-user, End -->
+
+        <!-- msyt-item, Begin -->
+        <msyt-item.version>2.0.0</msyt-item.version>
+        <msyt-item-api.version>2.0.0</msyt-item-api.version>
+        <msyt-item-common.version>2.0.0</msyt-item-common.version>
+        <msyt-item-dao.version>2.0.0</msyt-item-dao.version>
+        <msyt-item-interface.version>2.0.0</msyt-item-interface.version>
+        <msyt-item-pojo.version>2.0.0</msyt-item-pojo.version>
+        <msyt-item-service.version>2.0.0</msyt-item-service.version>
+        <msyt-item-web.version>2.0.0</msyt-item-web.version>
+        <msyt-item-ext.version>2.0.0</msyt-item-ext.version>
+        <!-- msyt-item, End -->
+
+        <!-- msyt-collector, Begin -->
+        <msyt-collector.version>2.0.0</msyt-collector.version>
+        <msyt-collector-api.version>2.0.0</msyt-collector-api.version>
+        <msyt-collector-common.version>2.0.0</msyt-collector-common.version>
+        <msyt-collector-dao.version>2.0.0</msyt-collector-dao.version>
+        <msyt-collector-interface.version>2.0.0</msyt-collector-interface.version>
+        <msyt-collector-pojo.version>2.0.0</msyt-collector-pojo.version>
+        <msyt-collector-service.version>2.0.0</msyt-collector-service.version>
+        <msyt-collector-web.version>2.0.0</msyt-collector-web.version>
+        <msyt-collector-ext.version>2.0.0</msyt-collector-ext.version>
+        <!-- msyt-collector, End -->
+
+        <!-- msyt-manager, Begin -->
+        <msyt-manager.version>2.0.0</msyt-manager.version>
+        <msyt-manager-api.version>2.0.0</msyt-manager-api.version>
+        <msyt-manager-common.version>2.0.0</msyt-manager-common.version>
+        <msyt-manager-dao.version>2.0.0</msyt-manager-dao.version>
+        <msyt-manager-interface.version>2.0.0</msyt-manager-interface.version>
+        <msyt-manager-pojo.version>2.0.0</msyt-manager-pojo.version>
+        <msyt-manager-service.version>2.0.0</msyt-manager-service.version>
+        <msyt-manager-web.version>2.0.0</msyt-manager-web.version>
+        <msyt-manager-ext.version>2.0.0</msyt-manager-ext.version>
+        <!-- msyt-manager, End -->
+
+        <!-- msyt-auth, Begin -->
+        <msyt-auth.version>2.0.0</msyt-auth.version>
+        <msyt-auth-api.version>2.0.0</msyt-auth-api.version>
+        <msyt-auth-common.version>2.0.0</msyt-auth-common.version>
+        <msyt-auth-dao.version>2.0.0</msyt-auth-dao.version>
+        <msyt-auth-interface.version>2.0.0</msyt-auth-interface.version>
+        <msyt-auth-pojo.version>2.0.0</msyt-auth-pojo.version>
+        <msyt-auth-service.version>2.0.0</msyt-auth-service.version>
+        <msyt-auth-web.version>2.0.0</msyt-auth-web.version>
+        <msyt-auth-ext.version>2.0.0</msyt-auth-ext.version>
+        <!-- msyt-auth, End -->
+
+        <!-- msyt-search, Begin -->
+        <msyt-search.version>2.0.0</msyt-search.version>
+        <msyt-search-api.version>2.0.0</msyt-search-api.version>
+        <msyt-search-common.version>2.0.0</msyt-search-common.version>
+        <msyt-search-dao.version>2.0.0</msyt-search-dao.version>
+        <msyt-search-interface.version>2.0.0</msyt-search-interface.version>
+        <msyt-search-pojo.version>2.0.0</msyt-search-pojo.version>
+        <msyt-search-service.version>2.0.0</msyt-search-service.version>
+        <msyt-search-web.version>2.0.0</msyt-search-web.version>
+        <msyt-search-ext.version>2.0.0</msyt-search-ext.version>
+        <!-- msyt-search, End -->
+
+        <!-- msyt-sso, Begin -->
+        <msyt-sso.version>2.0.0</msyt-sso.version>
+        <msyt-sso-api.version>2.0.0</msyt-sso-api.version>
+        <msyt-sso-common.version>2.0.0</msyt-sso-common.version>
+        <msyt-sso-dao.version>2.0.0</msyt-sso-dao.version>
+        <msyt-sso-interface.version>2.0.0</msyt-sso-interface.version>
+        <msyt-sso-pojo.version>2.0.0</msyt-sso-pojo.version>
+        <msyt-sso-service.version>2.0.0</msyt-sso-service.version>
+        <msyt-sso-web.version>2.0.0</msyt-sso-web.version>
+        <msyt-sso-ext.version>2.0.0</msyt-sso-ext.version>
+        <!-- msyt-sso, End -->
+
+        <!-- msyt-fileresource, Begin -->
+        <msyt-fileresource.version>2.0.0</msyt-fileresource.version>
+        <msyt-fileresource-api.version>2.0.0</msyt-fileresource-api.version>
+        <msyt-fileresource-common.version>2.0.0</msyt-fileresource-common.version>
+        <msyt-fileresource-dao.version>2.0.0</msyt-fileresource-dao.version>
+        <msyt-fileresource-interface.version>2.0.0</msyt-fileresource-interface.version>
+        <msyt-fileresource-pojo.version>2.0.0</msyt-fileresource-pojo.version>
+        <msyt-fileresource-service.version>2.0.0</msyt-fileresource-service.version>
+        <msyt-fileresource-web.version>2.0.0</msyt-fileresource-web.version>
+        <msyt-fileresource-ext.version>2.0.0</msyt-fileresource-ext.version>
+        <!-- msyt-fileresource, End -->
+
+        <!-- msyt-log, Begin -->
+        <msyt-log.version>2.0.0</msyt-log.version>
+        <msyt-log-api.version>2.0.0</msyt-log-api.version>
+        <msyt-log-common.version>2.0.0</msyt-log-common.version>
+        <msyt-log-dao.version>2.0.0</msyt-log-dao.version>
+        <msyt-log-interface.version>2.0.0</msyt-log-interface.version>
+        <msyt-log-pojo.version>2.0.0</msyt-log-pojo.version>
+        <msyt-log-service.version>2.0.0</msyt-log-service.version>
+        <msyt-log-web.version>2.0.0</msyt-log-web.version>
+        <msyt-log-ext.version>2.0.0</msyt-log-ext.version>
+        <!-- msyt-log, End -->
+
+        <!-- msyt-vipmember, Begin -->
+        <msyt-vipmember.version>2.0.0</msyt-vipmember.version>
+        <msyt-vipmember-api.version>2.0.0</msyt-vipmember-api.version>
+        <msyt-vipmember-common.version>2.0.0</msyt-vipmember-common.version>
+        <msyt-vipmember-dao.version>2.0.0</msyt-vipmember-dao.version>
+        <msyt-vipmember-interface.version>2.0.0</msyt-vipmember-interface.version>
+        <msyt-vipmember-pojo.version>2.0.0</msyt-vipmember-pojo.version>
+        <msyt-vipmember-service.version>2.0.0</msyt-vipmember-service.version>
+        <msyt-vipmember-web.version>2.0.0</msyt-vipmember-web.version>
+        <msyt-vipmember-ext.version>2.0.0</msyt-vipmember-ext.version>
+        <!-- msyt-vipmember, End -->
+
+        <!-- msyt-content, Begin -->
+        <msyt-content.version>2.0.0</msyt-content.version>
+        <msyt-content-api.version>2.0.0</msyt-content-api.version>
+        <msyt-content-common.version>2.0.0</msyt-content-common.version>
+        <msyt-content-dao.version>2.0.0</msyt-content-dao.version>
+        <msyt-content-interface.version>2.0.0</msyt-content-interface.version>
+        <msyt-content-pojo.version>2.0.0</msyt-content-pojo.version>
+        <msyt-content-service.version>2.0.0</msyt-content-service.version>
+        <msyt-content-web.version>2.0.0</msyt-content-web.version>
+        <msyt-content-ext.version>2.0.0</msyt-content-ext.version>
+        <!-- msyt-content, End -->
+
+        <!-- msyt-system, Begin -->
+        <msyt-system.version>2.0.0</msyt-system.version>
+        <msyt-system-api.version>2.0.0</msyt-system-api.version>
+        <msyt-system-common.version>2.0.0</msyt-system-common.version>
+        <msyt-system-dao.version>2.0.0</msyt-system-dao.version>
+        <msyt-system-interface.version>2.0.0</msyt-system-interface.version>
+        <msyt-system-pojo.version>2.0.0</msyt-system-pojo.version>
+        <msyt-system-service.version>2.0.0</msyt-system-service.version>
+        <msyt-system-web.version>2.0.0</msyt-system-web.version>
+        <msyt-system-ext.version>2.0.0</msyt-system-ext.version>
+        <!-- msyt-system, End -->
+
+        <!-- msyt-security, Begin -->
+        <msyt-security.version>2.0.0</msyt-security.version>
+        <msyt-security-api.version>2.0.0</msyt-security-api.version>
+        <msyt-security-common.version>2.0.0</msyt-security-common.version>
+        <msyt-security-dao.version>2.0.0</msyt-security-dao.version>
+        <msyt-security-interface.version>2.0.0</msyt-security-interface.version>
+        <msyt-security-pojo.version>2.0.0</msyt-security-pojo.version>
+        <msyt-security-service.version>2.0.0</msyt-security-service.version>
+        <msyt-security-web.version>2.0.0</msyt-security-web.version>
+        <msyt-security-ext.version>2.0.0</msyt-security-ext.version>
+        <!-- msyt-security, End -->
+
+        <!-- msyt-cache, Begin -->
+        <msyt-cache.version>2.0.0</msyt-cache.version>
+        <msyt-cache-api.version>2.0.0</msyt-cache-api.version>
+        <msyt-cache-common.version>2.0.0</msyt-cache-common.version>
+        <msyt-cache-dao.version>2.0.0</msyt-cache-dao.version>
+        <msyt-cache-interface.version>2.0.0</msyt-cache-interface.version>
+        <msyt-cache-pojo.version>2.0.0</msyt-cache-pojo.version>
+        <msyt-cache-service.version>2.0.0</msyt-cache-service.version>
+        <msyt-cache-web.version>2.0.0</msyt-cache-web.version>
+        <msyt-cache-ext.version>2.0.0</msyt-cache-ext.version>
+        <!-- msyt-cache, End -->
+		
+		
+		 <!-- msyt-logistics, Begin -->
+        <msyt-logistics.version>2.0.0</msyt-logistics.version>
+        <msyt-logistics-api.version>2.0.0</msyt-logistics-api.version>
+        <msyt-logistics-common.version>2.0.0</msyt-logistics-common.version>
+        <msyt-logistics-dao.version>2.0.0</msyt-logistics-dao.version>
+        <msyt-logistics-interface.version>2.0.0</msyt-logistics-interface.version>
+        <msyt-logistics-pojo.version>2.0.0</msyt-logistics-pojo.version>
+        <msyt-logistics-service.version>2.0.0</msyt-logistics-service.version>
+        <msyt-logistics-ext.version>2.0.0</msyt-logistics-ext.version>
+        <!-- msyt-logistics, End -->
+		
+		<!-- msyt-warehouse, Begin -->
+        <msyt-warehouse.version>2.0.0</msyt-warehouse.version>
+        <msyt-warehouse-api.version>2.0.0</msyt-warehouse-api.version>
+        <msyt-warehouse-common.version>2.0.0</msyt-warehouse-common.version>
+        <msyt-warehouse-dao.version>2.0.0</msyt-warehouse-dao.version>
+        <msyt-warehouse-interface.version>2.0.0</msyt-warehouse-interface.version>
+        <msyt-warehouse-pojo.version>2.0.0</msyt-warehouse-pojo.version>
+        <msyt-warehouse-service.version>2.0.0</msyt-warehouse-service.version>
+        <msyt-warehouse-ext.version>2.0.0</msyt-warehouse-ext.version>
+        <!-- msyt-warehouse, End -->
+		
+		<!-- msyt-thirdplatform, Begin -->
+        <msyt-thirdplatform.version>2.0.0</msyt-thirdplatform.version>
+        <msyt-thirdplatform-api.version>2.0.0</msyt-thirdplatform-api.version>
+        <msyt-thirdplatform-common.version>2.0.0</msyt-thirdplatform-common.version>
+        <msyt-thirdplatform-dao.version>2.0.0</msyt-thirdplatform-dao.version>
+        <msyt-thirdplatform-interface.version>2.0.0</msyt-thirdplatform-interface.version>
+        <msyt-thirdplatform-pojo.version>2.0.0</msyt-thirdplatform-pojo.version>
+        <msyt-thirdplatform-service.version>2.0.0</msyt-thirdplatform-service.version>
+        <msyt-thirdplatform-ext.version>2.0.0</msyt-thirdplatform-ext.version>
+        <!-- msyt-thirdplatform, End -->
+
+        <!-- 当前项目所有工程版本号, End -->
+
+        <!-- 第三方框架 Begin -->
+
+        <!-- JDK 版本号 -->
+        <jdk.version>1.8</jdk.version>
+
+        <junit.version>4.12</junit.version>
+        <!-- <spring.version>4.1.3.RELEASE</spring.version> -->
+        <!-- 4.3.2 版本和其他框架冲突，报错： 出错啦！！！ org.springframework.web.util.NestedServletException:
+            Handler dispatch failed; nested exception is java.lang.NoSuchMethodError:
+            com.fasterxml.jackson.databind.ObjectWriter.forType(Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/ObjectWriter
+            报错： nested exception is java.lang.NoSuchMethodError: com.fasterxml.jackson.databind.ObjectWriter.forType(Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/ObjectWriter -->
+        <spring.version>4.3.5.RELEASE</spring.version>
+        <mybatis.version>3.4.1</mybatis.version>
+        <!-- 3.4.1 , 3.4.0 <mybatis.version>3.2.8</mybatis.version> -->
+        <!-- <mybatis.spring.version>1.2.2</mybatis.spring.version> -->
+        <mybatis.spring.version>1.3.0</mybatis.spring.version>
+        <mybatis.paginator.version>1.2.17</mybatis.paginator.version>
+        <!-- <mybatis.paginator.version>1.2.15</mybatis.paginator.version> -->
+        <!--<mysql.version>5.1.32</mysql.version>-->
+        <mysql.version>6.0.3</mysql.version>
+        <slf4j.version>1.6.4</slf4j.version>
+        <!-- <jackson.version>2.4.2</jackson.version> -->
+        <jackson.version>2.8.5</jackson.version>
+        <!-- <jackson.version>2.8.1</jackson.version> -->
+        <!-- 1.1.0 太卡了 -->
+        <!--<druid.version>1.1.0</druid.version>-->
+        <druid.version>1.0.29</druid.version>
+        <!-- <druid.version>1.0.9</druid.version> -->
+        <!-- <httpclient.version>4.3.5</httpclient.version> -->
+        <httpclient.version>4.5.2</httpclient.version>
+        <jstl.version>1.2</jstl.version>
+        <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+        <javax.servlet.jsp-api.version>2.3.1</javax.servlet.jsp-api.version>
+        <joda-time.version>2.5</joda-time.version>
+        <commons-lang3.version>3.5</commons-lang3.version>
+        <!-- <commons-lang3.version>3.3.2</commons-lang3.version> -->
+        <!-- Apache 的 commons-io , 2012年已经不更新了 -->
+
+        <!-- 使用 commons-io 的 commons-io  -->
+        <commons-io.version>2.5</commons-io.version>
+        <commons-net.version>3.3</commons-net.version>
+        <!-- <pagehelper.version>3.4.2-fix</pagehelper.version> -->
+        <!-- <pagehelper.version>4.2.1</pagehelper.version>-->
+        <!-- 怎么从4.X升级到5.0，还能继续使用排序？https://github.com/abel533/OrderByHelper -->
+        <pagehelper.version>5.0.3</pagehelper.version>
+        <!-- pagehelper 5.x 把排序独立拆出来 -->
+        <orderby-helper.version>0.0.2</orderby-helper.version>
+        <!-- <jsqlparser.version>0.9.1</jsqlparser.version> -->
+        <commons-fileupload.version>1.3.1</commons-fileupload.version>
+        <!-- 1.3.2 报错 -->
+        <!-- <commons-fileupload.version>1.3.2</commons-fileupload.version> -->
+        <!-- <jedis.version>2.7.2</jedis.version> -->
+        <jedis.version>2.9.0</jedis.version>
+        <!--2.5.3 , dubbox : 2.8.4 -->
+        <dubbo.version>2.8.4</dubbo.version>
+        <zookeeper.version>3.4.8</zookeeper.version>
+        <zkclient.version>0.9</zkclient.version>
+        <freemarker.version>2.3.23</freemarker.version>
+        <quartz.version>2.2.3</quartz.version>
+        <shiro-all.version>1.3.2</shiro-all.version>
+
+        <!-- 有可能和Spring ， SpringMVC 框架中的依赖冲突，因为Spring，SpringMVC 已经依赖了 -->
+        <commons-codec.version>1.9</commons-codec.version>
+
+        <!-- 1.0.1 报错：java.io.FileNotFoundException: .\log\2017-04-06\info.log (另一个程序正在使用此文件，进程无法访问。)  -->
+        <flogger.version>1.0.2</flogger.version>
+
+        <!-- 阿里云，Begin -->
+        <aliyun-sdk-oss.version>2.5.0</aliyun-sdk-oss.version>
+        <ons-client.version>1.2.7.Final</ons-client.version>
+        <aliyun-java-sdk-core.version>3.2.2</aliyun-java-sdk-core.version>
+        <!-- 阿里云，End -->
+
+        <jaxrpc.version>1.1</jaxrpc.version>
+        <!-- POI -->
+        <poi-ooxml-schemas.version>3.15</poi-ooxml-schemas.version>
+        <poi-ooxml.version>3.15</poi-ooxml.version>
+        <poi.version>3.15</poi.version>
+
+        <commons-httpclient.version>3.1</commons-httpclient.version>
+        <axis.version>1.4</axis.version>
+        <wsdl4j.version>1.6.3</wsdl4j.version>
+        <commons-discovery.version>0.5</commons-discovery.version>
+        <!-- 报错： 3.2.2 ， java.lang.RuntimeException: java.io.IOException: invalid constant type: 18 -->
+        <!-- <cglib.version>3.2.2</cglib.version> -->
+        <cglib.version>3.2.3</cglib.version>
+        <commons-collections4.version>4.1</commons-collections4.version>
+
+        <aspectjweaver.version>1.8.9</aspectjweaver.version>
+        <urlrewritefilter.version>4.0.4</urlrewritefilter.version>
+        <dom4j.version>1.6.1</dom4j.version>
+
+        <!-- 2.8.0 报错 -->
+        <!-- <gson.version>2.8.0</gson.version> -->
+        <gson.version>2.7</gson.version>
+        <!-- <gson.version>2.8.0</gson.version> -->
+
+        <!-- 阿里巴巴 Json解析框架 -->
+        <fastjson.version>1.2.30</fastjson.version>
+
+        <!-- HTTP 请求框架， OkHttp , Retrofit2网络层处理 使用OKHTTP3处理 -->
+        <!--<okhttp.version>3.5.0</okhttp.version>-->
+
+        <!-- Apache Curator ，High-level API that greatly simplifies using ZooKeeper -->
+        <!-- 3.2.0 有问题！！！ -->
+        <!-- Versions The are currently two released versions of Curator, 2.x.x
+            and 3.x.x: Curator 2.x.x - compatible with both ZooKeeper 3.4.x and ZooKeeper
+            3.5.x Curator 3.x.x - compatible only with ZooKeeper 3.5.x and includes support
+            for new features such as dynamic reconfiguration, etc. -->
+        <curator-framework.version>2.11.1</curator-framework.version>
+        <curator-client.version>2.11.1</curator-client.version>
+        <curator-recipes.version>2.11.1</curator-recipes.version>
+
+        <!-- Google Guava -->
+        <!-- 20.0 ， 19.0 报错！！！ -->
+        <guava.version>18.0</guava.version>
+
+        <!-- 1.10.2 报错 -->
+        <jsoup.version>1.9.2</jsoup.version>
+
+        <!-- <javassist.version>3.20.0-GA</javassist.version> -->
+        <!-- <version>3.22.0-CR1</version>
+
+        3.21.0-GA
+          -->
+        <javassist.version>3.21.0-GA</javassist.version>
+
+        <!-- elasticsearch -->
+        <elasticsearch.version>5.2.1</elasticsearch.version>
+
+        <log4j-api.version>2.8.2</log4j-api.version>
+        <log4j-core.version>2.8.2</log4j-core.version>
+
+        <kryo.version>2.24.0</kryo.version>
+
+        <kryo-serializers.version>0.41</kryo-serializers.version>
+
+        <!-- hibernate-validator -->
+        <validation-api.version>1.1.0.Final</validation-api.version>
+        <hibernate-validator.version>5.4.1.Final</hibernate-validator.version>
+        <el-api.version>3.0.1-b08</el-api.version>
+
+        <jpinyin.version>1.1.8</jpinyin.version>
+
+        <!-- javax.mail -->
+        <mail-api.version>1.5.6</mail-api.version>
+
+        <!-- FastDFS -->
+        <fastdfs-client-java.version>1.26</fastdfs-client-java.version>
+
+        <!-- Netty ， Begin
+         由于 Netty 5.x 是商业版本，不再开源，但是 5.0.0.Alpha2 新增很多功能，已经代码调整，
+         Netty 4.x 和  Netty 5.x 不兼容， 5.0.0.Alpha2 (Mar 03, 2015)，
+         4.1.9.Final (Mar 10, 2017) ，由于 Hero 时间方面问题，同时为了更快实现，
+         先以5.0.0.Alpha2 (Mar 03, 2015) 来实现 ！！！
+
+		4.0.36.Final
+
+         -->
+        <!--<netty-all.version>4.0.36.Final</netty-all.version>-->
+
+        <netty-all.version>4.1.7.Final</netty-all.version>
+
+        <!-- 1.3.0.CR9 -->
+        <jboss-marshalling.version>1.4.11.Final</jboss-marshalling.version>
+        <jboss-marshalling-serial.version>1.4.11.Final</jboss-marshalling-serial.version>
+        <!-- Netty , End -->
+
+
+        <!--
+             HTML恶意代码过滤 AntiSamy 它是一个可确保用户输入的HTML/CSS符合应用规范的API。
+        换句话讲，这个API可以确保用户无法在HTML中提交恶意代码，
+        这些恶意代码提交通常被用于用户输入的个人资料、评论等会被服务端持久化的数据中。
+        对Web应用来讲，“恶意代码”通常是指Javascript。
+        CSS样式在调用 Javascript引擎的时候也会被认为是恶意代码。
+        当然，通常一些“正常”的HTML和CSS也会被用于恶意的目的。
+        百度的UEditor富文本编辑，提交的内容可能会被处理掉！！！ 百度的UEditor 也自带这些过滤功能！！！
+         ## Begin
+        1.5.3 ## Ok
+         1.5.3-atlassian-1 ## Error
+         1.5.3-atlassian-20  ## Error
+         1.5.5 ## Error
+             -->
+        <antisamy.version>1.5.5</antisamy.version>
+        <antisamy-sample-configs.version>1.5.3</antisamy-sample-configs.version>
+
+        <!--
+        Retrofit2网络层处理 使用OKHTTP3处理
+        -->
+        <retrofit.version>2.2.0</retrofit.version>
+
+	    <!-- Apache RocketMQ -->
+        <rocketmq-all.version>3.6.2.Final</rocketmq-all.version>
+
+	    <rocketmq-client.version>3.6.2.Final</rocketmq-client.version>
+
+		<cos-api.version>4.4</cos-api.version>
+
+        <!-- End -->
+
+        <!-- 第三方框架 End -->
+
+    </properties>
+
+    <!-- dependencyManagement -->
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- 管理当前项目所有的工程的版本号, Begin -->
+
+            <!-- msyt-parent, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-parent</artifactId>
+                <version>${msyt-parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-parent-api</artifactId>
+                <version>${msyt-parent-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-parent-common</artifactId>
+                <version>${msyt-parent-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-parent-dao</artifactId>
+                <version>${msyt-parent-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-parent-interface</artifactId>
+                <version>${msyt-parent-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-parent-pojo</artifactId>
+                <version>${msyt-parent-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-parent-service</artifactId>
+                <version>${msyt-parent-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-parent-web</artifactId>
+                <version>${msyt-parent-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-parent-ext</artifactId>
+                <version>${msyt-parent-ext.version}</version>
+            </dependency>
+            <!-- msyt-parent, End -->
+
+            <!-- msyt-member, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-member</artifactId>
+                <version>${msyt-member.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-member-api</artifactId>
+                <version>${msyt-member-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-member-common</artifactId>
+                <version>${msyt-member-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-member-dao</artifactId>
+                <version>${msyt-member-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-member-interface</artifactId>
+                <version>${msyt-member-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-member-pojo</artifactId>
+                <version>${msyt-member-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-member-service</artifactId>
+                <version>${msyt-member-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-member-web</artifactId>
+                <version>${msyt-member-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-member-ext</artifactId>
+                <version>${msyt-member-ext.version}</version>
+            </dependency>
+            <!-- msyt-member, End -->
+
+            <!-- msyt-commons, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-commons</artifactId>
+                <version>${msyt-commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-commons-api</artifactId>
+                <version>${msyt-commons-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-commons-common</artifactId>
+                <version>${msyt-commons-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-commons-dao</artifactId>
+                <version>${msyt-commons-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-commons-interface</artifactId>
+                <version>${msyt-commons-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-commons-pojo</artifactId>
+                <version>${msyt-commons-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-commons-service</artifactId>
+                <version>${msyt-commons-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-commons-web</artifactId>
+                <version>${msyt-commons-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-commons-ext</artifactId>
+                <version>${msyt-commons-ext.version}</version>
+            </dependency>
+            <!-- msyt-commons, End -->
+
+            <!-- msyt-collector, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-collector</artifactId>
+                <version>${msyt-collector.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-collector-api</artifactId>
+                <version>${msyt-collector-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-collector-common</artifactId>
+                <version>${msyt-collector-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-collector-dao</artifactId>
+                <version>${msyt-collector-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-collector-interface</artifactId>
+                <version>${msyt-collector-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-collector-pojo</artifactId>
+                <version>${msyt-collector-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-collector-service</artifactId>
+                <version>${msyt-collector-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-collector-web</artifactId>
+                <version>${msyt-collector-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-collector-ext</artifactId>
+                <version>${msyt-collector-ext.version}</version>
+            </dependency>
+            <!-- msyt-collector, End -->
+
+            <!-- msyt-user, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-user</artifactId>
+                <version>${msyt-user.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-user-api</artifactId>
+                <version>${msyt-user-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-user-common</artifactId>
+                <version>${msyt-user-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-user-dao</artifactId>
+                <version>${msyt-user-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-user-interface</artifactId>
+                <version>${msyt-user-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-user-pojo</artifactId>
+                <version>${msyt-user-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-user-service</artifactId>
+                <version>${msyt-user-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-user-web</artifactId>
+                <version>${msyt-user-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-user-ext</artifactId>
+                <version>${msyt-user-ext.version}</version>
+            </dependency>
+            <!-- msyt-user, End -->
+
+            <!-- msyt-item, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-item</artifactId>
+                <version>${msyt-item.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-item-api</artifactId>
+                <version>${msyt-item-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-item-common</artifactId>
+                <version>${msyt-item-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-item-dao</artifactId>
+                <version>${msyt-item-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-item-interface</artifactId>
+                <version>${msyt-item-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-item-pojo</artifactId>
+                <version>${msyt-item-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-item-service</artifactId>
+                <version>${msyt-item-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-item-web</artifactId>
+                <version>${msyt-item-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-item-ext</artifactId>
+                <version>${msyt-item-ext.version}</version>
+            </dependency>
+            <!-- msyt-item, End -->
+
+            <!-- msyt-auth, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-auth</artifactId>
+                <version>${msyt-auth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-auth-api</artifactId>
+                <version>${msyt-auth-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-auth-common</artifactId>
+                <version>${msyt-auth-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-auth-dao</artifactId>
+                <version>${msyt-auth-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-auth-interface</artifactId>
+                <version>${msyt-auth-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-auth-pojo</artifactId>
+                <version>${msyt-auth-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-auth-service</artifactId>
+                <version>${msyt-auth-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-auth-web</artifactId>
+                <version>${msyt-auth-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-auth-ext</artifactId>
+                <version>${msyt-auth-ext.version}</version>
+            </dependency>
+            <!-- msyt-auth, End -->
+
+            <!-- msyt-manager, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-manager</artifactId>
+                <version>${msyt-manager.version}</version>
+            </dependency>
+            <!-- <dependency> <groupId>cc.msonion.carambola</groupId> <artifactId>msyt-manager-api</artifactId>
+                <version>${msyt-manager-api.version}</version> </dependency> -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-manager-common</artifactId>
+                <version>${msyt-manager-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-manager-dao</artifactId>
+                <version>${msyt-manager-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-manager-interface</artifactId>
+                <version>${msyt-manager-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-manager-pojo</artifactId>
+                <version>${msyt-manager-pojo.version}</version>
+            </dependency>
+            <!-- <dependency> <groupId>cc.msonion.carambola</groupId> <artifactId>msyt-manager-service</artifactId>
+                <version>${msyt-manager-service.version}</version> </dependency> -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-manager-web</artifactId>
+                <version>${msyt-manager-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-manager-ext</artifactId>
+                <version>${msyt-manager-ext.version}</version>
+            </dependency>
+            <!-- msyt-manager, End -->
+
+            <!-- msyt-search, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-search</artifactId>
+                <version>${msyt-search.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-search-api</artifactId>
+                <version>${msyt-search-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-search-common</artifactId>
+                <version>${msyt-search-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-search-dao</artifactId>
+                <version>${msyt-search-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-search-interface</artifactId>
+                <version>${msyt-search-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-search-pojo</artifactId>
+                <version>${msyt-search-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-search-service</artifactId>
+                <version>${msyt-search-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-search-web</artifactId>
+                <version>${msyt-search-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-search-ext</artifactId>
+                <version>${msyt-search-ext.version}</version>
+            </dependency>
+            <!-- msyt-search, End -->
+
+            <!-- msyt-sso, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-sso</artifactId>
+                <version>${msyt-sso.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-sso-api</artifactId>
+                <version>${msyt-sso-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-sso-common</artifactId>
+                <version>${msyt-sso-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-sso-dao</artifactId>
+                <version>${msyt-sso-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-sso-interface</artifactId>
+                <version>${msyt-sso-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-sso-pojo</artifactId>
+                <version>${msyt-sso-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-sso-service</artifactId>
+                <version>${msyt-sso-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-sso-web</artifactId>
+                <version>${msyt-sso-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-sso-ext</artifactId>
+                <version>${msyt-sso-ext.version}</version>
+            </dependency>
+            <!-- msyt-sso, End -->
+
+            <!-- msyt-fileresource, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-fileresource</artifactId>
+                <version>${msyt-fileresource.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-fileresource-api</artifactId>
+                <version>${msyt-fileresource-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-fileresource-common</artifactId>
+                <version>${msyt-fileresource-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-fileresource-dao</artifactId>
+                <version>${msyt-fileresource-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-fileresource-interface</artifactId>
+                <version>${msyt-fileresource-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-fileresource-pojo</artifactId>
+                <version>${msyt-fileresource-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-fileresource-service</artifactId>
+                <version>${msyt-fileresource-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-fileresource-web</artifactId>
+                <version>${msyt-fileresource-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-fileresource-ext</artifactId>
+                <version>${msyt-fileresource-ext.version}</version>
+            </dependency>
+            <!-- msyt-fileresource, End -->
+
+            <!-- msyt-log, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-log</artifactId>
+                <version>${msyt-log.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-log-api</artifactId>
+                <version>${msyt-log-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-log-common</artifactId>
+                <version>${msyt-log-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-log-dao</artifactId>
+                <version>${msyt-log-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-log-interface</artifactId>
+                <version>${msyt-log-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-log-pojo</artifactId>
+                <version>${msyt-log-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-log-service</artifactId>
+                <version>${msyt-log-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-log-web</artifactId>
+                <version>${msyt-log-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-log-ext</artifactId>
+                <version>${msyt-log-ext.version}</version>
+            </dependency>
+            <!-- msyt-log, End -->
+
+            <!-- msyt-vipmember, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-vipmember</artifactId>
+                <version>${msyt-vipmember.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-vipmember-api</artifactId>
+                <version>${msyt-vipmember-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-vipmember-common</artifactId>
+                <version>${msyt-vipmember-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-vipmember-dao</artifactId>
+                <version>${msyt-vipmember-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-vipmember-interface</artifactId>
+                <version>${msyt-vipmember-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-vipmember-pojo</artifactId>
+                <version>${msyt-vipmember-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-vipmember-service</artifactId>
+                <version>${msyt-vipmember-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-vipmember-web</artifactId>
+                <version>${msyt-vipmember-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-vipmember-ext</artifactId>
+                <version>${msyt-vipmember-ext.version}</version>
+            </dependency>
+            <!-- msyt-vipmember, End -->
+
+            <!-- msyt-content, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-content</artifactId>
+                <version>${msyt-content.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-content-api</artifactId>
+                <version>${msyt-content-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-content-common</artifactId>
+                <version>${msyt-content-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-content-dao</artifactId>
+                <version>${msyt-content-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-content-interface</artifactId>
+                <version>${msyt-content-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-content-pojo</artifactId>
+                <version>${msyt-content-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-content-service</artifactId>
+                <version>${msyt-content-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-content-web</artifactId>
+                <version>${msyt-content-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-content-ext</artifactId>
+                <version>${msyt-content-ext.version}</version>
+            </dependency>
+            <!-- msyt-content, End -->
+
+            <!-- msyt-system, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-system</artifactId>
+                <version>${msyt-system.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-system-api</artifactId>
+                <version>${msyt-system-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-system-common</artifactId>
+                <version>${msyt-system-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-system-dao</artifactId>
+                <version>${msyt-system-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-system-interface</artifactId>
+                <version>${msyt-system-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-system-pojo</artifactId>
+                <version>${msyt-system-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-system-service</artifactId>
+                <version>${msyt-system-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-system-web</artifactId>
+                <version>${msyt-system-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-system-ext</artifactId>
+                <version>${msyt-system-ext.version}</version>
+            </dependency>
+            <!-- msyt-system, End -->
+
+            <!-- msyt-security, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-security</artifactId>
+                <version>${msyt-security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-security-api</artifactId>
+                <version>${msyt-security-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-security-common</artifactId>
+                <version>${msyt-security-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-security-dao</artifactId>
+                <version>${msyt-security-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-security-interface</artifactId>
+                <version>${msyt-security-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-security-pojo</artifactId>
+                <version>${msyt-security-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-security-service</artifactId>
+                <version>${msyt-security-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-security-web</artifactId>
+                <version>${msyt-security-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-security-ext</artifactId>
+                <version>${msyt-security-ext.version}</version>
+            </dependency>
+            <!-- msyt-security, End -->
+
+            <!-- msyt-cache, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-cache</artifactId>
+                <version>${msyt-cache.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-cache-api</artifactId>
+                <version>${msyt-cache-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-cache-common</artifactId>
+                <version>${msyt-cache-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-cache-dao</artifactId>
+                <version>${msyt-cache-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-cache-interface</artifactId>
+                <version>${msyt-cache-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-cache-pojo</artifactId>
+                <version>${msyt-cache-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-cache-service</artifactId>
+                <version>${msyt-cache-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-cache-web</artifactId>
+                <version>${msyt-cache-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-cache-ext</artifactId>
+                <version>${msyt-cache-ext.version}</version>
+            </dependency>
+            <!-- msyt-cache, End -->
+			
+			
+			  <!-- msyt-logistics, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-logistics</artifactId>
+                <version>${msyt-logistics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-logistics-api</artifactId>
+                <version>${msyt-logistics-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-logistics-common</artifactId>
+                <version>${msyt-logistics-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-logistics-dao</artifactId>
+                <version>${msyt-logistics-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-logistics-interface</artifactId>
+                <version>${msyt-logistics-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-logistics-pojo</artifactId>
+                <version>${msyt-logistics-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-logistics-service</artifactId>
+                <version>${msyt-logistics-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-logistics-ext</artifactId>
+                <version>${msyt-logistics-ext.version}</version>
+            </dependency>
+            <!-- msyt-logistics, End -->
+			
+			
+			  <!-- msyt-warehouse, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-warehouse</artifactId>
+                <version>${msyt-warehouse.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-warehouse-api</artifactId>
+                <version>${msyt-warehouse-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-warehouse-common</artifactId>
+                <version>${msyt-warehouse-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-warehouse-dao</artifactId>
+                <version>${msyt-warehouse-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-warehouse-interface</artifactId>
+                <version>${msyt-warehouse-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-warehouse-pojo</artifactId>
+                <version>${msyt-warehouse-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-warehouse-service</artifactId>
+                <version>${msyt-warehouse-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-warehouse-ext</artifactId>
+                <version>${msyt-warehouse-ext.version}</version>
+            </dependency>
+            <!-- msyt-warehouse, End -->
+			
+			<!-- msyt-thirdplatform, Begin -->
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-thirdplatform</artifactId>
+                <version>${msyt-thirdplatform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-thirdplatform-api</artifactId>
+                <version>${msyt-thirdplatform-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-thirdplatform-common</artifactId>
+                <version>${msyt-thirdplatform-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-thirdplatform-dao</artifactId>
+                <version>${msyt-thirdplatform-dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-thirdplatform-interface</artifactId>
+                <version>${msyt-thirdplatform-interface.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-thirdplatform-pojo</artifactId>
+                <version>${msyt-thirdplatform-pojo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-thirdplatform-service</artifactId>
+                <version>${msyt-thirdplatform-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cc.msonion.carambola</groupId>
+                <artifactId>msyt-thirdplatform-ext</artifactId>
+                <version>${msyt-thirdplatform-ext.version}</version>
+            </dependency>
+            <!-- msyt-thirdplatform, End -->
+			
+
+            <!-- 管理当前项目所有的工程的版本号, End -->
+
+
+            <!-- 管理第三方框架 Begin -->
+
+            <!-- 阿里云 -->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun-sdk-oss.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun.openservices</groupId>
+                <artifactId>ons-client</artifactId>
+                <version>${ons-client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun-java-sdk-core.version}</version>
+            </dependency>
+
+            <!-- 时间操作组件 -->
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda-time.version}</version>
+            </dependency>
+            <!-- Apache工具组件 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <!-- 全部统一使用 commons-io 的 commons-io -->
+            <!--<dependency>-->
+            <!--<groupId>org.apache.commons</groupId>-->
+            <!--<artifactId>commons-io</artifactId>-->
+            <!--<version>${commons-io.version}</version>-->
+            <!--</dependency>-->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>${commons-net.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+            </dependency>
+
+            <!-- cglib -->
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
+            </dependency>
+
+            <!-- Jackson Json处理工具包，SpringMVC 中默认就是使用 Jackson 解析Json -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <!-- httpclient -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+
+            <!-- quartz任务调度框架 -->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
+            </dependency>
+
+            <!-- 单元测试 -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <!--<scope>test</scope>-->
+            </dependency>
+
+            <!-- 日志处理 -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <!-- Mybatis -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis.spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.miemiedev</groupId>
+                <artifactId>mybatis-paginator</artifactId>
+                <version>${mybatis.paginator.version}</version>
+            </dependency>
+
+            <!-- Mybatis 分页插件 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>orderby-helper</artifactId>
+                <version>${orderby-helper.version}</version>
+            </dependency>
+
+            <!-- MySql -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <!-- 连接池，阿里巴巴开源的JDBC 连接池，比 C3P0，DBCP等等都强大，全球最好，最强大的 连接池，网上测试过 ，比较过各种连接池的性能！！！ -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!-- Spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jms</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!-- Spring tx -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!-- 不要使用！！！ <dependency> <groupId>org.springframework</groupId> <artifactId>spring-orm</artifactId>
+                <version>${spring.version}</version> </dependency> -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectjweaver.version}</version>
+            </dependency>
+
+            <!-- urlrewritefilter -->
+            <dependency>
+                <groupId>org.tuckey</groupId>
+                <artifactId>urlrewritefilter</artifactId>
+                <version>${urlrewritefilter.version}</version>
+            </dependency>
+
+            <!-- dom4j -->
+            <dependency>
+                <groupId>dom4j</groupId>
+                <artifactId>dom4j</artifactId>
+                <version>${dom4j.version}</version>
+            </dependency>
+
+            <!-- JSP相关 -->
+            <dependency>
+                <groupId>jstl</groupId>
+                <artifactId>jstl</artifactId>
+                <version>${jstl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax.servlet-api.version}</version>
+                <!-- Servlet 的 scope配置成 provided，编译，测试，运行使用，打包不包含进去，因为Tomcat中已经包含， 如果打包再包含进去，可能导致冲突报错！！！ -->
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>javax.servlet.jsp-api</artifactId>
+                <version>${javax.servlet.jsp-api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- 文件上传组件，报错！！！ -->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons-fileupload.version}</version>
+            </dependency>
+
+            <!-- Redis客户端 -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+
+            <!-- Dubbo相关 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.httpcomponents</groupId>
+                        <artifactId>httpcore</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>${zookeeper.version}</version>
+            </dependency>
+            <!-- <dependency> <groupId>com.github.sgroschupf</groupId> <artifactId>zkclient</artifactId>
+                <version>${zkclient.version}</version> </dependency> -->
+            <dependency>
+                <groupId>com.101tec</groupId>
+                <artifactId>zkclient</artifactId>
+                <version>${zkclient.version}</version>
+            </dependency>
+
+            <!-- Freemarker -->
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
+
+            <!-- 加密解密，安全相关，有可能和Spring框架冲突，因为Spring框架中已经依赖了 -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
+            </dependency>
+
+            <!-- Shiro -->
+            <!-- <dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-core</artifactId>
+                <version>${shiro.version}</version> <exclusions> <exclusion> <artifactId>slf4j-api</artifactId>
+                <groupId>org.slf4j</groupId> </exclusion> </exclusions> </dependency> <dependency>
+                <groupId>org.apache.shiro</groupId> <artifactId>shiro-web</artifactId> <version>shiro.version</version>
+                </dependency> <dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-spring</artifactId>
+                <version>shiro.version</version> </dependency> -->
+
+            <!-- shiro-all -->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-all</artifactId>
+                <version>${shiro-all.version}</version>
+            </dependency>
+
+            <!-- 基于双缓冲队列、多刷盘机制的超轻量级 Java 日志 -->
+            <dependency>
+                <groupId>com.github.cyfonly</groupId>
+                <artifactId>flogger</artifactId>
+                <version>${flogger.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-discovery</groupId>
+                <artifactId>commons-discovery</artifactId>
+                <version>${commons-discovery.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>wsdl4j</groupId>
+                <artifactId>wsdl4j</artifactId>
+                <version>${wsdl4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.axis</groupId>
+                <artifactId>axis</artifactId>
+                <version>${axis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.xml</groupId>
+                <artifactId>jaxrpc</artifactId>
+                <version>${jaxrpc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>${commons-httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi-ooxml.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml-schemas</artifactId>
+                <version>${poi-ooxml-schemas.version}</version>
+            </dependency>
+
+            <!-- 阿里巴巴 Json解析框架 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- Google Json解析框架，报错！！！ -->
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
+
+            <!-- HTTP请求框架， OkHttp , Retrofit2网络层处理 使用OKHTTP3处理 -->
+            <!--<dependency>-->
+                <!--<groupId>com.squareup.okhttp3</groupId>-->
+                <!--<artifactId>okhttp</artifactId>-->
+                <!--<version>${okhttp.version}</version>-->
+            <!--</dependency>-->
+
+            <!-- High-level API that greatly simplifies using ZooKeeper -->
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <version>${curator-framework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-client</artifactId>
+                <version>${curator-client.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator-recipes.version}</version>
+            </dependency>
+
+            <!-- Guava is a suite of core and expanded libraries that include utility
+                classes, google's collections, io classes, and much much more. Guava has
+                only one code dependency - javax.annotation, per the JSR-305 spec. -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <!-- jsoup is a Java library for working with real-world HTML. It provides
+                a very convenient API for extracting and manipulating data, using the best
+                of DOM, CSS, and jquery-like methods. -->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>${javassist.version}</version>
+            </dependency>
+
+            <!-- ElasticSearch ## Begin -->
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>transport</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j-api.version}</version>
+            </dependency>
+
+            <!-- ElasticSearch ## End -->
+
+            <!-- DubboX , Begin -->
+
+            <dependency>
+                <groupId>com.esotericsoftware.kryo</groupId>
+                <artifactId>kryo</artifactId>
+                <version>${kryo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.javakaffee</groupId>
+                <artifactId>kryo-serializers</artifactId>
+                <version>${kryo-serializers.version}</version>
+            </dependency>
+
+            <!-- DubboX , End -->
+
+            <!-- hibernate-validator , begin -->
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>${el-api.version}</version>
+            </dependency>
+
+
+            <!-- hibernate-validator , End -->
+
+            <!-- JPinyin是一个汉字转拼音的Java开源类库
+                https://github.com/stuxuhai/jpinyin
+            -->
+            <dependency>
+                <groupId>com.github.stuxuhai</groupId>
+                <artifactId>jpinyin</artifactId>
+                <version>${jpinyin.version}</version>
+            </dependency>
+
+            <!-- javax.mail -->
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>javax.mail-api</artifactId>
+                <version>${mail-api.version}</version>
+            </dependency>
+
+            <!-- JAVA SE环境如要导入，版本号保持一致 -->
+            <dependency>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>${mail-api.version}</version>
+            </dependency>
+
+
+            <!-- FastDFS Client Java
+              FastDFS is an open source high performance distributed file system (DFS). It's major functions include: file storing, file syncing and file accessing, and design for high capacity and load balance.
+              -->
+            <dependency>
+                <groupId>org.csource</groupId>
+                <artifactId>fastdfs-client-java</artifactId>
+                <version>${fastdfs-client-java.version}</version>
+            </dependency>
+
+            <!-- Netty Begin ，
+            Netty是由JBOSS提供的一个java开源框架。Netty提供异步的、事件驱动的网络应用程序框架和工具，用以快速开发高性能、高可靠性的网络服务器和客户端程序。
+            也就是说，Netty 是一个基于NIO的客户、服务器端编程框架，使用Netty 可以确保你快速和简单的开发出一个网络应用
+            ，例如实现了某种协议的客户，服务端应用。
+            Netty相当简化和流线化了网络应用的编程开发过程，例如，TCP和UDP的socket服务开发。
+            -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty-all.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.marshalling</groupId>
+                <artifactId>jboss-marshalling</artifactId>
+                <version>${jboss-marshalling.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.marshalling</groupId>
+                <artifactId>jboss-marshalling-serial</artifactId>
+                <version>${jboss-marshalling-serial.version}</version>
+            </dependency>
+            <!-- Netty End -->
+
+            <!--
+             HTML恶意代码过滤 AntiSamy 它是一个可确保用户输入的HTML/CSS符合应用规范的API。
+        换句话讲，这个API可以确保用户无法在HTML中提交恶意代码，
+        这些恶意代码提交通常被用于用户输入的个人资料、评论等会被服务端持久化的数据中。
+        对Web应用来讲，“恶意代码”通常是指Javascript。
+        CSS样式在调用 Javascript引擎的时候也会被认为是恶意代码。
+        当然，通常一些“正常”的HTML和CSS也会被用于恶意的目的。
+        百度的UEditor富文本编辑，提交的内容可能会被处理掉！！！ 百度的UEditor 也自带这些过滤功能！！！
+         ## Begin
+             -->
+
+            <dependency>
+                <groupId>org.owasp.antisamy</groupId>
+                <artifactId>antisamy</artifactId>
+                <version>${antisamy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.owasp.antisamy</groupId>
+                <artifactId>antisamy-sample-configs</artifactId>
+                <version>${antisamy-sample-configs.version}</version>
+            </dependency>
+
+            <!--
+            Retrofit2网络层处理 使用OKHTTP3处理
+            -->
+            <dependency>
+                <groupId>com.squareup.retrofit2</groupId>
+                <artifactId>retrofit</artifactId>
+                <version>${retrofit.version}</version>
+            </dependency>
+
+	    <!--
+            Apache RocketMQ is a low latency, reliable, scalable,
+            easy to use message oriented middleware born from alibaba massive messaging business.
+            -->
+            <!--<dependency>-->
+                <!--<groupId>com.alibaba.rocketmq</groupId>-->
+                <!--<artifactId>rocketmq-all</artifactId>-->
+                <!--<version>${rocketmq-all.version}</version>-->
+            <!--</dependency>-->
+            <dependency>
+                <groupId>com.alibaba.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>${rocketmq-client.version}</version>
+            </dependency>
+
+		
+			 <dependency>
+                <groupId>com.qcloud</groupId>
+                <artifactId>cos_api</artifactId>
+                <version>${cos-api.version}</version>
+            </dependency>
+            <!-- End -->
+
+
+            <!-- 管理第三方框架 End -->
+
+        </dependencies>
+    </dependencyManagement>
+
+
+	
+    <build>
+        <plugins>
+
+		<!-- add by Hero @ 2017-04-18 ， Begin -->
+			
+            <!-- 资源文件拷贝插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <!--<version>2.7</version>-->
+                <version>3.0.2</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+                <!-- add by Hero @ 2017-04-18 , End  -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <!--<version>3.2</version>-->
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF8</encoding>
+		    <!-- 加入图像相关类库，Maven编译报错：
+             类 JPEGImageDecoder 找不到 ！！！
+             -->
+                    <compilerArguments>
+                        <verbose />
+                        <!-- JAVA_HOME为：C:\Java\jdk1.8.0_65 ， 不需要再包括 \jre 目录，自动加上 \jre目录，
+                         如果再到加上，就会重复了，导致路径错误。 -->
+                        <bootclasspath>${java.home}\lib\rt.jar;${java.home}\lib\jce.jar</bootclasspath>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-jar-plugin</artifactId>
+			  <version>3.0.2</version>
+			  <configuration>
+				<archive>
+				  <manifestEntries>
+					<msyt-version>${maven.build.timestamp}</msyt-version>
+				  </manifestEntries>
+				</archive>
+			  </configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<!--<version>3.0.0</version>-->
+                <version>3.1.0</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<msyt-version>${maven.build.timestamp}</msyt-version>
+						</manifestEntries>
+					</archive>
+				</configuration>	
+			</plugin>
+        </plugins>
+    </build>
+</project>
