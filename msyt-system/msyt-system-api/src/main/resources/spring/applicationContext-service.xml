@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 配置dubbo服务 -->
+    <dubbo:application name="msyt-system-api" owner="yt" organization="www.msyc.cc"/>
+
+    <!-- 使用Zookeeper实现注册中心，集群的方式 -->
+    <dubbo:registry protocol="zookeeper" address="${zk.connectString}" timeout="${msonion_dubbo_registry_timeout}"/>
+
+
+    <!-- 引用服务 Begin ， 搜索中，即发布服务，又引用其他服务！！！ -->
+
+    <!-- 日志 服务 -->
+    <!-- 日志 服务，报错，必须使用 MsOnionLog 接口 -->
+    <!--<dubbo:reference interface="cc.msonion.carambola.log.service.LogService"
+                     id="logService" version="${dubbo.service.logService.version}"
+                     timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.msOnionLog}"/>-->
+
+    <!-- 日志 服务 -->
+    <dubbo:reference interface="cc.msonion.carambola.parent.interfaces.log.MsOnionLog"
+                     id="msOnionLog" version="${dubbo.service.logService.version}"
+                     timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.msOnionLog}"/>
+
+    <!-- ###################### msyt-member ### End  ######################  -->
+
+    <!-- 成员（公司内部） Service -->
+    <dubbo:reference interface="cc.msonion.carambola.member.service.MemberService"
+                     id="memberService" version="${dubbo.service.memberService.vesion}"
+                     timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.memberService}"/>
+
+
+    <!-- ###################### msyt-member ### End  ######################  -->
+
+    <!-- ###################### msyt-collector ### Begin ######################  -->
+
+    <!-- ###################### msyt-collector ### End  ######################  -->
+
+    <!-- ###################### msyt-system ### End  ######################  -->
+
+    <!-- 系统设置 Service-->
+    <dubbo:reference interface="cc.msonion.carambola.system.service.SysSettingService"
+                     id="sysSettingService" version="${dubbo.service.sysSettingService.vesion}"
+                     timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.sysSettingService}"/>
+
+    <!-- 验证码图片 Service-->
+    <dubbo:reference interface="cc.msonion.carambola.system.service.SysVerifyCodePictureService"
+                     id="sysVerifyCodePictureServiceImpl" version="${dubbo.service.sysVerifyCodePictureService.vesion}"
+                     timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.sysVerifyCodePictureService}"/>
+
+    <!-- ###################### msyt-system ### End  ######################  -->
+
+    <!-- ################## msyt-cache  ###### Begin ######################### -->
+
+
+    <dubbo:reference interface="cc.msonion.carambola.cache.service.DynamicCacheService"
+                     id="dynamicCacheService" version="${dubbo.service.dynamicCacheService.version}"
+                     timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.dynamicCacheService}"/>
+
+    <!-- ################## msyt-cache  ###### End ######################### -->
+
+    <!-- ################## msyt-content  ###### Begin ######################### -->
+
+
+    <!-- ################## msyt-content  ###### Begin ######################### -->
+
+    <!-- ################## msyt-fileresource  ###### Begin ######################### -->
+
+
+    <!-- ################## msyt-fileresource  ###### End ######################### -->
+
+
+    <!-- ################## msyt-logistics  ###### Begin ######################### -->
+
+
+    <!-- ################## msyt-logistics  ###### End ######################### -->
+
+    <!-- ################## msyt-warehouse  ###### Begin ######################### -->
+
+
+    <!-- ################## msyt-warehouse  ###### End ######################### -->
+
+    <!-- ################## msyt-thirdplatform  ###### Begin ######################### -->
+
+
+    <!-- ################## msyt-thirdplatform  ###### End ######################### -->
+
+    <!-- ###################### msyt-item ### Begin ######################  -->
+
+    <!-- ###################### msyt-item ### End ######################  -->
+
+    <!-- 引用服务 End -->
+
+
+</beans>

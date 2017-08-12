@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>msyt-system</artifactId>
+        <groupId>cc.msonion.carambola</groupId>
+        <version>2.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>msyt-system-interface</artifactId>
+    <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-system-interface，系统接口模块</description>
+
+    <!-- 依赖 -->
+    <dependencies>
+
+        <!-- msyt-parent-interface -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-parent-interface</artifactId>
+        </dependency>
+
+        <!-- msyt-system-pojo，由于已经依赖 msyt-system-common，因此就不要再直接依赖，msyt-system-common -->
+        <!--<dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-system-pojo</artifactId>
+        </dependency>-->
+
+        <!-- msyt-system-ext，由于已经依赖 msyt-system-pojo，因此就不要再直接依赖，msyt-system-pojo -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-system-ext</artifactId>
+        </dependency>
+
+        <!-- 单元测试，由于是 scope：test ，因此每一个地方都需要依赖 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cc.msonion.carambola</groupId>
+    <artifactId>msyt-parent</artifactId>
+    <version>2.0.0</version>
+  </parent>
+  <groupId>cc.msonion.carambola</groupId>
+  <artifactId>msyt-system</artifactId>
+  <version>2.0.0</version>
+  <packaging>pom</packaging>
+  <name>msyt-system</name>
+  <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-system，系统模块</description>
+
+  <!-- modules -->
+  <modules>
+    <module>msyt-system-api</module>
+    <module>msyt-system-common</module>
+    <module>msyt-system-dao</module>
+    <module>msyt-system-interface</module>
+    <module>msyt-system-pojo</module>
+    <module>msyt-system-ext</module>
+    <module>msyt-system-service</module>
+  </modules>
+
+</project>
