@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.msonion.carambola.collector.dao.mapper.CollectorItemCollectionMapper">
+  <resultMap id="BaseResultMap" type="cc.msonion.carambola.collector.pojo.CollectorItemCollection">
+    <id column="idx" jdbcType="BIGINT" property="idx" />
+    <result column="idx_code" jdbcType="BIGINT" property="idxCode" />
+    <result column="item_idx" jdbcType="BIGINT" property="itemIdx" />
+    <result column="selling_point" jdbcType="VARCHAR" property="sellingPoint" />
+    <result column="slogan" jdbcType="VARCHAR" property="slogan" />
+    <result column="shopping_guide" jdbcType="VARCHAR" property="shoppingGuide" />
+    <result column="editor_idx" jdbcType="BIGINT" property="editorIdx" />
+    <result column="search_keywords" jdbcType="VARCHAR" property="searchKeywords" />
+    <result column="attachment_id" jdbcType="BIGINT" property="attachmentId" />
+    <result column="video_link" jdbcType="VARCHAR" property="videoLink" />
+    <result column="edit_type" jdbcType="SMALLINT" property="editType" />
+    <result column="create_by_member_idx" jdbcType="BIGINT" property="createByMemberIdx" />
+    <result column="update_by_member_idx" jdbcType="BIGINT" property="updateByMemberIdx" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+    <result column="ext" jdbcType="VARCHAR" property="ext" />
+    <result column="publish_status" jdbcType="SMALLINT" property="publishStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    idx, idx_code, item_idx, selling_point, slogan, shopping_guide, editor_idx, search_keywords, 
+    attachment_id, video_link, edit_type, create_by_member_idx, update_by_member_idx, 
+    create_time, update_time, status, version, ext, publish_status
+  </sql>
+  <select id="selectByExample" parameterType="cc.msonion.carambola.collector.pojo.CollectorItemCollectionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_item_collection
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_item_collection
+    where idx = #{idx,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_item_collection
+    where idx = #{idx,jdbcType=BIGINT}
+  </delete>
+  <update id="deleteByIdxesWithExample" parameterType="cc.msonion.carambola.collector.pojo.CollectorItemCollectionExample">
+    update tb_item_collection set status = 0
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </update>
+  <insert id="insert" parameterType="cc.msonion.carambola.collector.pojo.CollectorItemCollection">
+    insert into tb_item_collection (idx, idx_code, item_idx, 
+      selling_point, slogan, shopping_guide, 
+      editor_idx, search_keywords, attachment_id, 
+      video_link, edit_type, create_by_member_idx, 
+      update_by_member_idx, create_time, update_time, 
+      status, version, ext, 
+      publish_status)
+    values (#{idx,jdbcType=BIGINT}, #{idxCode,jdbcType=BIGINT}, #{itemIdx,jdbcType=BIGINT}, 
+      #{sellingPoint,jdbcType=VARCHAR}, #{slogan,jdbcType=VARCHAR}, #{shoppingGuide,jdbcType=VARCHAR}, 
+      #{editorIdx,jdbcType=BIGINT}, #{searchKeywords,jdbcType=VARCHAR}, #{attachmentId,jdbcType=BIGINT}, 
+      #{videoLink,jdbcType=VARCHAR}, #{editType,jdbcType=SMALLINT}, #{createByMemberIdx,jdbcType=BIGINT}, 
+      #{updateByMemberIdx,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=SMALLINT}, #{version,jdbcType=BIGINT}, #{ext,jdbcType=VARCHAR}, 
+      #{publishStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="cc.msonion.carambola.collector.pojo.CollectorItemCollection">
+    insert into tb_item_collection
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idx != null">
+        idx,
+      </if>
+      <if test="idxCode != null">
+        idx_code,
+      </if>
+      <if test="itemIdx != null">
+        item_idx,
+      </if>
+      <if test="sellingPoint != null">
+        selling_point,
+      </if>
+      <if test="slogan != null">
+        slogan,
+      </if>
+      <if test="shoppingGuide != null">
+        shopping_guide,
+      </if>
+      <if test="editorIdx != null">
+        editor_idx,
+      </if>
+      <if test="searchKeywords != null">
+        search_keywords,
+      </if>
+      <if test="attachmentId != null">
+        attachment_id,
+      </if>
+      <if test="videoLink != null">
+        video_link,
+      </if>
+      <if test="editType != null">
+        edit_type,
+      </if>
+      <if test="createByMemberIdx != null">
+        create_by_member_idx,
+      </if>
+      <if test="updateByMemberIdx != null">
+        update_by_member_idx,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="ext != null">
+        ext,
+      </if>
+      <if test="publishStatus != null">
+        publish_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idx != null">
+        #{idx,jdbcType=BIGINT},
+      </if>
+      <if test="idxCode != null">
+        #{idxCode,jdbcType=BIGINT},
+      </if>
+      <if test="itemIdx != null">
+        #{itemIdx,jdbcType=BIGINT},
+      </if>
+      <if test="sellingPoint != null">
+        #{sellingPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="slogan != null">
+        #{slogan,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuide != null">
+        #{shoppingGuide,jdbcType=VARCHAR},
+      </if>
+      <if test="editorIdx != null">
+        #{editorIdx,jdbcType=BIGINT},
+      </if>
+      <if test="searchKeywords != null">
+        #{searchKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentId != null">
+        #{attachmentId,jdbcType=BIGINT},
+      </if>
+      <if test="videoLink != null">
+        #{videoLink,jdbcType=VARCHAR},
+      </if>
+      <if test="editType != null">
+        #{editType,jdbcType=SMALLINT},
+      </if>
+      <if test="createByMemberIdx != null">
+        #{createByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="updateByMemberIdx != null">
+        #{updateByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="ext != null">
+        #{ext,jdbcType=VARCHAR},
+      </if>
+      <if test="publishStatus != null">
+        #{publishStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cc.msonion.carambola.collector.pojo.CollectorItemCollectionExample" resultType="java.lang.Long">
+    select count(idx) from tb_item_collection
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_item_collection
+    <set>
+      <if test="record.idx != null">
+        idx = #{record.idx,jdbcType=BIGINT},
+      </if>
+      <if test="record.idxCode != null">
+        idx_code = #{record.idxCode,jdbcType=BIGINT},
+      </if>
+      <if test="record.itemIdx != null">
+        item_idx = #{record.itemIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.sellingPoint != null">
+        selling_point = #{record.sellingPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.slogan != null">
+        slogan = #{record.slogan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoppingGuide != null">
+        shopping_guide = #{record.shoppingGuide,jdbcType=VARCHAR},
+      </if>
+      <if test="record.editorIdx != null">
+        editor_idx = #{record.editorIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.searchKeywords != null">
+        search_keywords = #{record.searchKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachmentId != null">
+        attachment_id = #{record.attachmentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.videoLink != null">
+        video_link = #{record.videoLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.editType != null">
+        edit_type = #{record.editType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.createByMemberIdx != null">
+        create_by_member_idx = #{record.createByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateByMemberIdx != null">
+        update_by_member_idx = #{record.updateByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=BIGINT},
+      </if>
+      <if test="record.ext != null">
+        ext = #{record.ext,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishStatus != null">
+        publish_status = #{record.publishStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_item_collection
+    set idx = #{record.idx,jdbcType=BIGINT},
+      idx_code = #{record.idxCode,jdbcType=BIGINT},
+      item_idx = #{record.itemIdx,jdbcType=BIGINT},
+      selling_point = #{record.sellingPoint,jdbcType=VARCHAR},
+      slogan = #{record.slogan,jdbcType=VARCHAR},
+      shopping_guide = #{record.shoppingGuide,jdbcType=VARCHAR},
+      editor_idx = #{record.editorIdx,jdbcType=BIGINT},
+      search_keywords = #{record.searchKeywords,jdbcType=VARCHAR},
+      attachment_id = #{record.attachmentId,jdbcType=BIGINT},
+      video_link = #{record.videoLink,jdbcType=VARCHAR},
+      edit_type = #{record.editType,jdbcType=SMALLINT},
+      create_by_member_idx = #{record.createByMemberIdx,jdbcType=BIGINT},
+      update_by_member_idx = #{record.updateByMemberIdx,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=SMALLINT},
+      version = #{record.version,jdbcType=BIGINT},
+      ext = #{record.ext,jdbcType=VARCHAR},
+      publish_status = #{record.publishStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cc.msonion.carambola.collector.pojo.CollectorItemCollection">
+    update tb_item_collection
+    <set>
+      <if test="idxCode != null">
+        idx_code = #{idxCode,jdbcType=BIGINT},
+      </if>
+      <if test="itemIdx != null">
+        item_idx = #{itemIdx,jdbcType=BIGINT},
+      </if>
+      <if test="sellingPoint != null">
+        selling_point = #{sellingPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="slogan != null">
+        slogan = #{slogan,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuide != null">
+        shopping_guide = #{shoppingGuide,jdbcType=VARCHAR},
+      </if>
+      <if test="editorIdx != null">
+        editor_idx = #{editorIdx,jdbcType=BIGINT},
+      </if>
+      <if test="searchKeywords != null">
+        search_keywords = #{searchKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentId != null">
+        attachment_id = #{attachmentId,jdbcType=BIGINT},
+      </if>
+      <if test="videoLink != null">
+        video_link = #{videoLink,jdbcType=VARCHAR},
+      </if>
+      <if test="editType != null">
+        edit_type = #{editType,jdbcType=SMALLINT},
+      </if>
+      <if test="createByMemberIdx != null">
+        create_by_member_idx = #{createByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="updateByMemberIdx != null">
+        update_by_member_idx = #{updateByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="ext != null">
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+      <if test="publishStatus != null">
+        publish_status = #{publishStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where idx = #{idx,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cc.msonion.carambola.collector.pojo.CollectorItemCollection">
+    update tb_item_collection
+    set idx_code = #{idxCode,jdbcType=BIGINT},
+      item_idx = #{itemIdx,jdbcType=BIGINT},
+      selling_point = #{sellingPoint,jdbcType=VARCHAR},
+      slogan = #{slogan,jdbcType=VARCHAR},
+      shopping_guide = #{shoppingGuide,jdbcType=VARCHAR},
+      editor_idx = #{editorIdx,jdbcType=BIGINT},
+      search_keywords = #{searchKeywords,jdbcType=VARCHAR},
+      attachment_id = #{attachmentId,jdbcType=BIGINT},
+      video_link = #{videoLink,jdbcType=VARCHAR},
+      edit_type = #{editType,jdbcType=SMALLINT},
+      create_by_member_idx = #{createByMemberIdx,jdbcType=BIGINT},
+      update_by_member_idx = #{updateByMemberIdx,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=SMALLINT},
+      version = #{version,jdbcType=BIGINT},
+      ext = #{ext,jdbcType=VARCHAR},
+      publish_status = #{publishStatus,jdbcType=SMALLINT}
+    where idx = #{idx,jdbcType=BIGINT}
+  </update>
+</mapper>

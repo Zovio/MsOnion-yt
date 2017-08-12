@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cc.msonion.carambola</groupId>
+        <artifactId>msyt-collector</artifactId>
+        <version>2.0.0</version>
+    </parent>
+    <artifactId>msyt-collector-pojo</artifactId>
+    <name>msyt-collector-pojo</name>
+    <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-collector-pojo，收集器POJO模块</description>
+
+    <!-- 依赖 -->
+    <dependencies>
+
+        <!-- msyt-parent-pojo -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-parent-pojo</artifactId>
+        </dependency>
+
+        <!-- msyt-collector-common -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-collector-common</artifactId>
+        </dependency>
+
+        <!-- 单元测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

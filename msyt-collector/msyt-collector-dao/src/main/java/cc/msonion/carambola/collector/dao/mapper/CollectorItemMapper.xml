@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.msonion.carambola.collector.dao.mapper.CollectorItemMapper">
+  <resultMap id="BaseResultMap" type="cc.msonion.carambola.collector.pojo.CollectorItem">
+    <id column="idx" jdbcType="BIGINT" property="idx" />
+    <result column="idx_code" jdbcType="BIGINT" property="idxCode" />
+    <result column="item_state_idx" jdbcType="BIGINT" property="itemStateIdx" />
+    <result column="item_ext_idx" jdbcType="BIGINT" property="itemExtIdx" />
+    <result column="item_no" jdbcType="CHAR" property="itemNo" />
+    <result column="barcode" jdbcType="VARCHAR" property="barcode" />
+    <result column="cn_name" jdbcType="VARCHAR" property="cnName" />
+    <result column="en_name" jdbcType="VARCHAR" property="enName" />
+    <result column="brand_idx" jdbcType="BIGINT" property="brandIdx" />
+    <result column="origin_idx" jdbcType="BIGINT" property="originIdx" />
+    <result column="category_idx" jdbcType="BIGINT" property="categoryIdx" />
+    <result column="specification" jdbcType="VARCHAR" property="specification" />
+    <result column="warehouse_type_idx" jdbcType="BIGINT" property="warehouseTypeIdx" />
+    <result column="batch" jdbcType="INTEGER" property="batch" />
+    <result column="weight" jdbcType="BIGINT" property="weight" />
+    <result column="collection_remark" jdbcType="VARCHAR" property="collectionRemark" />
+    <result column="image_small" jdbcType="VARCHAR" property="imageSmall" />
+    <result column="image_middle" jdbcType="VARCHAR" property="imageMiddle" />
+    <result column="image_big" jdbcType="VARCHAR" property="imageBig" />
+    <result column="purchase_status" jdbcType="SMALLINT" property="purchaseStatus" />
+    <result column="collection_status" jdbcType="SMALLINT" property="collectionStatus" />
+    <result column="publish_status" jdbcType="SMALLINT" property="publishStatus" />
+    <result column="create_by_member_idx" jdbcType="BIGINT" property="createByMemberIdx" />
+    <result column="update_by_member_idx" jdbcType="BIGINT" property="updateByMemberIdx" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+    <result column="ext" jdbcType="VARCHAR" property="ext" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    idx, idx_code, item_state_idx, item_ext_idx, item_no, barcode, cn_name, en_name, 
+    brand_idx, origin_idx, category_idx, specification, warehouse_type_idx, batch, weight, 
+    collection_remark, image_small, image_middle, image_big, purchase_status, collection_status, 
+    publish_status, create_by_member_idx, update_by_member_idx, create_time, update_time, 
+    status, version, ext
+  </sql>
+  <select id="selectByExample" parameterType="cc.msonion.carambola.collector.pojo.CollectorItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_item
+    where idx = #{idx,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_item
+    where idx = #{idx,jdbcType=BIGINT}
+  </delete>
+  <update id="deleteByIdxesWithExample" parameterType="cc.msonion.carambola.collector.pojo.CollectorItemExample">
+    update tb_item set status = 0
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </update>
+  <insert id="insert" parameterType="cc.msonion.carambola.collector.pojo.CollectorItem">
+    insert into tb_item (idx, idx_code, item_state_idx, 
+      item_ext_idx, item_no, barcode, 
+      cn_name, en_name, brand_idx, 
+      origin_idx, category_idx, specification, 
+      warehouse_type_idx, batch, weight, 
+      collection_remark, image_small, image_middle, 
+      image_big, purchase_status, collection_status, 
+      publish_status, create_by_member_idx, update_by_member_idx, 
+      create_time, update_time, status, 
+      version, ext)
+    values (#{idx,jdbcType=BIGINT}, #{idxCode,jdbcType=BIGINT}, #{itemStateIdx,jdbcType=BIGINT}, 
+      #{itemExtIdx,jdbcType=BIGINT}, #{itemNo,jdbcType=CHAR}, #{barcode,jdbcType=VARCHAR}, 
+      #{cnName,jdbcType=VARCHAR}, #{enName,jdbcType=VARCHAR}, #{brandIdx,jdbcType=BIGINT}, 
+      #{originIdx,jdbcType=BIGINT}, #{categoryIdx,jdbcType=BIGINT}, #{specification,jdbcType=VARCHAR}, 
+      #{warehouseTypeIdx,jdbcType=BIGINT}, #{batch,jdbcType=INTEGER}, #{weight,jdbcType=BIGINT}, 
+      #{collectionRemark,jdbcType=VARCHAR}, #{imageSmall,jdbcType=VARCHAR}, #{imageMiddle,jdbcType=VARCHAR}, 
+      #{imageBig,jdbcType=VARCHAR}, #{purchaseStatus,jdbcType=SMALLINT}, #{collectionStatus,jdbcType=SMALLINT}, 
+      #{publishStatus,jdbcType=SMALLINT}, #{createByMemberIdx,jdbcType=BIGINT}, #{updateByMemberIdx,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=SMALLINT}, 
+      #{version,jdbcType=BIGINT}, #{ext,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cc.msonion.carambola.collector.pojo.CollectorItem">
+    insert into tb_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idx != null">
+        idx,
+      </if>
+      <if test="idxCode != null">
+        idx_code,
+      </if>
+      <if test="itemStateIdx != null">
+        item_state_idx,
+      </if>
+      <if test="itemExtIdx != null">
+        item_ext_idx,
+      </if>
+      <if test="itemNo != null">
+        item_no,
+      </if>
+      <if test="barcode != null">
+        barcode,
+      </if>
+      <if test="cnName != null">
+        cn_name,
+      </if>
+      <if test="enName != null">
+        en_name,
+      </if>
+      <if test="brandIdx != null">
+        brand_idx,
+      </if>
+      <if test="originIdx != null">
+        origin_idx,
+      </if>
+      <if test="categoryIdx != null">
+        category_idx,
+      </if>
+      <if test="specification != null">
+        specification,
+      </if>
+      <if test="warehouseTypeIdx != null">
+        warehouse_type_idx,
+      </if>
+      <if test="batch != null">
+        batch,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="collectionRemark != null">
+        collection_remark,
+      </if>
+      <if test="imageSmall != null">
+        image_small,
+      </if>
+      <if test="imageMiddle != null">
+        image_middle,
+      </if>
+      <if test="imageBig != null">
+        image_big,
+      </if>
+      <if test="purchaseStatus != null">
+        purchase_status,
+      </if>
+      <if test="collectionStatus != null">
+        collection_status,
+      </if>
+      <if test="publishStatus != null">
+        publish_status,
+      </if>
+      <if test="createByMemberIdx != null">
+        create_by_member_idx,
+      </if>
+      <if test="updateByMemberIdx != null">
+        update_by_member_idx,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="ext != null">
+        ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idx != null">
+        #{idx,jdbcType=BIGINT},
+      </if>
+      <if test="idxCode != null">
+        #{idxCode,jdbcType=BIGINT},
+      </if>
+      <if test="itemStateIdx != null">
+        #{itemStateIdx,jdbcType=BIGINT},
+      </if>
+      <if test="itemExtIdx != null">
+        #{itemExtIdx,jdbcType=BIGINT},
+      </if>
+      <if test="itemNo != null">
+        #{itemNo,jdbcType=CHAR},
+      </if>
+      <if test="barcode != null">
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="cnName != null">
+        #{cnName,jdbcType=VARCHAR},
+      </if>
+      <if test="enName != null">
+        #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandIdx != null">
+        #{brandIdx,jdbcType=BIGINT},
+      </if>
+      <if test="originIdx != null">
+        #{originIdx,jdbcType=BIGINT},
+      </if>
+      <if test="categoryIdx != null">
+        #{categoryIdx,jdbcType=BIGINT},
+      </if>
+      <if test="specification != null">
+        #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseTypeIdx != null">
+        #{warehouseTypeIdx,jdbcType=BIGINT},
+      </if>
+      <if test="batch != null">
+        #{batch,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=BIGINT},
+      </if>
+      <if test="collectionRemark != null">
+        #{collectionRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="imageSmall != null">
+        #{imageSmall,jdbcType=VARCHAR},
+      </if>
+      <if test="imageMiddle != null">
+        #{imageMiddle,jdbcType=VARCHAR},
+      </if>
+      <if test="imageBig != null">
+        #{imageBig,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseStatus != null">
+        #{purchaseStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="collectionStatus != null">
+        #{collectionStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="publishStatus != null">
+        #{publishStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="createByMemberIdx != null">
+        #{createByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="updateByMemberIdx != null">
+        #{updateByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="ext != null">
+        #{ext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cc.msonion.carambola.collector.pojo.CollectorItemExample" resultType="java.lang.Long">
+    select count(idx) from tb_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_item
+    <set>
+      <if test="record.idx != null">
+        idx = #{record.idx,jdbcType=BIGINT},
+      </if>
+      <if test="record.idxCode != null">
+        idx_code = #{record.idxCode,jdbcType=BIGINT},
+      </if>
+      <if test="record.itemStateIdx != null">
+        item_state_idx = #{record.itemStateIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.itemExtIdx != null">
+        item_ext_idx = #{record.itemExtIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.itemNo != null">
+        item_no = #{record.itemNo,jdbcType=CHAR},
+      </if>
+      <if test="record.barcode != null">
+        barcode = #{record.barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cnName != null">
+        cn_name = #{record.cnName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enName != null">
+        en_name = #{record.enName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandIdx != null">
+        brand_idx = #{record.brandIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.originIdx != null">
+        origin_idx = #{record.originIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.categoryIdx != null">
+        category_idx = #{record.categoryIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.specification != null">
+        specification = #{record.specification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warehouseTypeIdx != null">
+        warehouse_type_idx = #{record.warehouseTypeIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.batch != null">
+        batch = #{record.batch,jdbcType=INTEGER},
+      </if>
+      <if test="record.weight != null">
+        weight = #{record.weight,jdbcType=BIGINT},
+      </if>
+      <if test="record.collectionRemark != null">
+        collection_remark = #{record.collectionRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageSmall != null">
+        image_small = #{record.imageSmall,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageMiddle != null">
+        image_middle = #{record.imageMiddle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageBig != null">
+        image_big = #{record.imageBig,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchaseStatus != null">
+        purchase_status = #{record.purchaseStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.collectionStatus != null">
+        collection_status = #{record.collectionStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.publishStatus != null">
+        publish_status = #{record.publishStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.createByMemberIdx != null">
+        create_by_member_idx = #{record.createByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateByMemberIdx != null">
+        update_by_member_idx = #{record.updateByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=BIGINT},
+      </if>
+      <if test="record.ext != null">
+        ext = #{record.ext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_item
+    set idx = #{record.idx,jdbcType=BIGINT},
+      idx_code = #{record.idxCode,jdbcType=BIGINT},
+      item_state_idx = #{record.itemStateIdx,jdbcType=BIGINT},
+      item_ext_idx = #{record.itemExtIdx,jdbcType=BIGINT},
+      item_no = #{record.itemNo,jdbcType=CHAR},
+      barcode = #{record.barcode,jdbcType=VARCHAR},
+      cn_name = #{record.cnName,jdbcType=VARCHAR},
+      en_name = #{record.enName,jdbcType=VARCHAR},
+      brand_idx = #{record.brandIdx,jdbcType=BIGINT},
+      origin_idx = #{record.originIdx,jdbcType=BIGINT},
+      category_idx = #{record.categoryIdx,jdbcType=BIGINT},
+      specification = #{record.specification,jdbcType=VARCHAR},
+      warehouse_type_idx = #{record.warehouseTypeIdx,jdbcType=BIGINT},
+      batch = #{record.batch,jdbcType=INTEGER},
+      weight = #{record.weight,jdbcType=BIGINT},
+      collection_remark = #{record.collectionRemark,jdbcType=VARCHAR},
+      image_small = #{record.imageSmall,jdbcType=VARCHAR},
+      image_middle = #{record.imageMiddle,jdbcType=VARCHAR},
+      image_big = #{record.imageBig,jdbcType=VARCHAR},
+      purchase_status = #{record.purchaseStatus,jdbcType=SMALLINT},
+      collection_status = #{record.collectionStatus,jdbcType=SMALLINT},
+      publish_status = #{record.publishStatus,jdbcType=SMALLINT},
+      create_by_member_idx = #{record.createByMemberIdx,jdbcType=BIGINT},
+      update_by_member_idx = #{record.updateByMemberIdx,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=SMALLINT},
+      version = #{record.version,jdbcType=BIGINT},
+      ext = #{record.ext,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cc.msonion.carambola.collector.pojo.CollectorItem">
+    update tb_item
+    <set>
+      <if test="idxCode != null">
+        idx_code = #{idxCode,jdbcType=BIGINT},
+      </if>
+      <if test="itemStateIdx != null">
+        item_state_idx = #{itemStateIdx,jdbcType=BIGINT},
+      </if>
+      <if test="itemExtIdx != null">
+        item_ext_idx = #{itemExtIdx,jdbcType=BIGINT},
+      </if>
+      <if test="itemNo != null">
+        item_no = #{itemNo,jdbcType=CHAR},
+      </if>
+      <if test="barcode != null">
+        barcode = #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="cnName != null">
+        cn_name = #{cnName,jdbcType=VARCHAR},
+      </if>
+      <if test="enName != null">
+        en_name = #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandIdx != null">
+        brand_idx = #{brandIdx,jdbcType=BIGINT},
+      </if>
+      <if test="originIdx != null">
+        origin_idx = #{originIdx,jdbcType=BIGINT},
+      </if>
+      <if test="categoryIdx != null">
+        category_idx = #{categoryIdx,jdbcType=BIGINT},
+      </if>
+      <if test="specification != null">
+        specification = #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseTypeIdx != null">
+        warehouse_type_idx = #{warehouseTypeIdx,jdbcType=BIGINT},
+      </if>
+      <if test="batch != null">
+        batch = #{batch,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=BIGINT},
+      </if>
+      <if test="collectionRemark != null">
+        collection_remark = #{collectionRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="imageSmall != null">
+        image_small = #{imageSmall,jdbcType=VARCHAR},
+      </if>
+      <if test="imageMiddle != null">
+        image_middle = #{imageMiddle,jdbcType=VARCHAR},
+      </if>
+      <if test="imageBig != null">
+        image_big = #{imageBig,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseStatus != null">
+        purchase_status = #{purchaseStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="collectionStatus != null">
+        collection_status = #{collectionStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="publishStatus != null">
+        publish_status = #{publishStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="createByMemberIdx != null">
+        create_by_member_idx = #{createByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="updateByMemberIdx != null">
+        update_by_member_idx = #{updateByMemberIdx,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="ext != null">
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where idx = #{idx,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cc.msonion.carambola.collector.pojo.CollectorItem">
+    update tb_item
+    set idx_code = #{idxCode,jdbcType=BIGINT},
+      item_state_idx = #{itemStateIdx,jdbcType=BIGINT},
+      item_ext_idx = #{itemExtIdx,jdbcType=BIGINT},
+      item_no = #{itemNo,jdbcType=CHAR},
+      barcode = #{barcode,jdbcType=VARCHAR},
+      cn_name = #{cnName,jdbcType=VARCHAR},
+      en_name = #{enName,jdbcType=VARCHAR},
+      brand_idx = #{brandIdx,jdbcType=BIGINT},
+      origin_idx = #{originIdx,jdbcType=BIGINT},
+      category_idx = #{categoryIdx,jdbcType=BIGINT},
+      specification = #{specification,jdbcType=VARCHAR},
+      warehouse_type_idx = #{warehouseTypeIdx,jdbcType=BIGINT},
+      batch = #{batch,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=BIGINT},
+      collection_remark = #{collectionRemark,jdbcType=VARCHAR},
+      image_small = #{imageSmall,jdbcType=VARCHAR},
+      image_middle = #{imageMiddle,jdbcType=VARCHAR},
+      image_big = #{imageBig,jdbcType=VARCHAR},
+      purchase_status = #{purchaseStatus,jdbcType=SMALLINT},
+      collection_status = #{collectionStatus,jdbcType=SMALLINT},
+      publish_status = #{publishStatus,jdbcType=SMALLINT},
+      create_by_member_idx = #{createByMemberIdx,jdbcType=BIGINT},
+      update_by_member_idx = #{updateByMemberIdx,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=SMALLINT},
+      version = #{version,jdbcType=BIGINT},
+      ext = #{ext,jdbcType=VARCHAR}
+    where idx = #{idx,jdbcType=BIGINT}
+  </update>
+</mapper>

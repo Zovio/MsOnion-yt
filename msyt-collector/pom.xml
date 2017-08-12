@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cc.msonion.carambola</groupId>
+		<artifactId>msyt-parent</artifactId>
+		<version>2.0.0</version>
+	</parent>
+	<artifactId>msyt-collector</artifactId>
+	<packaging>pom</packaging>
+	<name>msyt-collector</name>
+	<description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-collector，收集器，收集互联网中各大平台商品订信息</description>
+	<modules>
+		<module>msyt-collector-api</module>
+		<module>msyt-collector-common</module>
+		<module>msyt-collector-dao</module>
+		<module>msyt-collector-interface</module>
+		<module>msyt-collector-pojo</module>
+		<module>msyt-collector-service</module>
+		<module>msyt-collector-ext</module>
+	</modules>
+
+
+
+</project>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!-- 配置包扫描器 -->
+    <!--  注意，这里扫描的包 和 springmvc 中扫描的包，不要冲突！！！ -->
+
+    <!-- Member（公司内部成员）-->
+    <context:component-scan base-package="cc.msonion.carambola.collector.service"></context:component-scan>
+
+    <!-- 扫描多个包，可以使用 ,(逗号）或者；(分号） 分隔 -->
+
+    <!-- Redis的Key生成器 -->
+    <context:component-scan
+            base-package="cc.msonion.carambola.collector.service.redis.key.impl"></context:component-scan>
+
+
+    <!-- 发布dubbo服务 -->
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="msyt-collector-service" owner="yt" organization="www.msyc.cc"/>
+
+    <!-- Zookeeper 实现注册中心，集群方式 -->
+
+    <dubbo:registry protocol="zookeeper"
+                    address="${zk.connectString}" timeout="${msonion_dubbo_registry_timeout}"/>
+
+
+    <!-- 用dubbo协议在20882端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="20803"/>
+
+    <!-- timeout远程服务调用超时时间(毫秒) -->
+    <!-- threads该服务线程池大小 -->
+    <!-- accepts限制服务器端接受的连接不能超过1000个 , accepts="1000"  -->
+    <!-- 随机token令牌，使用UUID生成 ，防止消费者绕过注册中心访问提供者-->
+    <dubbo:provider timeout="${msonion_dubbo_service_timeout}" token="true"/>
+
+    <!-- <dubbo:consumer/> 服务消费者缺省值配置 , 说明：该标签为<dubbo:reference>标签的缺省值设置。 -->
+    <dubbo:consumer check="${dubbo.consumer.check.collector}" />
+
+    <!-- 声明需要暴露的服务接口 -->
+    <!-- 设置服务超时时间，默认1000毫秒，也就是1秒钟，如果需要调试，可以设置为 100000 毫秒，
+    也就是100秒钟，不到2分钟！ ，如果上线，需要欢迎会默认的值！！！ -->
+
+    <!-- 发布服务 ## Begin  -->
+
+    <!-- 发布商品服务，注意：interface 都是Service 接口，而不是实现类！！！
+    ， ref 才是实现类 实例 ！！！ -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.ItemService"
+                   ref="itemServiceImpl" version="${dubbo.service.collectorItemService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 发布商品竞价服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.ItemBiddingService"
+                   ref="itemBiddingServiceImpl" version="${dubbo.service.collectorItemBiddingService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 发布属性服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.AttributeService"
+                   ref="attributeServiceImpl" version="${dubbo.service.collectorAttributeService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 发布属性组服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.AttributeGroupService"
+                   ref="attributeGroupServiceImpl" version="${dubbo.service.collectorAttributeGroupService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 发布属性组属性服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.AttributeGroupAttributeService"
+                   ref="attributeGroupAttributeServiceImpl"
+                   version="${dubbo.service.collectorAttributeGroupAttributeService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 发布品牌服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.ItemBrandService"
+                   ref="itemBrandServiceImpl" version="${dubbo.service.collectorItemBrandService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 发布类目服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.ItemCategoryService"
+                   ref="itemCategoryServiceImpl" version="${dubbo.service.collectorItemCategoryService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 发布产地服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.ItemOriginService"
+                   ref="itemOriginServiceImpl" version="${dubbo.service.collectorItemOriginService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 发布商品价格服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.ItemPriceService"
+                   ref="itemPriceServiceImpl" version="${dubbo.service.collectorItemPriceService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 发布商品采集服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.ItemCollectionService"
+                   ref="itemCollectionServiceImpl" version="${dubbo.service.collectorItemCollectionService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 发布采编服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.EditorService"
+                   ref="editorServiceImpl" version="${dubbo.service.collectorEditorService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 发布商品属性服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.ItemAttributeService"
+                   ref="itemAttributeServiceImpl" version="${dubbo.service.collectorItemAttributeService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 发布商品历史服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.ItemHistoryService"
+                   ref="itemHistoryServiceImpl" version="${dubbo.service.collectorItemHistoryService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 发布商品内容服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.ItemContentService"
+                   ref="itemContentServiceImpl" version="${dubbo.service.collectorItemContentService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+
+    <!-- 商品正式图片服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.ItemFormalImageLibService"
+                   ref="itemFormalImageLibServiceImpl" version="${dubbo.service.itemFormalImageLibService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 商品多条形码服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.ItemBarcodeService"
+                   ref="itemBarcodeServiceImpl" version="${dubbo.service.itemBarcodeService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 商品关键属性图片服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.ItemAttributeImageService"
+                   ref="itemAttributeImageServiceImpl" version="${dubbo.service.itemAttributeImageService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 商品日志服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.ItemLogService"
+                   ref="itemLogServiceImpl" version="${dubbo.service.itemLogService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 发布服务 ## End  -->
+
+    <!-- 引用（调用）服务 ## Begin -->
+
+    <!-- 日志 服务，报错，必须使用 MsOnionLog 接口 -->
+    <!--<dubbo:reference interface="cc.msonion.carambola.log.service.LogService"
+                     id="logService" version="${dubbo.service.logService.version}"
+                     timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.msOnionLog}"/>-->
+
+    <!-- 日志 服务 -->
+    <dubbo:reference interface="cc.msonion.carambola.parent.interfaces.log.MsOnionLog"
+                     id="msOnionLog" version="${dubbo.service.logService.version}"
+                     timeout="${msonion_dubbo_service_timeout}" check="${dubbo.reference.check.msOnionLog}"/>
+
+    <!-- 类目与属性组服务 -->
+    <dubbo:service interface="cc.msonion.carambola.collector.service.CategoryAttributeGroupService"
+                   ref="categoryAttributeGroupServiceImpl" version="${dubbo.service.categoryAttributeGroupService.version}"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 引用（调用）服务 ## End  -->
+
+</beans>
