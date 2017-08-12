@@ -1,0 +1,115 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cc.msonion.carambola</groupId>
+		<artifactId>msyt-log</artifactId>
+		<version>2.0.0</version>
+	</parent>
+	<artifactId>msyt-log-service</artifactId>
+	<packaging>war</packaging>
+	<name>msyt-log-service</name>
+	<description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-log-service，日志服务模块</description>
+
+	<!-- 依赖 -->
+	<dependencies>
+
+		<!-- msyt-parent-service -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-parent-service</artifactId>
+		</dependency>
+
+		<!-- msyt-log-dao -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-log-dao</artifactId>
+		</dependency>
+
+		<!-- msyt-log-interface -->
+		<dependency>
+			<groupId>cc.msonion.carambola</groupId>
+			<artifactId>msyt-log-interface</artifactId>
+		</dependency>
+		<!-- 单元测试 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+    </dependencies>
+
+	<build>
+
+		<plugins>
+
+			<!-- 配置Tomcat插件，使用Tomcat插件之后，本地就不需要单独安装Tomcat了 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<path>/</path>
+					<port>8151</port>
+					<goal>clean tomcat7:run</goal>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+		<!-- 多套环境，不同环境的配置不同， ## Begin -->
+
+		<resources>
+			<!-- 指定环境配置文件输出目录 -->
+			<resource>
+				<!-- 原始的 -->
+				<!--<directory>${profile.dir}</directory>-->
+
+				<!-- add -->
+				<directory>${resources.dir}</directory>
+				<targetPath>${project.build.directory}/classes</targetPath>
+
+				<!-- add by Hero ##  -->
+				<includes>
+					<include>log4j.properties</include>
+					<include>flogger.properties</include>
+					<include>spring/**</include>
+
+					<!--<include>${target.env}/properties/**</include>-->
+					<include>${target.env}/**</include>
+
+				</includes>
+
+				<!-- 资源过滤   -->
+				<filtering>true</filtering>
+
+			</resource>
+
+			<!--<resource>
+				<directory>${profile.dir}</directory>
+				<targetPath>${project.build.directory}/classes</targetPath>
+				<includes>
+					<include>${target.env}/properties/**</include>
+				</includes>
+			</resource>-->
+
+			<!-- 资源过滤   -->
+			<!--<resource>-->
+				<!--<directory>src/main/resources</directory>-->
+				<!--<directory>${resources.dir}</directory>-->
+				<!--<directory>${profile.dir}</directory>-->
+				<!--<directory>${resources.dir}</directory>-->
+				<!--<filtering>true</filtering>
+			</resource>-->
+
+		</resources>
+
+		<!--<filters>
+			<filter></filter>
+		</filters>-->
+
+		<!-- 多套环境，不同环境的配置不同， ## End -->
+
+	</build>
+
+</project>

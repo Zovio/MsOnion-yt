@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+			 									 http://www.springframework.org/schema/beans/spring-beans.xsd
+        										 http://www.springframework.org/schema/context 
+        										 http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 配置加载配置文件 -->
+    <!-- <context:property-placeholder location="classpath:properties/*.properties"/> -->
+
+    <!-- 配置文件环境切换 ### Begin  -->
+    <!--
+             # Environment :
+             pro(production、生产环境) , pre(preview、预发布环境) , test（测试环境） , dev(develop、开发环境) , sta (stable、稳定环境)
+
+            -->
+
+    <context:property-placeholder location="classpath:*/properties/config-*.properties"/>
+
+    <!-- dev(develop、开发环境) -->
+    <!--<context:property-placeholder location="classpath:dev/properties/config-*.properties"/>-->
+
+    <!-- test（测试环境） -->
+    <!--<context:property-placeholder location="classpath:test/properties/config-*.properties"/>-->
+
+    <!-- sta (stable、稳定环境) -->
+    <!--<context:property-placeholder location="classpath:sta/properties/config-*.properties"/>-->
+
+    <!--  pre(preview、预发布环境) -->
+    <!--<context:property-placeholder location="classpath:pre/properties/config-*.properties"/>-->
+
+    <!-- pro(production、生产环境)  -->
+    <!--<context:property-placeholder location="classpath:pro/properties/config-*.properties"/>-->
+
+    <!-- 配置文件环境切换 ### End  -->
+
+    <!-- 不是WEB工程，不要 classpath: -->
+    <!-- 	<context:property-placeholder location="properties/*.properties"/> -->
+
+    <!-- 直接使用 bean 无法 扫描  Domain 中的  @Value 注解，必须使用 ： context:component-scan  -->
+    <!-- <bean class="cc.msonion.parent.pojo.Domain"></bean> -->
+
+    <!-- 注意，这里扫描的包 和 service 中扫描的包，不要冲突！！！ -->
+
+    <!--  OK  -->
+    <context:component-scan base-package="cc.msonion.carambola.parent.pojo"/>
+
+    <!-- 扫描动态配置 -->
+    <context:component-scan base-package="cc.msonion.carambola.parent.ext.pojo.setting"/>
+
+    <!--  msyt-parent-ext ，不需要 -->
+    <!--<context:component-scan base-package="cc.msonion.carambola.parent.ext"/>-->
+
+</beans>
