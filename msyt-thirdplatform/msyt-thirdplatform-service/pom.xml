@@ -1,0 +1,134 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>msyt-thirdplatform</artifactId>
+        <groupId>cc.msonion.carambola</groupId>
+        <version>2.0.0</version>
+    </parent>
+    <artifactId>msyt-thirdplatform-service</artifactId>
+    <packaging>war</packaging>
+    <name>msyt-thirdplatform-service</name>
+    <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-thirdplatform-service，thirdplatform服务模块</description>
+
+    <!-- 依赖 -->
+    <dependencies>
+
+        <!-- 依赖洋桃分布式架构，Begin -->
+        <!-- msyt-parent-service -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-parent-common</artifactId>
+        </dependency>
+
+        <!-- msyt-parent-ext -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-parent-ext</artifactId>
+        </dependency>
+        <!-- msyt-parent-service -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-parent-service</artifactId>
+        </dependency>
+
+        <!-- msyt-parent-interface -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-parent-interface</artifactId>
+        </dependency>
+
+        <!-- msyt-thirdplatform-interface -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-thirdplatform-interface</artifactId>
+        </dependency>
+
+        <!-- msyt-thirdplatform-ext -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-thirdplatform-ext</artifactId>
+        </dependency>
+
+        <!-- 依赖洋桃分布式架构，End -->
+
+        <!-- 依赖第三方，Begin -->
+
+        <!-- 单元测试，由于是 scope：test ，因此每一个地方都需要依赖 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- 依赖第三方，End -->
+
+
+    </dependencies>
+
+    <build>
+        <finalName>msyt-thirdplatform-service</finalName>
+        <plugins>
+
+            <!-- 配置Tomcat插件，使用Tomcat插件之后，本地就不需要单独安装Tomcat了 -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <configuration>
+                    <path>/</path>
+                    <port>8231</port>
+                    <goal>clean tomcat7:run</goal>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+        <!-- 多套环境，不同环境的配置不同， ## Begin -->
+
+        <resources>
+            <!-- 指定环境配置文件输出目录 -->
+            <resource>
+                <!-- 原始的 -->
+                <!--<directory>${profile.dir}</directory>-->
+
+                <!-- add -->
+                <directory>${resources.dir}</directory>
+                <targetPath>${project.build.directory}/classes</targetPath>
+
+                <!-- add by Hero ##  -->
+                <includes>
+                    <include>log4j.properties</include>
+                    <include>spring/**</include>
+                    <!--<include>mybatis/**</include>-->
+
+                    <!--<include>${target.env}/properties/**</include>-->
+                    <include>${target.env}/**</include>
+
+                </includes>
+
+                <!-- 资源过滤   -->
+                <filtering>true</filtering>
+
+            </resource>
+
+            <!--<resource>
+                <directory>${profile.dir}</directory>
+                <targetPath>${project.build.directory}/classes</targetPath>
+                <includes>
+                    <include>${target.env}/properties/**</include>
+                </includes>
+            </resource>-->
+
+            <!-- 资源过滤   -->
+            <!--<resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>-->
+        </resources>
+
+        <!-- 多套环境，不同环境的配置不同， ## End -->
+
+    </build>
+
+</project>

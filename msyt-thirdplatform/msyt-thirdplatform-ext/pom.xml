@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>msyt-thirdplatform</artifactId>
+        <groupId>cc.msonion.carambola</groupId>
+        <version>2.0.0</version>
+    </parent>
+    <artifactId>msyt-thirdplatform-ext</artifactId>
+    <name>msyt-thirdplatform-ext</name>
+    <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-thirdplatform-ext，thirdplatform扩展模块</description>
+
+    <!-- 依赖 -->
+    <dependencies>
+        <!-- msyt-parent-ext -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-parent-ext</artifactId>
+        </dependency>
+
+        <!-- msyt-thirdplatform-pojo，由于已经依赖 msyt-thirdplatform-common，因此就不要再直接依赖，msyt-thirdplatform-common -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-thirdplatform-pojo</artifactId>
+        </dependency>
+        <!-- msyt-warehouse-pojo -->
+        <dependency>
+            <groupId>cc.msonion.carambola</groupId>
+            <artifactId>msyt-warehouse-pojo</artifactId>
+        </dependency>
+
+                <!-- 单元测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+    </dependencies>
+
+</project>

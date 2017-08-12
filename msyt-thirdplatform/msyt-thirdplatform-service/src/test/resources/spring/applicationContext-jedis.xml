@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+			 								     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	<!-- 配置包扫描器 -->
+	<!-- 注意，这里扫描的包 和 springmvc 中扫描的包，不要冲突！！！ -->
+	<!-- <context:component-scan base-package="cc.msonion.image.service"></context:component-scan> -->
+
+	<!-- 加载属性配置文件 -->
+	<!-- <context:property-placeholder location="classpath:fdfs/fdfsConfig.properties"/> -->
+
+
+	<!-- 单机版本 Redis 客户端 Jedis # Begin -->
+
+	<!-- 必须注意：单机版本，不可以使用集群中的任何一个节点的，否则报错： Error: redis.clients.jedis.exceptions.JedisMovedDataException:
+        MOVED 4768 192.168.100.153:6379 单机版，必须使用单机服务器， 192.168.100.88 就是单机版Redis
+        服务器 -->
+
+	<!-- String host, int port -->
+
+	<!-- 第一种使用构造函数的参数名称，创建 JedisPool -->
+	<!-- <bean class="redis.clients.jedis.JedisPool"> <constructor-arg name="host"
+        value="192.168.100.88"></constructor-arg> <constructor-arg name="port" value="6379"></constructor-arg>
+        </bean> -->
+
+	<!-- 建议使用域名 ， 不建议使用： 172.16.50.241 -->
+
+	<!--<bean-->
+	<!--clacc.msonion.carambola.parent.ext.redis.clients.jedis.MsOnionElasticJedisSingle">-->
+	<!--<constructor-arg name="logAnalyzer" ref="logAnalyzer"></constructor-arg>-->
+	<!--</bean>-->
+
+	<!--<bean class="redis.clients.jedis.JedisPool">-->
+
+	<!--<constructor-arg index="0" type="java.lang.String"-->
+	<!--value="${msonion_redis_single_connect_string}" />-->
+	<!--<constructor-arg index="1" type="int" value="${msonion_redis_single_port}" />-->
+
+	<!--</bean>-->
+
+	<!-- 单机版本 Redis 客户端 Jedis # End -->
+
+
+	<!-- Redis 客户端 Jedis 集群版本 Begin -->
+
+	<!-- String host, int port -->
+
+	<bean class="cc.msonion.carambola.parent.pojo.redis.clients.jedis.MsOnionJedisCluster">
+		<constructor-arg name="nodes">
+			<set>
+				<bean class="cc.msonion.carambola.parent.pojo.redis.clients.jedis.MsOnionHostAndPort">
+					<constructor-arg name="host" value="redis01.msyc.dev"/>
+					<constructor-arg name="port" value="7000"/>
+				</bean>
+				<bean class="cc.msonion.carambola.parent.pojo.redis.clients.jedis.MsOnionHostAndPort">
+					<constructor-arg name="host" value="redis02.msyc.dev"/>
+					<constructor-arg name="port" value="7000"/>
+				</bean>
+				<bean class="cc.msonion.carambola.parent.pojo.redis.clients.jedis.MsOnionHostAndPort">
+					<constructor-arg name="host" value="redis03.msyc.dev"/>
+					<constructor-arg name="port" value="7000"/>
+				</bean>
+			</set>
+		</constructor-arg>
+	</bean>
+
+	<bean id="logAnalyzer" class="cc.msonion.carambola.parent.ext.log.analyze.MsOnionSimpleLogAnalyzer"/>
+
+	<bean class="cc.msonion.carambola.parent.ext.redis.clients.jedis.MsOnionElasticJedisCluster">
+		<constructor-arg name="logAnalyzer" ref="logAnalyzer"/>
+	</bean>
+
+	<!-- Redis 客户端 Jedis 集群版本 End -->
+
+</beans>

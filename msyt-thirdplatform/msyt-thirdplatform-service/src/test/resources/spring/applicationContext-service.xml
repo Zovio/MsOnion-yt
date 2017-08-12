@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- <context:property-placeholder location="classpath:dev/properties/config-*.properties"/>-->
+
+    <context:property-placeholder location="classpath:*/properties/config-*.properties"/>
+
+    <context:component-scan base-package="cc.msonion.carambola.thirdplatform.erp.service"></context:component-scan>
+    <context:component-scan base-package="cc.msonion.carambola.thirdplatform.erp.pojo"></context:component-scan>
+
+    <!-- 发布dubbo服务 -->
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="msyt-thirdplatform-service" owner="yt" organization="www.msyc.cc"/>
+
+    <!-- Zookeeper 实现注册中心，集群方式 -->
+
+    <dubbo:registry protocol="zookeeper"
+                    address="${zk.connectString}" timeout="${msonion_dubbo_registry_timeout}"/>
+
+
+    <!-- 用dubbo协议在20882端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="20820"/>
+
+    <!-- <dubbo:consumer/> 服务消费者缺省值配置 , 说明：该标签为<dubbo:reference>标签的缺省值设置。 -->
+    <dubbo:consumer check="false" />
+
+    <!-- timeout远程服务调用超时时间(毫秒) -->
+    <!-- threads该服务线程池大小 -->
+    <!-- accepts限制服务器端接受的连接不能超过1000个 , accepts="1000"  -->
+    <!-- 随机token令牌，使用UUID生成 ，防止消费者绕过注册中心访问提供者-->
+    <dubbo:provider timeout="${msonion_dubbo_service_timeout}" token="true"/>
+
+    <!-- 声明需要暴露的服务接口 -->
+    <!-- 设置服务超时时间，默认1000毫秒，也就是1秒钟，如果需要调试，可以设置为 100000 毫秒，
+    也就是100秒钟，不到2分钟！ ，如果上线，需要欢迎会默认的值！！！ -->
+
+    <!-- 引用（调用）服务 Begin  -->
+
+    <!-- 发布ERP服务，注意：interface 都是Service 接口，而不是实现类！！！
+    ， ref 才是实现类 实例 ！！！-->
+    <dubbo:service interface="cc.msonion.carambola.thirdplatform.erp.service.ErpStockService"
+                   ref="erpStockServiceImpl" version="2.0.0.201707121401"
+                   timeout="${msonion_dubbo_service_timeout}"/>
+
+    <!-- 日志 服务 -->
+    <dubbo:reference interface="cc.msonion.carambola.log.service.LogService"
+                     id="logService" version="2.0.0.201707121401"
+                     timeout="${msonion_dubbo_service_timeout}" check="false" />
+
+    <!-- 引用（调用）服务 End -->
+</beans>

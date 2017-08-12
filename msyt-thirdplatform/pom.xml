@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>cc.msonion.carambola</groupId>
+        <artifactId>msyt-parent</artifactId>
+        <version>2.0.0</version>
+    </parent>
+    <groupId>cc.msonion.carambola</groupId>
+    <artifactId>msyt-thirdplatform</artifactId>
+    <packaging>pom</packaging>
+    <description>洋葱小姐（Ms.Onion）, 洋桃供应链，msyt-thirdplatform，第三方系统对接模块</description>
+
+    <modules>
+        <module>msyt-thirdplatform-common</module>
+        <module>msyt-thirdplatform-api</module>
+        <module>msyt-thirdplatform-interface</module>
+        <module>msyt-thirdplatform-ext</module>
+        <module>msyt-thirdplatform-pojo</module>
+        <module>msyt-thirdplatform-service</module>
+    </modules>
+
+
+</project>
